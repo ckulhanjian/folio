@@ -1,0 +1,635 @@
+
+body, html, #root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  /* overflow-y: hidden;
+  scroll-behavior: smooth; */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+/* buttons */
+.buttons {
+  display: flex;
+  gap: 1em;
+  color: black;
+  background-color: indianred;
+}
+
+.playlist {
+  height: 100vh;
+  /* overflow: hidden; */
+}
+
+.header-buttons {
+  display: flex;
+  direction: row;
+  align-items: center;
+  margin-top: 1.5em;
+  gap: 0.5em;
+}
+
+.turn {
+  /* padding: .25em; */
+  padding: 0 .3em;
+  font-size: 40px;
+  /* margin-left: .5em; */
+  border-radius: 50%;
+  border: 2px solid transparent;
+  color: indianred;
+  background-color: transparent;
+}
+
+.turn:hover {
+  color: gray;
+}
+
+/* play now */
+.play {
+  width: 150px;
+  height: 50px;
+  border-radius: 30px;;
+  background-color: indianred;
+  border: 2px solid transparent;
+  font-size: 1em;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.play:hover {
+  transform: scale(1.08);
+}
+
+/* content */
+.content {
+  flex: 1;
+  padding: 2em 4em;
+}
+
+/* header */
+.header {
+  /* border: solid 2px white; */
+  /* background-color: indianred; */
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: lavenderblush;
+  /* position: relative; So MusicGrid (absolute) is scoped inside */
+  /* overflow: hidden;   Hide overflow of floating notes */
+  /* background-image: url('/sheetmusic.png'); */
+  /* remove margin or use padding if needed */
+  perspective: 800px;
+  position: relative;
+  padding: 40px;
+}
+
+/* .header:hover {
+  animation: scale(1.08);
+} */
+
+
+/* name & picture */
+.profile {
+  display: flex;
+  gap: 1em;
+  padding-top: 1em;
+  align-items: center;
+}
+.profile img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.backside {
+  padding: 1em 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backside p {
+  margin: 0;
+  padding: 0;
+}
+
+.backside ul {
+  display: flex;
+  padding: .5em 0;
+}
+
+.backside .education,
+.backside .interests,
+.backside .coursework {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.backside .education li {
+  margin-right: 0.5em;
+  background-color: blue;
+  color: white;
+}
+
+.education p {
+  padding: 0.5em 0;
+  color: gray;
+  font-size: 18px;
+}
+
+
+.backside .interests li {
+  margin-right: 0.5em;
+  color: lavenderblush;
+}
+
+.backside .coursework li {
+  margin-right: 0.5em;
+  color: indianred;
+  font-weight:700;
+  /* background-color: gray; */
+}
+
+.coursework li:hover {
+  color: rgb(30, 30, 30);
+}
+
+.education li:hover {
+  color: rgb(148, 148, 255);
+}
+
+.fs {
+  background-color: blue;
+}
+
+.ds {
+  background-color: orange;
+}
+.ux {
+  background-color: purple;
+}
+.cv {
+  background-color: green;
+}
+.fs,.ds,.ux,.cv {
+  animation: ease-in-out 0.8s;
+}
+.ds:hover,
+.fs:hover,
+.cv:hover,
+.ux:hover {
+  transform: scale(1.05);
+}
+
+.backside ul li {
+  /* background-color: black; */
+  /* color: lavenderblush; */
+  border-radius: 20px;
+  padding: 0.5em;
+}
+
+/* bio on right */
+.album-info {
+  position: relative;
+  text-align: left;
+  padding-left: 3em;
+  padding-right: 3em;
+}
+
+.album-info h1 {
+  font-size: 4em;
+  /* margin-bottom: 0;
+  margin-top: 0; */
+}
+
+.album-info p {
+  /* padding-top: 1em; */
+  color: gray;
+}
+
+/* left */
+.album-cover {
+  height: 250px;
+  width: 250px;
+  padding: 1em;
+  /* background-color: black; */
+  object-fit: cover;
+  border-radius: 50%;
+  animation: spin 4s infinite linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* tracks */
+.track-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  color: lavenderblush;
+  width: 60%;
+  padding-left: 3em;
+  padding-right: 4em;
+}
+
+.tracks {
+  width: 60%;
+  padding: 0 4em;
+}
+
+.track {
+  display: flex;
+  transition: all 0.5s ease;
+  color: gray;
+  align-items: center;
+  padding: 16px 16px;
+}
+
+.track-id {
+  width: 50px;
+}
+
+.track-name {
+  width: 450px;
+  text-align: center;
+    font-weight: bold;
+}
+
+.track-type {
+  width: 200px;
+  /* align-items: left; */
+  /* text-align: left; */
+  color: lavenderblush;
+  font-size: 14px;
+    /* font-weight: 100; */
+
+}
+
+.track-date {
+  width: 200px;
+  text-align: right;
+}
+
+/* .track-id {
+  /* flex: 0 0 auto; */
+  /* margin-right: 1.5em; 
+}  */
+
+/* .track-type {
+  border-radius: 25px;
+  display: inline-flex;
+  padding: 0.25em 0.75em;
+  
+} */
+
+/* .track-type {
+  flex: 0 0 auto;
+  text-align: right;
+  margin-left: auto;
+  color: lavenderblush;
+} */
+
+/* .track-date {
+  width: 100px;
+  text-align: right;
+} */
+
+.track-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 25px;
+  white-space: nowrap;
+  justify-content: left;
+}
+
+.track:hover {
+  color: lavenderblush;
+  background-color: gray;
+  border-radius: 15px;
+  border-color: lavender;
+  transform: scale(1.1); /* Slightly enlarge the element */
+}
+
+.headerRow {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: black; /* or your site bg */
+  padding: 0 1em;
+  padding-bottom: 1em;
+  border-bottom: .5px solid rgb(110, 110, 110);
+}
+
+
+.track-dot {
+  border-radius: 50%;
+  height: 8px;
+  width: 8px;
+  margin-right: 6px;
+}
+
+.exp {
+  color: white;
+  padding: 0 1em;
+  margin: 0;
+  font-size: 4em;
+  /* color: transparent;
+  -webkit-text-stroke: 1px lavenderblush;  */
+}
+
+/* footer slider */
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+/* currently playing bar */
+.now-playing-bar {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  bottom: 0;
+  width: 100vw;
+  /* background-color: rgb(205, 92, 92); */
+  color: lavenderblush;
+  overflow: hidden;
+  /* white-space: nowrap; */
+  height: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  --gap: .1em;
+  gap: var(--gap)
+} 
+
+.now-playing-buttons {
+  display: flex;
+  justify-content: center;
+  gap: .5em;
+  position: sticky; /* keeps it visible within bar */
+  bottom: 0;
+  font-size: 20px;
+}
+
+.now-playing-content {
+  /* padding-top: 0.5em; */
+  display: flex;
+}
+
+.now-playing-bar ul {
+  flex-shrink: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 100%;
+  animation: scroll 10s infinite linear;
+}
+
+.now-playing-content span {
+  margin: 0 1em;
+}
+
+.hover-name {
+  color: lavenderblush;
+}
+
+/* footer */
+.footer {
+  display: flex;
+  color: white;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.footer h1 {
+  padding-bottom: .5em;
+  font-size: 3em;
+  /* transition: all 0.5s ease; */
+}
+
+.footer h1:hover {
+  padding-bottom: .5em;
+  font-size: 3em;
+  /* transform: scale(1.5); Slightly enlarge the element */
+}
+
+.footer h2 {
+  font-size: 2.5em;
+  font-weight: 200;
+}
+
+.footer-text {
+  display: flex;
+  gap: 2em;
+  text-align: right;
+}
+
+/* footer links */
+.links {
+  padding-top: 1em;
+  display: flex;
+  justify-content: center;
+  gap: .5em;
+  color: black;
+  width: 100vw;
+  font-size: 1em;
+  align-items: center;
+  margin-top: 4em;
+}
+
+.links a {
+  text-decoration: none;
+  color: lavenderblush;
+  border-radius: 30px;
+  padding: 1em;
+}
+
+.links a::after {
+  content: " ↗";
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.links a:hover::after {
+  opacity: 1;
+}
+
+.links a:hover {
+  font-size: 1em;
+  color: gray;
+  /* transition: opacity 0.5s ease; */
+  background-color: rgba(128, 128, 128, 0.316);
+}
+
+li {
+list-style: none;
+}
+
+/* footer images */
+.artist:hover {
+color: lavenderblush;
+/* font-style: italic; */
+text-decoration: underline dotted;
+}
+
+.footer-bio {
+color: gray;
+padding: 1em 0;
+width: 300px;
+}
+
+
+.track-details {
+  color: lavenderblush;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.now-playing {
+  display: flex;
+  color: lavenderblush;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+.side-by-side {
+  display: flex;
+  overflow: hidden;
+}
+
+.proj-desc {
+  margin: 1em 0;
+  color: lavenderblush;
+}
+
+/* .border {
+  border: 4px solid white;
+  
+  background-color: white;
+  
+} */
+
+.border {
+  display: flex;
+  align-items: center;
+  color: black;
+  background: white;
+  padding: 20px;
+  margin: 10em;
+  border-radius: 20px;
+  /* border-top-right-radius: 50px;
+  border-top-left-radius: 500px;
+  border-bottom-right-radius: 50px; 
+  border-bottom-left-radius: 500px;  */
+  box-shadow: 0px 20px 30px rgba(255, 255, 255, 0.4);
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.border:hover {
+  transform: rotateX(2deg) rotateY(2deg);
+  /* box-shadow: 0px 20px 30px rgba(255, 255, 255); */
+}
+
+
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background: rgb(176, 176, 176);
+  border: 1px solid pink;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.footer-pic {
+  border-radius: 50%;
+  background-color: rgba(255, 192, 203, 0.763);
+  /* border: 5px dotted pink; */
+}
+
+
+/* background */
+
+/* ReactiveBackground.css */
+.reactive-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: url('/bg.jpeg');
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+
+  /* Grainy base layer */
+  filter: brightness(0.85);
+}
+
+/* Mouse-light overlay using a radial gradient */
+/* .reactive-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    rgba(255, 255, 255, 0.15),
+    transparent 120px
+  );
+  transition: background 0.2s ease;
+  mix-blend-mode: screen;
+} */
+
+
+/*  */
+
+.text-black {
+  color: black;
+}
+
+/* .turn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+} */
+
+.turnlogo {
+  /* display: block; */
+  /* display: inline-flex; */
+  font-size: 50px;
+  color: indianred;
+  /* margin-left: 10em; */
+  position: absolute;
+  top: -1.65em;
+  right: 0;
+  
+}
