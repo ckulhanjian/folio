@@ -2,6 +2,15 @@
 import Track from './Track.jsx'
 import TrackLabels from './TrackLabels.jsx';
 // import reactLogo from './assets/react.svg'
+import d from '../assets/default.png'
+
+import video1 from '../assets/videos/1.mp4';
+import video2 from '../assets/videos/2.mp4';
+
+const videoMap = {
+  '1.mp4': video1,
+  '2.mp4': video2,
+};
 
 function Playlist({tracks}) {
     const styleMap = {
@@ -57,11 +66,12 @@ function Playlist({tracks}) {
                     {hoveredTrack ? (
                         <div className='now-playing'>
                             <video
-                                src= {hoveredTrack?.link}
+                                src={videoMap[hoveredTrack.link]}
                                 autoPlay
                                 loop
                                 muted
                                 playsInline
+                                alt='video'
                                 style={{ width: '75%', height: 'auto', 
                                     borderRadius: '5px'
                              }}
@@ -71,7 +81,7 @@ function Playlist({tracks}) {
                     ) :
                     (
                     <div className="now-playing">
-                        <img src="default2.png" style={{
+                        <img src={d} style={{
                             height: '300px'
                         }}/>
                     </div>)

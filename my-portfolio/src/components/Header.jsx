@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import '../styles.css';
 import MusicGrid from '../components/MusicGrid'
 import ReactiveBackground from '../components/ReactiveBackground';
+import record from '../assets/record.png'
+import me from '../assets/me.png'
 
 function handleMouseMove(e) {
-  const card = document.querySelector('.border');
+  const card = document.querySelector('.cover-border');
   const rect = card.getBoundingClientRect();
   const x = e.clientX - rect.left - rect.width / 2;
   const y = e.clientY - rect.top - rect.height / 2;
@@ -16,7 +18,7 @@ function handleMouseMove(e) {
 }
 
 function handleMouseLeave() {
-  const card = document.querySelector('.border');
+  const card = document.querySelector('.cover-border');
   card.style.transform = 'rotateX(0deg) rotateY(0deg)';
 }
 
@@ -36,17 +38,22 @@ function Header({ album }) {
     };
 
     const [isFront, setFront] = useState(true);
+    const [isAlbum, setAlbum] = useState(true);
 
 
    const handleClick = () => {
     setFront(prev => !prev);
     };
 
+    const handleAlbumClick = () => {
+    setAlbum(prev => !prev);
+    };
+
     return (
         <div className="header">
             <ReactiveBackground />
             <div
-                className="border"
+                className="cover-border"
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
                 onClick={handleClick}
@@ -56,14 +63,14 @@ function Header({ album }) {
                 (
                 <>
                     <div className='albumbg'>
-                        <img src="/record.png" className="album-cover" alt="Album cover" />
+                        <img src={isAlbum} className="album-cover" alt="Album cover" onClick={handleAlbumClick}/>
                     </div>
                     
                     <div className="album-info">
                         {/* <span className='turnlogo'>&#10561;</span> */}
                         <p>Portfolio</p>
                         <h1>Cara Kulhanjian</h1>
-                        <p className='text-black'>Data, Design & D.</p>
+                        <p className='text-black'>CS @ UF 2027. Data Design Discovery.</p>
                         <div className="header-buttons">
                             <button className="play" onClick={scrollToPlaylist} >⏵︎ Play Now</button>
                             <button className="turn" >&#10561;</button>
