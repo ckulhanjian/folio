@@ -1,0 +1,56 @@
+
+[{
+    "name": "Meth Use Disorder GLP Analysis", 
+    "type": "Research",
+    "organization": "UF Khoshbouei Lab", 
+    "position": "Data Analysis Research Assistant", 
+    "startDate": "January 2025", 
+    "endDate": "Present",
+    "techStack": "Python",
+    "link": "",
+    "description": "Analyzed meth use disorder patients."
+},
+{
+    "name": "Speech Language Development (SLD)",
+    "type": "Design Team",
+    "organization": "UF Dream Team x Shands Hospital",
+    "position": "Software Developer",
+    "startDate": "Septmeber 2025",
+    "endDate": "Present",
+    "techStack": "Python | spacy | NLTK",
+    "link": "",
+    "description": "Automated child speech language development assessments."
+},
+{
+    "name": "Flight Path Optimization",
+    "type": "Design Team",
+    "organization": "Society of Women Engineers (SWE)",
+    "position": "Project Lead",
+    "startDate": "August 2025", 
+    "endDate": "May 2026", 
+    "techStack": "React | Flask | SQLite",
+    "link": "",
+    "description": "Lead a desigh team of 30+ students."
+},
+{ 
+    "name": "Travel Agency Script Designer", 
+    "type": "Project",
+    "organization": "Travel Wizards",
+    "position": "Software Developer",
+    "startDate": "July 2025",
+    "endDate": "As Needed",
+    "techStack": "Python | pyMuPDF", 
+    "link": "", 
+    "description": "scripts."
+},
+{ 
+    "name": "Programming 1 Teaching Assistant", 
+    "type": "Campus Job", 
+    "position": "Teaching Assistant",
+    "organization": "University of Florida",
+    "startDate": "August 2024", 
+    "endDate": "December 2024",
+    "techStack": "Canvas",
+    "link": "",  
+    "description": "Led 2 discussion sessions with 30+ students for Programming Fundamentals (700+ students) where I explained procedural and objected-oriented programming and debugged projects."
+}]

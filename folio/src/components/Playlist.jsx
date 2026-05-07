@@ -1,30 +1,17 @@
  import { useState } from 'react'
 import Track from './Track.jsx'
 import TrackLabels from './TrackLabels.jsx';
-// import reactLogo from './assets/react.svg'
 import d from '../assets/default.png'
 
-import video1 from '../assets/videos/1.mp4';
-import video2 from '../assets/videos/2.mp4';
-
-const videoMap = {
-  '1.mp4': video1,
-  '2.mp4': video2,
-};
+// need to import photos / videos
 
 function Playlist({tracks}) {
     const styleMap = {
-        Certificate: { bg: 'blue', dot: 'lightblue' },
-        Program: { bg: 'green', dot: 'lightgreen' },
-        Project: { bg: 'purple', dot: 'lavender' },
-        'Design Team': { bg: 'hotPink', dot: 'lightpink' },
-        'Teaching Assistant': { bg: 'indianred', dot: 'red' }
+        'Project': { bg: 'blue', dot: 'lightblue' },
+        'Design Team': { bg: 'red', dot: 'lightred' },
+        'Teaching Assistant': { bg: 'green', dot: 'lightgreen' }
     };
 
-    
-    
-    // console.log('Playlist props:', { album, tracks }); // Debug log
-    // console.log('creating tracklist...')
     const [hoveredTrack, setHoveredTrack] = useState(null);
     // const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -37,8 +24,11 @@ function Playlist({tracks}) {
                 key={index}
                 id={index + 1}
                 name={track.name}
-                album={track.album}
-                date={track.date}
+                type={track.type}
+                organization={track.organization}
+                position={track.position}
+                startDate={track.startDate}
+                endDate={track.endDate}
                 onHover={() => setHoveredTrack(track)}
                 onLeave={() => setHoveredTrack(null)}
                 bgColor={colors.bg}   // Pass background color
@@ -47,11 +37,6 @@ function Playlist({tracks}) {
             />
         );
     });
-    
-
-    
-
-    // console.log('Tracklist: ', { tracklist })
 
     return (
         <div className='playlist'>
@@ -65,17 +50,6 @@ function Playlist({tracks}) {
 
                     {hoveredTrack ? (
                         <div className='now-playing'>
-                            <video
-                                src={videoMap[hoveredTrack.link]}
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                alt='video'
-                                style={{ width: '75%', height: 'auto', 
-                                    borderRadius: '5px'
-                             }}
-                                />
                             <p className='proj-desc'>{hoveredTrack?.description}</p>
                         </div>
                     ) :
@@ -92,22 +66,17 @@ function Playlist({tracks}) {
 
 
             {hoveredTrack && (
-                // console.log(hoveredTrack.bgColor)
+
 
                 <div className='now-playing-bar' style={{ 
                 backgroundColor: styleMap[hoveredTrack.album]?.bg || 'grey' }}>
-                    {/* <div className="now-playing-buttons">
-                        <span>⏮︎</span>
-                        <span className='pause'>⏸︎</span>
-                        <span>⏭︎</span>
-                    </div> */}
                     <div className="now-playing-content">
                         <ul>
                             <li>
                                 {/* <span class='hover-now'>Now Playing:</span> */}
                                 <span className='hover-name'>{hoveredTrack.name}</span>
-                                <span class='hover-name'>{hoveredTrack.album}</span>
-                                <span class='hover-name'>{hoveredTrack.date}</span>
+                                <span class='hover-name'>{hoveredTrack.type}</span>
+                                <span class='hover-name'>{hoveredTrack.position}</span>
                             </li>
                             <li>
                                 Currently Playing:
@@ -117,8 +86,8 @@ function Playlist({tracks}) {
                             <li>
                                 {/* <span class='hover-now'>Now Playing:</span> */}
                                 <span className='hover-name'>{hoveredTrack.name}</span>
-                                <span class='hover-name'>{hoveredTrack.album}</span>
-                                <span class='hover-name'>{hoveredTrack.date}</span>
+                                <span class='hover-name'>{hoveredTrack.type}</span>
+                                <span class='hover-name'>{hoveredTrack.position}</span>
                             </li>
                             <li>
                                 <span>Currently Playing:</span>

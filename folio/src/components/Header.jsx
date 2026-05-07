@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../styles.css';
-import MusicGrid from '../components/MusicGrid'
-import ReactiveBackground from '../components/ReactiveBackground';
+// import MusicGrid from '../components/MusicGrid'
+// import ReactiveBackground from '../components/ReactiveBackground';
 import record from '../assets/record.png'
 import me from '../assets/me.png'
 
@@ -22,7 +22,7 @@ function handleMouseLeave() {
   card.style.transform = 'rotateX(0deg) rotateY(0deg)';
 }
 
-function Header({ album }) {
+function Header() {
     const scrollToPlaylist = () => {
         const section = document.getElementById('content-section');
         if (section) {
@@ -51,7 +51,7 @@ function Header({ album }) {
 
     return (
         <div className="header">
-            <ReactiveBackground />
+            {/* <ReactiveBackground /> */}
             <div
                 className="cover-border"
                 onMouseMove={handleMouseMove}
@@ -121,4 +121,4 @@ function Header({ album }) {
     );
 }
 
-export default Header;
+export default OldHeader;
