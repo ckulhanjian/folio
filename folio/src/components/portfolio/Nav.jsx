@@ -23,24 +23,32 @@ function Nav() {
     sections.forEach((section) => sectionObserver.observe(section));
 
     // The folder-tab nav only makes sense once you've left the cover
-    // (hero) — keep it hidden until you've scrolled past the landing
-    // page. The hero is 200vh tall (extra scroll room for its own
-    // background-scroll effect), so compare against its actual
-    // release point rather than using intersection ratio.
-    const hero = document.getElementById('hero');
-    const updateShowTabs = () => {
-      if (!hero) return;
-      const releasePoint = hero.offsetHeight - window.innerHeight;
-      setShowTabs(window.scrollY >= releasePoint - 40);
-    };
-    updateShowTabs();
-    window.addEventListener('scroll', updateShowTabs, { passive: true });
-    window.addEventListener('resize', updateShowTabs);
+    // (hero) — keep it hidden until the hero text has scrolled out of
+    // view. Watch the text itself (.hero-sticky) rather than the outer
+    // #hero wrapper: on desktop that wrapper is 200vh tall (extra
+    // scroll room for its own background-scroll effect) but the text
+    // occupies only the last viewport of it, and on mobile the wrapper
+    // collapses to exactly one viewport with no extra room at all — an
+    // observer on the actual visible text handles both correctly
+    // without needing to know which case applies.
+    const heroText = document.querySelector('.hero-sticky');
+    let heroObserver;
+    if (heroText) {
+      heroObserver = new IntersectionObserver(
+        ([entry]) => setShowTabs(!entry.isIntersecting),
+        // Right at the exact release boundary a sub-pixel sliver of
+        // overlap can remain at the top edge (where the text scrolls
+        // out), which would otherwise still count as "intersecting"
+        // and leave the tabs stuck hidden — pull the effective
+        // viewport's top edge down by 20px so a clean break is required.
+        { threshold: 0, rootMargin: '-20px 0px 0px 0px' }
+      );
+      heroObserver.observe(heroText);
+    }
 
     return () => {
       sectionObserver.disconnect();
-      window.removeEventListener('scroll', updateShowTabs);
-      window.removeEventListener('resize', updateShowTabs);
+      heroObserver?.disconnect();
     };
   }, []);
 

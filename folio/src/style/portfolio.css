@@ -869,9 +869,19 @@ html {
     font-size: 1.05rem;
   }
 
+  /* The scroll-away-background effect needs extra scroll room to
+     work, but that "dead" scroll distance is the same kind of jank we
+     fixed for the other sections below — on mobile it just reads as
+     an empty page that won't move. Collapse the hero to exactly one
+     screen here instead: the text and background transition to About
+     immediately, in normal flow, no gimmick, no dead zone. */
   .hero-full {
-    height: 160vh;
-    height: 160svh;
+    height: 100vh;
+    height: 100svh;
+  }
+
+  .hero-sticky {
+    position: relative;
   }
 
   /* A sticky section taller than the viewport (routine here once
