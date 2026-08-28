@@ -110,11 +110,23 @@ html {
 }
 
 .nav-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: 'Bodoni Moda', serif;
   font-style: italic;
   font-size: 1.3rem;
   font-weight: 600;
   text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-heart {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 /* Two nav states sharing one slot at top right: a constant, very thin
@@ -335,17 +347,79 @@ html {
   background: var(--paper);
 }
 
-.about-grid {
+/* Editorial magazine-spread layout: a big script theme + narrative
+   story on one side, a small photo collage on the other — no colored
+   backdrop behind the images, just the photos themselves. */
+.about-spread {
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 3rem;
-  align-items: center;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: start;
 }
 
-.about-bio {
-  margin-top: 1.25rem;
-  max-width: 42ch;
+.about-theme {
+  margin-top: 0.5rem;
+}
+
+/* Needs the compound selector: .portfolio .accent (two classes) would
+   otherwise beat a plain .about-theme rule on specificity and shrink
+   this back down to .accent's 1.2em. */
+.about-theme.accent {
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.about-story {
+  margin-top: 1.5rem;
+  max-width: 48ch;
   font-size: 1.05rem;
+}
+
+.about-story + .about-story {
+  margin-top: 1rem;
+}
+
+.about-photos {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2rem;
+  padding-top: 0.5rem;
+}
+
+.about-photo {
+  margin: 0;
+  width: 80%;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  box-shadow: 0 20px 40px rgba(32, 26, 20, 0.18);
+}
+
+.about-photo figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  text-align: right;
+  color: var(--ink-soft);
+}
+
+.about-photo-accent {
+  width: 42%;
+  align-self: flex-start;
+  margin-left: 1.5rem;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transform: rotate(-3deg);
+  box-shadow: 0 14px 28px rgba(32, 26, 20, 0.16);
 }
 
 .hero-meta {
@@ -388,32 +462,6 @@ html {
 .btn-outline {
   background: transparent;
   color: var(--maroon);
-}
-
-.hero-art {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.hero-art-block {
-  position: absolute;
-  width: 78%;
-  aspect-ratio: 4/5;
-  background: var(--babyblue);
-  border-radius: var(--radius);
-  transform: translate(18px, 18px);
-}
-
-.hero-art img {
-  position: relative;
-  width: 78%;
-  aspect-ratio: 4/5;
-  object-fit: cover;
-  border-radius: var(--radius);
-  border: 6px solid var(--paper);
-  box-shadow: 0 20px 40px rgba(32, 26, 20, 0.18);
 }
 
 /* ---------- research ---------- */
@@ -850,14 +898,26 @@ html {
 
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
-  .about-grid,
+  .about-spread,
   .research-grid,
   .coursework-grid {
     grid-template-columns: 1fr;
   }
 
-  .hero-art {
+  .about-photos {
     order: -1;
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .about-photo,
+  .about-photo-accent {
+    width: 45%;
+  }
+
+  .about-photo-accent {
+    margin-left: 0;
   }
 
   .tab {

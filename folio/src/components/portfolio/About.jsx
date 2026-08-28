@@ -1,26 +1,44 @@
 import { profile, resumeFileUrl } from '../../data/portfolio.js';
 import headshot from '../../assets/cara-headshot.jpg';
+import me from '../../assets/me.png';
 import Reveal from './Reveal.jsx';
 
 function About() {
   return (
     <section id="about" className="section about stack-section">
-      <div className="about-grid">
-        <Reveal className="about-text" y={26}>
+      <div className="about-spread">
+        <Reveal className="about-copy" y={26}>
           <span className="eyebrow">About</span>
-          <p className="about-bio">{profile.bio}</p>
+          <h2 className="about-theme accent">Carpe Diem.</h2>
+          <p className="about-story">
+            Carpe Diem has always felt less like a motto and more like a method. I came to
+            computer science through curiosity — for how systems work, how people use them,
+            and how good design can make both feel effortless — and that same curiosity is
+            what's pulled me toward research, toward leadership, toward saying yes to the
+            harder path when it's the more interesting one.
+          </p>
+          <p className="about-story">
+            At the University of Florida's Honors College, I've built that curiosity into a
+            practice: analyzing patient data in a neuroscience lab, leading a
+            cross-disciplinary engineering team, mentoring students still finding their
+            footing in code. Data, design, and a bit of stubborn optimism are the threads
+            running through all of it — the belief that today's the day to start the thing
+            you've been putting off.
+          </p>
           <p className="hero-meta">{profile.meta}</p>
           <div className="hero-cta">
-            <a className="btn btn-solid" href="#research">View Research</a>
-            <a className="btn btn-outline" href={resumeFileUrl} download>
+            <a className="btn btn-solid" href={resumeFileUrl} download>
               Download Resume ↓
             </a>
           </div>
         </Reveal>
 
-        <Reveal className="hero-art" y={26} delay={0.15}>
-          <div className="hero-art-block" aria-hidden="true" />
-          <img src={headshot} alt={profile.name} />
+        <Reveal className="about-photos" y={26} delay={0.15}>
+          <figure className="about-photo about-photo-main">
+            <img src={headshot} alt={profile.name} />
+            <figcaption>{profile.name}</figcaption>
+          </figure>
+          <img src={me} alt="" className="about-photo-accent" />
         </Reveal>
       </div>
     </section>
