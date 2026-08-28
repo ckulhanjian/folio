@@ -6,6 +6,7 @@
   --babyblue: #aecdea;
   --pink: #f6c9d1;
   --maroon: #6e0f13;
+  --finale: #2c4a3b;
   --ink: #201a14;
   --ink-soft: #4a4038;
   --line: rgba(32, 26, 20, 0.14);
@@ -99,25 +100,55 @@ html {
   text-decoration: none;
 }
 
-.nav-links {
+/* Folder tabs — one per page stacked on the hero "cover". The active
+   tab (current section) pops up and turns fully opaque; passed tabs
+   stay visible but recede, like tabs on a folder you've flipped open. */
+.tab-row {
   display: flex;
-  gap: clamp(0.75rem, 3vw, 2rem);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 0.9rem;
-  font-weight: 600;
+  align-items: flex-end;
+  height: 40px;
 }
 
-.nav-links a {
+.tab {
+  --tab-color: var(--paper);
+  --tab-text: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 1.2em;
+  margin-left: -14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  padding-bottom: 2px;
-  border-bottom: 2px solid transparent;
-  transition: border-color 0.2s ease;
+  background: var(--tab-color);
+  clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  opacity: 0.55;
+  transform: translateY(6px) scale(0.94);
+  transition: transform 0.25s ease, opacity 0.25s ease, box-shadow 0.25s ease;
 }
 
-.nav-links a:hover {
-  border-color: var(--maroon);
+/* Extra specificity needed to beat the global `.portfolio a { color: inherit }`. */
+.tab-row .tab {
+  color: var(--tab-text);
+}
+
+.tab:first-child {
+  margin-left: 0;
+}
+
+.tab:hover {
+  opacity: 0.85;
+}
+
+.tab-active {
+  height: 40px;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  box-shadow: 0 8px 18px rgba(32, 26, 20, 0.28);
+  z-index: 5;
 }
 
 /* ---------- hero ---------- */
@@ -474,7 +505,7 @@ html {
 
 /* ---------- resume ---------- */
 .resume {
-  background: var(--maroon);
+  background: var(--finale);
   color: var(--cream);
 }
 
@@ -501,7 +532,7 @@ html {
 .resume .btn-solid {
   background: var(--pink);
   border-color: var(--pink);
-  color: var(--maroon);
+  color: var(--finale);
 }
 
 .resume-cards {
@@ -619,6 +650,41 @@ html {
   color: var(--cream);
 }
 
+.folder-recap {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.recap-tab {
+  --tab-color: var(--paper);
+  --tab-text: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  height: 34px;
+  padding: 0 1.2em;
+  margin-left: -14px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--tab-text);
+  background: var(--tab-color);
+  clip-path: polygon(16px 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  border: 1px solid rgba(32, 26, 20, 0.1);
+}
+
+.recap-tab:first-child {
+  margin-left: 0;
+}
+
+.recap-caption {
+  margin-top: 0.9rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  text-align: center;
+}
+
 .footer-copy {
   margin-top: 2.5rem;
   font-size: 0.78rem;
@@ -637,9 +703,13 @@ html {
     order: -1;
   }
 
-  .nav-links {
-    font-size: 0.78rem;
-    gap: 0.9rem;
+  .tab {
+    font-size: 0.62rem;
+    padding: 0 0.75em;
+  }
+
+  .nav-logo {
+    font-size: 1.05rem;
   }
 
   .hero-full {

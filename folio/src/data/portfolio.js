@@ -1,6 +1,16 @@
 // Content for the CUR E-Portfolio sections.
 // Sourced from Cara's resume (Aug 2026) and confirmed lab details.
 
+// The "pages" of the folder — hero is the cover underneath everything else,
+// these are the tabbed pages stacked on top of it in scroll order.
+export const pageTabs = [
+  { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
+  { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
+  { id: 'coursework', label: 'Coursework', color: 'var(--babyblue)', text: 'var(--ink)' },
+  { id: 'resume', label: 'Resume', color: 'var(--finale)', text: 'var(--cream)' },
+  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
+];
+
 export const profile = {
   name: 'Cara Kulhanjian',
   tagline: 'Computer Science Student & Data-Driven Researcher',
