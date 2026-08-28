@@ -864,6 +864,17 @@ html {
     height: 160vh;
     height: 160svh;
   }
+
+  /* A sticky section taller than the viewport (routine here once
+     grids go single-column) freezes visually for the whole time it's
+     "stuck" — the page scrollbar moves but nothing on screen changes
+     until it finally releases, which reads as broken. Below this
+     width, sections scroll in normal flow instead, so every bit of
+     content becomes visible progressively as you scroll past it. */
+  .stack-section {
+    position: relative;
+    top: auto;
+  }
 }
 
 /* Phones: lighten the effects that are cheapest to feel as jank on a
