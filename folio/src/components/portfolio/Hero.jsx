@@ -1,8 +1,19 @@
+import me from '../../assets/me.png';
+import crochetPattern from '../../assets/crochet-pattern.jpg';
+import RotatingHead from './RotatingHead.jsx';
+
 function Hero() {
   return (
     <section id="hero" className="hero-full">
       <div className="hero-bg-layer" aria-hidden="true" />
       <div className="hero-sticky">
+        <div className="hero-collage" aria-hidden="true">
+          <div className="hero-pattern-swatch">
+            <img src={crochetPattern} alt="" />
+          </div>
+          <RotatingHead src={me} alt="" className="hero-logo-img" />
+        </div>
+
         <h1 className="hero-statement">
           <span className="accent">Cara Kulhanjian</span> / Research, Data &amp; Design / studying Computer
           Science at the University of Florida

@@ -1,5 +1,5 @@
 import { profile, resumeFileUrl } from '../../data/portfolio.js';
-import me from '../../assets/me.png';
+import headshot from '../../assets/cara-headshot.jpg';
 import Reveal from './Reveal.jsx';
 
 function About() {
@@ -20,7 +20,7 @@ function About() {
 
         <Reveal className="hero-art" y={26} delay={0.15}>
           <div className="hero-art-block" aria-hidden="true" />
-          <img src={me} alt={profile.name} />
+          <img src={headshot} alt={profile.name} />
         </Reveal>
       </div>
     </section>
