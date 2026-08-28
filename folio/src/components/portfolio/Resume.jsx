@@ -1,0 +1,49 @@
+import { experience, academics, skills, resumeFileUrl } from '../../data/portfolio.js';
+
+function Resume() {
+  return (
+    <section id="resume" className="section resume">
+      <div className="resume-top">
+        <div>
+          <span className="eyebrow" style={{ color: 'var(--pink)' }}>Resume / CV</span>
+          <h2>Download the full CV</h2>
+          <p>A complete record of my research, professional experience, and technical skills.</p>
+        </div>
+        <a className="btn btn-solid" href={resumeFileUrl} download>
+          Download PDF ↓
+        </a>
+      </div>
+
+      <div className="resume-cards">
+        <div className="resume-card">
+          <h3>Experience Highlights</h3>
+          {experience.map((job) => (
+            <div className="exp-item" key={job.org}>
+              <div className="exp-role">{job.role}</div>
+              <div className="exp-org">{job.org} · {job.location}</div>
+              <div className="exp-date">{job.date}</div>
+            </div>
+          ))}
+        </div>
+
+        <div className="resume-card">
+          <h3>Skills</h3>
+          <div className="tag-row">
+            {[...skills.languagesTools, ...skills.libraries].map((skill) => (
+              <span key={skill}>{skill}</span>
+            ))}
+          </div>
+        </div>
+
+        <div className="resume-card">
+          <h3>Education</h3>
+          <div className="edu-line">{academics.major}</div>
+          <div className="edu-sub">{academics.school}</div>
+          <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Resume;
