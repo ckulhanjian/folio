@@ -47,17 +47,23 @@ function Nav() {
   return (
     <nav className="nav">
       <a className="nav-logo" href="#hero">Cara Kulhanjian</a>
-      <div className={`tab-row${showTabs ? ' tab-row-visible' : ''}`}>
-        {pageTabs.map((tab) => (
-          <a
-            key={tab.id}
-            href={`#${tab.id}`}
-            className={`tab${active === tab.id ? ' tab-active' : ''}`}
-            style={{ '--tab-color': tab.color, '--tab-text': tab.text }}
-          >
-            {tab.label}
-          </a>
-        ))}
+      <div className="nav-right">
+        <div className={`mini-nav${showTabs ? ' mini-nav-hidden' : ''}`}>
+          {pageTabs.map((tab) => (
+            <a key={tab.id} href={`#${tab.id}`}>{tab.label}</a>
+          ))}
+        </div>
+        <div className={`tab-row${showTabs ? ' tab-row-visible' : ''}`}>
+          {pageTabs.map((tab) => (
+            <a
+              key={tab.id}
+              href={`#${tab.id}`}
+              className={`tab${active === tab.id ? ' tab-active' : ''}`}
+            >
+              {tab.label}
+            </a>
+          ))}
+        </div>
       </div>
     </nav>
   );

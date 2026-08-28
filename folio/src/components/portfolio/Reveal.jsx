@@ -8,7 +8,7 @@ function Reveal({
   delay = 0,
   duration = 0.7,
   once = true,
-  amount = 0.3,
+  amount = 0.15,
   as = 'div',
 }) {
   const MotionTag = motion[as] || motion.div;

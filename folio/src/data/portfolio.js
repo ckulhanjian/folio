@@ -4,10 +4,38 @@
 // The "pages" of the folder — hero is the cover underneath everything else,
 // these are the tabbed pages stacked on top of it in scroll order.
 export const pageTabs = [
-  { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
-  { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
-  { id: 'coursework', label: 'Coursework', color: 'var(--babyblue)', text: 'var(--ink)' },
-  { id: 'resume', label: 'Resume', color: 'var(--finale)', text: 'var(--cream)' },
+  {
+    id: 'about',
+    label: 'About',
+    color: 'var(--paper)',
+    text: 'var(--ink)',
+    eyebrow: 'About',
+    title: 'Computer Science Student & Data-Driven Researcher',
+  },
+  {
+    id: 'research',
+    label: 'Research',
+    color: 'var(--pink)',
+    text: 'var(--ink)',
+    eyebrow: 'Research Project',
+    title: 'Methamphetamine Use Disorder & GLP-1',
+  },
+  {
+    id: 'coursework',
+    label: 'Coursework',
+    color: 'var(--babyblue)',
+    text: 'var(--ink)',
+    eyebrow: 'Coursework',
+    title: 'Bachelor of Science in Computer Science',
+  },
+  {
+    id: 'resume',
+    label: 'Resume',
+    color: 'var(--finale)',
+    text: 'var(--cream)',
+    eyebrow: 'Resume / CV',
+    title: 'Download the full CV',
+  },
   { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
 ];
 
