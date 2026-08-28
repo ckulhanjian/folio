@@ -1,9 +1,10 @@
 import { experience, academics, skills, resumeFileUrl } from '../../data/portfolio.js';
+import Reveal from './Reveal.jsx';
 
 function Resume() {
   return (
-    <section id="resume" className="section resume">
-      <div className="resume-top">
+    <section id="resume" className="section resume stack-section">
+      <Reveal className="resume-top" y={22}>
         <div>
           <span className="eyebrow" style={{ color: 'var(--pink)' }}>Resume / CV</span>
           <h2>Download the full CV</h2>
@@ -12,10 +13,10 @@ function Resume() {
         <a className="btn btn-solid" href={resumeFileUrl} download>
           Download PDF ↓
         </a>
-      </div>
+      </Reveal>
 
       <div className="resume-cards">
-        <div className="resume-card">
+        <Reveal className="resume-card" y={30} delay={0.05} as="div">
           <h3>Experience Highlights</h3>
           {experience.map((job) => (
             <div className="exp-item" key={job.org}>
@@ -24,23 +25,23 @@ function Resume() {
               <div className="exp-date">{job.date}</div>
             </div>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="resume-card">
+        <Reveal className="resume-card" y={30} delay={0.15}>
           <h3>Skills</h3>
           <div className="tag-row">
             {[...skills.languagesTools, ...skills.libraries].map((skill) => (
               <span key={skill}>{skill}</span>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="resume-card">
+        <Reveal className="resume-card" y={30} delay={0.25}>
           <h3>Education</h3>
           <div className="edu-line">{academics.major}</div>
           <div className="edu-sub">{academics.school}</div>
           <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

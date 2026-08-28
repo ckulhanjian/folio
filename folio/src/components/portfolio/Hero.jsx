@@ -1,28 +1,17 @@
-import { profile, resumeFileUrl } from '../../data/portfolio.js';
-import me from '../../assets/me.png';
-
 function Hero() {
   return (
-    <section id="about" className="section hero">
-      <div>
-        <span className="eyebrow">E-Portfolio</span>
-        <h1>
-          <span className="accent">{profile.name}</span>
+    <section id="hero" className="hero-full">
+      <div className="hero-bg-layer" aria-hidden="true" />
+      <div className="hero-sticky">
+        <h1 className="hero-statement">
+          <span className="accent">Cara Kulhanjian</span> / Research, Data &amp; Design / studying Computer
+          Science at the University of Florida
         </h1>
-        <p className="hero-tagline">{profile.tagline}</p>
-        <p className="hero-bio">{profile.bio}</p>
-        <p className="hero-meta">{profile.meta}</p>
-        <div className="hero-cta">
-          <a className="btn btn-solid" href="#research">View Research</a>
-          <a className="btn btn-outline" href={resumeFileUrl} download>
-            Download Resume ↓
-          </a>
-        </div>
-      </div>
-
-      <div className="hero-art">
-        <div className="hero-art-block" aria-hidden="true" />
-        <img src={me} alt={profile.name} />
+        <span className="scroll-cue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 4v14M6 12l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </span>
       </div>
     </section>
   );

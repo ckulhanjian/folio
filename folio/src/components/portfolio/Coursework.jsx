@@ -1,28 +1,29 @@
 import { academics } from '../../data/portfolio.js';
+import Reveal from './Reveal.jsx';
 
 function Coursework() {
   return (
-    <section id="coursework" className="section coursework">
-      <div className="coursework-head">
+    <section id="coursework" className="section coursework stack-section">
+      <Reveal className="coursework-head" y={22}>
         <span className="eyebrow">Coursework</span>
         <h2>{academics.major}</h2>
         <p className="degree">
           {academics.school} · {academics.grad} · GPA {academics.gpa}
         </p>
         <p>{academics.narrative}</p>
-      </div>
+      </Reveal>
 
       <div className="coursework-grid">
-        <div>
+        <Reveal x={-30} y={0} delay={0.1}>
           <h3 style={{ fontStyle: 'italic', marginBottom: '0.8rem' }}>Relevant Coursework</h3>
           <ul className="pill-list">
             {academics.courses.map((course) => (
               <li key={course}>{course}</li>
             ))}
           </ul>
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal x={30} y={0} delay={0.2}>
           <div className="side-col">
             <h3>Distinctions</h3>
             <ul className="plain-list">
@@ -40,7 +41,7 @@ function Coursework() {
               ))}
             </ul>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

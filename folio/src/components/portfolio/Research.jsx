@@ -1,28 +1,32 @@
 import { research } from '../../data/portfolio.js';
+import Reveal from './Reveal.jsx';
+import PhotoStack from './PhotoStack.jsx';
 
 function Research() {
   return (
-    <section id="research" className="section research">
-      <span className="eyebrow">Research Project</span>
-      <h2 className="research-title">{research.title}</h2>
+    <section id="research" className="section research stack-section">
+      <Reveal as="span" className="eyebrow" y={0}>
+        Research Project
+      </Reveal>
+      <Reveal className="research-title-wrap" delay={0.05}>
+        <h2 className="research-title">{research.title}</h2>
+      </Reveal>
 
       <div className="research-meta">
-        <div className="meta-card">
-          <div className="label">Principal Investigator</div>
-          <div className="value">{research.pi}</div>
-        </div>
-        <div className="meta-card">
-          <div className="label">Institution &amp; Department</div>
-          <div className="value">{research.institution}</div>
-        </div>
-        <div className="meta-card">
-          <div className="label">Time Affiliated</div>
-          <div className="value">{research.duration}</div>
-        </div>
+        {[
+          ['Principal Investigator', research.pi],
+          ['Institution & Department', research.institution],
+          ['Time Affiliated', research.duration],
+        ].map(([label, value], i) => (
+          <Reveal key={label} className="meta-card" y={18} delay={0.1 + i * 0.08}>
+            <div className="label">{label}</div>
+            <div className="value">{value}</div>
+          </Reveal>
+        ))}
       </div>
 
       <div className="research-grid">
-        <div className="research-body">
+        <Reveal className="research-body" x={-24} y={0}>
           <div>
             <h3>Research Focus</h3>
             <p>{research.focus}</p>
@@ -31,23 +35,17 @@ function Research() {
             <h3>Project Responsibilities</h3>
             <p>{research.responsibilities}</p>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="research-media" role="img" aria-label="Placeholder for a research figure or photo">
-          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="4" y="10" width="56" height="44" rx="6" stroke="#6e0f13" strokeWidth="2.5" />
-            <circle cx="20" cy="24" r="5" stroke="#6e0f13" strokeWidth="2.5" />
-            <path d="M4 44L22 30L34 40L46 26L60 40" stroke="#6e0f13" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <span className="media-label">Add a figure or photo</span>
-          <span className="media-sub">e.g. a heatmap from the imaging analysis or a lab photo</span>
-        </div>
+        <Reveal x={24} y={0} delay={0.1}>
+          <PhotoStack />
+        </Reveal>
       </div>
 
-      <div className="research-context">
+      <Reveal className="research-context" y={18}>
         <h3>About the Data</h3>
         <p>{research.context}</p>
-      </div>
+      </Reveal>
     </section>
   );
 }

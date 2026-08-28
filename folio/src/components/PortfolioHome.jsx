@@ -1,6 +1,7 @@
 import '../style/portfolio.css';
 import Nav from './portfolio/Nav.jsx';
 import Hero from './portfolio/Hero.jsx';
+import About from './portfolio/About.jsx';
 import Research from './portfolio/Research.jsx';
 import Coursework from './portfolio/Coursework.jsx';
 import Resume from './portfolio/Resume.jsx';
@@ -11,6 +12,7 @@ function PortfolioHome() {
     <div className="portfolio">
       <Nav />
       <Hero />
+      <About />
       <Research />
       <Coursework />
       <Resume />
