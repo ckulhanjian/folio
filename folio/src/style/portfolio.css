@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Petit+Formal+Script&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Pacifico&family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   --cream: #f6efc9;
@@ -20,9 +20,14 @@
 }
 
 /* Prevent horizontal scroll without breaking position: sticky inside .portfolio
-   (overflow-x on that element would turn it into a scroll container). */
+   (overflow-x on that element would turn it into a scroll container).
+   scroll-snap-type here (not on a wrapper) gives every .stack-section a
+   consistent, deliberate "slide to the next screen" feel on scroll —
+   proximity rather than mandatory so it settles into place without
+   ever forcing a jump or trapping the scroll. */
 html {
   overflow-x: hidden;
+  scroll-snap-type: y proximity;
 }
 
 .portfolio * {
@@ -38,13 +43,15 @@ html {
   line-height: 1.05;
 }
 
-/* Script flourish for names and callouts, playing against the bold
-   Bodoni Moda headlines the way "La" plays against "FLEUR VERTE". */
+/* Whimsical, legible script flourish for names and callouts, playing
+   against the bold Bodoni Moda headlines the way "La" plays against
+   "FLEUR VERTE". Pacifico over a thinner script so it stays readable
+   even at hero scale. */
 .portfolio .accent {
-  font-family: 'Petit Formal Script', cursive;
+  font-family: 'Pacifico', cursive;
   font-style: normal;
   font-weight: 400;
-  font-size: 1.2em;
+  font-size: 1.15em;
   line-height: 1;
 }
 
@@ -62,20 +69,20 @@ html {
   padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 6vw, 5rem);
 }
 
-/* Each main section pins to the top and the next one slides up over it,
-   like cards being laid down on a table — a distinct transition per
-   section boundary instead of a plain scroll. */
+/* Each main section is a full-screen color "page" that the scroll
+   snaps cleanly to the top of — a consistent, deliberate slide from
+   screen to screen no matter how tall any one section's content is
+   (sticky-based pinning gave every section a different "stuck"
+   duration depending on its height, which read as inconsistent).
+   svh (stable "small" viewport height) instead of vh — vh recalculates
+   as a mobile browser's address bar shows/hides mid-scroll. */
 .stack-section {
-  position: sticky;
-  top: 0;
-  /* svh (stable "small" viewport height) instead of vh — vh recalculates
-     as a mobile browser's address bar shows/hides mid-scroll, which
-     fights the sticky math here and reads as jank. Fallback first for
-     browsers without svh support. */
+  position: relative;
   min-height: 100vh;
   min-height: 100svh;
   border-radius: 40px 40px 0 0;
   box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
+  scroll-snap-align: start;
 }
 
 /* Pull each section up over the tail end of the one before it (skips
@@ -306,15 +313,36 @@ html {
   transition: transform 0.06s linear;
 }
 
+/* Mirrors the face collage in the opposite corner. */
+.hero-heart {
+  position: absolute;
+  bottom: 10%;
+  left: clamp(1.5rem, 8vw, 6rem);
+  width: clamp(60px, 7vw, 90px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid var(--paper);
+  box-shadow: 0 12px 24px rgba(32, 26, 20, 0.22);
+  transform: rotate(-6deg);
+}
+
 @media (max-width: 860px) {
   .hero-collage {
     width: clamp(90px, 24vw, 130px);
     top: 8%;
     right: 1.25rem;
   }
+
+  .hero-heart {
+    width: clamp(46px, 14vw, 64px);
+    bottom: 6%;
+    left: 1.25rem;
+  }
 }
 
 .hero-statement {
+  font-family: 'Fredoka', sans-serif;
   font-size: clamp(2.2rem, 6vw, 5rem);
   font-weight: 500;
   max-width: 22ch;
@@ -412,14 +440,25 @@ html {
   color: var(--ink-soft);
 }
 
-.about-photo-accent {
-  width: 42%;
-  align-self: flex-start;
-  margin-left: 1.5rem;
+.about-photo-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.about-photo-small {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+}
+
+.about-photo-small img {
   aspect-ratio: 1;
-  object-fit: cover;
-  transform: rotate(-3deg);
-  box-shadow: 0 14px 28px rgba(32, 26, 20, 0.16);
+}
+
+.about-photo-small figcaption {
+  text-align: left;
+  font-size: 0.62rem;
 }
 
 .hero-meta {
@@ -906,18 +945,12 @@ html {
 
   .about-photos {
     order: -1;
-    flex-direction: row;
-    align-items: flex-end;
-    flex-wrap: wrap;
+    align-items: stretch;
   }
 
-  .about-photo,
-  .about-photo-accent {
-    width: 45%;
-  }
-
-  .about-photo-accent {
-    margin-left: 0;
+  .about-photo-main {
+    width: 70%;
+    align-self: center;
   }
 
   .tab {
@@ -943,22 +976,11 @@ html {
   .hero-sticky {
     position: relative;
   }
-
-  /* A sticky section taller than the viewport (routine here once
-     grids go single-column) freezes visually for the whole time it's
-     "stuck" — the page scrollbar moves but nothing on screen changes
-     until it finally releases, which reads as broken. Below this
-     width, sections scroll in normal flow instead, so every bit of
-     content becomes visible progressively as you scroll past it. */
-  .stack-section {
-    position: relative;
-    top: auto;
-  }
 }
 
 /* Phones: lighten the effects that are cheapest to feel as jank on a
-   touch device (large blurred shadows, heavy backdrop blur) and give
-   scrolling room to breathe rather than snapping section to section. */
+   touch device — large blurred shadows, heavy backdrop blur. The
+   scroll-snap itself stays on at every width for a consistent feel. */
 @media (max-width: 640px) {
   * {
     -webkit-tap-highlight-color: transparent;
