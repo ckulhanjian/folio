@@ -728,11 +728,10 @@ html {
    sliver of Resume visible above the footer. */
 .pf-footer {
   background: var(--paper);
-  padding: 3.5rem clamp(1.5rem, 6vw, 3rem);
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
 }
 
 .pf-footer h2 {
@@ -770,47 +769,45 @@ html {
 }
 
 /* The folder's index — a cropped sliver of each prior page (its color,
-   eyebrow, and title only), stacked like the tops of pages peeking out
-   of a folder. Clicking one jumps to that section, same as the nav. */
+   eyebrow, and title only), spanning the full width edge to edge like
+   colored flag stripes, and filling all the vertical space the closing
+   text below doesn't need, so the whole page reads as full-bleed.
+   Clicking one jumps to that section, same as the nav. */
 .page-index {
-  max-width: 480px;
   width: 100%;
   min-width: 0;
-  margin: 0 auto 3rem;
+  flex: 1 1 auto;
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  flex-direction: row;
 }
 
 .page-index-row {
   --tab-color: var(--paper);
   --tab-text: var(--ink);
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  min-width: 0;
-  height: 68px;
-  padding: 0 1.2rem;
-  border-radius: 16px;
+  justify-content: flex-end;
+  padding: 1.75rem 1.1rem;
   background: var(--tab-color);
   text-align: left;
   text-decoration: none;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(32, 26, 20, 0.14);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: flex-grow 0.25s ease, background 0.15s ease;
+}
+
+.page-index-row:hover {
+  flex-grow: 1.5;
 }
 
 .page-index .page-index-row {
   color: var(--tab-text);
 }
 
-.page-index-row:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(32, 26, 20, 0.2);
-}
-
 .page-index-eyebrow {
-  font-size: 0.6rem;
+  display: block;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -818,18 +815,17 @@ html {
 }
 
 .page-index-title {
+  display: block;
   min-width: 0;
-  margin-top: 0.15rem;
+  margin-top: 0.3rem;
   font-family: 'Bodoni Moda', serif;
-  font-size: 1.1rem;
+  font-size: clamp(1rem, 1.6vw, 1.35rem);
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.15;
 }
 
 .contact-close {
-  padding-top: 0.5rem;
+  padding: 2.5rem clamp(1.5rem, 6vw, 3rem) 3rem;
 }
 
 .footer-inline-link {
@@ -926,6 +922,44 @@ html {
 
   .photo-stack-surface {
     max-width: 220px;
+  }
+
+  /* Five full-height columns are unreadable at phone widths — fall
+     back to the stacked rounded cards instead of a flag stripe. */
+  .pf-footer {
+    justify-content: center;
+  }
+
+  .page-index {
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .page-index-row {
+    flex: 0 0 auto;
+    justify-content: center;
+    height: 64px;
+    padding: 0 1.1rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(32, 26, 20, 0.14);
+  }
+
+  .page-index-row:hover {
+    flex-grow: 0;
+  }
+
+  .page-index-title {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-close {
+    padding: 0 1.25rem 2.5rem;
   }
 }
 
