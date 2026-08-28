@@ -27,14 +27,7 @@ function Research() {
 
       <div className="research-grid">
         <Reveal className="research-body" x={-24} y={0}>
-          <div>
-            <h3>Research Focus</h3>
-            <p>{research.focus}</p>
-          </div>
-          <div>
-            <h3>Project Responsibilities</h3>
-            <p>{research.responsibilities}</p>
-          </div>
+          <p>{research.summary}</p>
         </Reveal>
 
         <Reveal x={24} y={0} delay={0.1}>
@@ -42,9 +35,12 @@ function Research() {
         </Reveal>
       </div>
 
-      <Reveal className="research-context" y={18}>
-        <h3>About the Data</h3>
-        <p>{research.context}</p>
+      <Reveal className="research-links" y={18}>
+        {research.links.map((link) => (
+          <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
+            {link.label} ↗
+          </a>
+        ))}
       </Reveal>
     </section>
   );

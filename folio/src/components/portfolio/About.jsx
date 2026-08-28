@@ -1,4 +1,4 @@
-import { profile, resumeFileUrl } from '../../data/portfolio.js';
+import { profile } from '../../data/portfolio.js';
 import headshotDots from '../../assets/about-headshot-dots.jpg';
 import candidDots from '../../assets/about-candid-dots.jpg';
 import laptopScreen from '../../assets/about-laptop-screen.jpg';
@@ -27,11 +27,6 @@ function About() {
             you've been putting off.
           </p>
           <p className="hero-meta">{profile.meta}</p>
-          <div className="hero-cta">
-            <a className="btn btn-solid" href={resumeFileUrl} download>
-              Download Resume ↓
-            </a>
-          </div>
         </Reveal>
 
         <Reveal className="about-photos" y={26} delay={0.15}>

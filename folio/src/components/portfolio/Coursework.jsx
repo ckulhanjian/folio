@@ -10,7 +10,6 @@ function Coursework() {
         <p className="degree">
           {academics.school} · {academics.grad} · GPA {academics.gpa}
         </p>
-        <p>{academics.narrative}</p>
       </Reveal>
 
       <div className="coursework-grid">

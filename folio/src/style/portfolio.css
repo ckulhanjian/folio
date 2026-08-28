@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;0,6..96,700;1,6..96,500;1,6..96,600&family=Pacifico&family=Fredoka:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
   --cream: #f6efc9;
@@ -37,22 +37,15 @@ html {
 .portfolio h1,
 .portfolio h2,
 .portfolio h3 {
-  font-family: 'Bodoni Moda', serif;
+  font-family: 'Fraunces', serif;
   font-weight: 600;
   margin: 0;
   line-height: 1.05;
 }
 
-/* Whimsical, legible script flourish for names and callouts, playing
-   against the bold Bodoni Moda headlines the way "La" plays against
-   "FLEUR VERTE". Pacifico over a thinner script so it stays readable
-   even at hero scale. */
 .portfolio .accent {
-  font-family: 'Pacifico', cursive;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.15em;
-  line-height: 1;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .portfolio p {
@@ -120,7 +113,7 @@ html {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-family: 'Bodoni Moda', serif;
+  font-family: 'Fraunces', serif;
   font-style: italic;
   font-size: 1.3rem;
   font-weight: 600;
@@ -313,36 +306,15 @@ html {
   transition: transform 0.06s linear;
 }
 
-/* Mirrors the face collage in the opposite corner. */
-.hero-heart {
-  position: absolute;
-  bottom: 10%;
-  left: clamp(1.5rem, 8vw, 6rem);
-  width: clamp(60px, 7vw, 90px);
-  aspect-ratio: 1;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid var(--paper);
-  box-shadow: 0 12px 24px rgba(32, 26, 20, 0.22);
-  transform: rotate(-6deg);
-}
-
 @media (max-width: 860px) {
   .hero-collage {
     width: clamp(90px, 24vw, 130px);
     top: 8%;
     right: 1.25rem;
   }
-
-  .hero-heart {
-    width: clamp(46px, 14vw, 64px);
-    bottom: 6%;
-    left: 1.25rem;
-  }
 }
 
 .hero-statement {
-  font-family: 'Fredoka', sans-serif;
   font-size: clamp(2.2rem, 6vw, 5rem);
   font-weight: 500;
   max-width: 22ch;
@@ -549,16 +521,6 @@ html {
   align-items: start;
 }
 
-.research-body h3 {
-  font-size: 1.1rem;
-  font-style: italic;
-  margin-bottom: 0.6rem;
-}
-
-.research-body > div + div {
-  margin-top: 1.75rem;
-}
-
 /* photo stack — polaroids fanned like they're piled on a table */
 .photo-stack {
   display: flex;
@@ -619,15 +581,20 @@ html {
   text-align: center;
 }
 
-.research-context {
+.research-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
   margin-top: 2.5rem;
   padding-top: 2rem;
   border-top: 1px solid rgba(32, 26, 20, 0.15);
 }
 
-.research-context h3 {
-  font-style: italic;
-  margin-bottom: 0.6rem;
+.research-links a {
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 /* ---------- coursework ---------- */
@@ -914,7 +881,7 @@ html {
   display: block;
   min-width: 0;
   margin-top: 0.3rem;
-  font-family: 'Bodoni Moda', serif;
+  font-family: 'Fraunces', serif;
   font-size: clamp(1rem, 1.6vw, 1.35rem);
   font-weight: 600;
   line-height: 1.15;
@@ -1006,34 +973,11 @@ html {
     flex-shrink: 0;
   }
 
-  /* At this width the logo + all 5 links can't fit on one line without
-     overlapping, so the link strip becomes its own horizontally
-     scrollable lane instead of wrapping or shrinking illegibly. */
+  /* The secondary nav (page links, colored tabs) is desktop-only —
+     on phones the nav is just the wordmark, keeping it out of the way
+     of the content below. */
   .nav-right {
-    max-width: 58vw;
-  }
-
-  .mini-nav,
-  .tab-row {
-    justify-content: flex-start;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-mask-image: linear-gradient(to right, black calc(100% - 18px), transparent 100%);
-    mask-image: linear-gradient(to right, black calc(100% - 18px), transparent 100%);
-  }
-
-  .mini-nav::-webkit-scrollbar,
-  .tab-row::-webkit-scrollbar {
     display: none;
-  }
-
-  .mini-nav {
-    gap: 0.6rem;
-    font-size: 0.6rem;
-  }
-
-  .mini-nav a {
-    flex-shrink: 0;
   }
 
   .photo-stack-surface {

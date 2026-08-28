@@ -1,6 +1,5 @@
 import me from '../../assets/me.png';
 import crochetPattern from '../../assets/crochet-pattern.jpg';
-import heartIcon from '../../assets/heart-icon.jpg';
 import RotatingHead from './RotatingHead.jsx';
 
 function Hero() {
@@ -14,8 +13,6 @@ function Hero() {
           </div>
           <RotatingHead src={me} alt="" className="hero-logo-img" />
         </div>
-
-        <img src={heartIcon} alt="" className="hero-heart" aria-hidden="true" />
 
         <h1 className="hero-statement">
           <span className="accent">Cara Kulhanjian</span> / Research, Data &amp; Design / studying Computer

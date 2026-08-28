@@ -59,26 +59,17 @@ export const research = {
   pi: 'Dr. Habibeh Khoshbouei',
   institution: 'Khoshbouei Neuroscience Lab, Department of Neuroscience, University of Florida College of Medicine',
   duration: 'February 2026 – Present (7+ months)',
-  focus:
+  summary:
     'My research sits at the intersection of neuroscience and data science, working with the ' +
     "Khoshbouei Neuroscience Lab to understand recovery and relapse patterns in individuals with " +
     "methamphetamine use disorder. Using the National Institutes of Health's All of Us Research " +
-    'Program database, I process patient-level health records at scale to study how GLP-1 medication ' +
-    'history relates to substance use recovery outcomes. In parallel, I support the lab\'s brain imaging ' +
-    'work, analyzing scan data to map which brain regions show the highest concentrations of fungal ' +
-    'infection — research that informs the broader lab focus on the neurobiology of addiction.',
-  responsibilities:
-    'As an undergraduate researcher, I query and clean cohort data from over 800,000 patient records in ' +
-    'the All of Us database, isolating a study cohort of 7,000+ individuals with methamphetamine and ' +
-    'GLP-1 history to build a predictive recovery and relapse model in Python (pandas, NumPy, ' +
-    'scikit-learn). I also analyze brain imaging data across multiple lab projects, creating heatmaps ' +
-    'and regression lines in Matplotlib and Seaborn to visualize regional infection concentrations, and ' +
-    'present findings to the lab team on a regular basis.',
-  context:
-    'This project uses de-identified data from the All of Us Research Program, an NIH initiative ' +
-    'building one of the most diverse health databases in the world. Understanding links between ' +
-    'metabolic medications like GLP-1 agonists and substance use recovery is an emerging area of ' +
-    'addiction neuroscience with direct implications for treatment design.',
+    'Program database, I query and clean cohort data from over 800,000 patient records, isolating ' +
+    'a study cohort of 7,000+ individuals with methamphetamine and GLP-1 history to build a ' +
+    'predictive recovery and relapse model in Python (pandas, NumPy, scikit-learn). In parallel, I ' +
+    "analyze brain imaging data across the lab's projects, creating heatmaps and regression lines " +
+    'in Matplotlib and Seaborn to visualize regional infection concentrations, and present findings ' +
+    'to the lab team on a regular basis.',
+  links: [{ label: 'All of Us Research Program', url: 'https://www.researchallofus.org' }],
 };
 
 export const academics = {
@@ -86,13 +77,6 @@ export const academics = {
   school: 'University of Florida, Honors College',
   gpa: '3.88 / 4.0',
   grad: 'Expected May 2027',
-  narrative:
-    "My coursework is built around a specialization that bridges systems, intelligence, and design: " +
-    'I pair core Computer Science requirements with electives in machine learning and human-computer ' +
-    'interaction so I can build systems that are both technically sound and genuinely usable. Circuits ' +
-    'coursework grounds my understanding of the hardware underneath the software I write, and a ' +
-    'prompt engineering course reflects my growing focus on applied AI. Outside the classroom, I bring ' +
-    'that same combination — data analysis, engineering, and design — into research and leadership roles.',
   courses: [
     'Human-Computer Interaction',
     'Machine Learning',
@@ -101,6 +85,8 @@ export const academics = {
     'Data Structures & Algorithms',
     'Operating Systems',
     'Databases & Information Systems',
+    'Signals and Systems',
+    'Algorithm Design',
   ],
   distinctions: ['Honors College, University of Florida', 'IBM Design Thinking Practitioner Certification'],
   involvement: [
@@ -111,7 +97,7 @@ export const academics = {
 };
 
 export const skills = {
-  languagesTools: ['Python', 'C++', 'HTML & CSS', 'SQL', 'JavaScript', 'Figma', 'Gemini Enterprise Platform', 'Microsoft Power Platform'],
+  languagesTools: ['Python', 'C++', 'MATLAB', 'HTML & CSS', 'SQL', 'JavaScript', 'Figma', 'Gemini Enterprise Platform', 'Microsoft Power Platform'],
   libraries: ['Matplotlib', 'Seaborn', 'Scikit-learn', 'Pandas', 'NumPy', 'React', 'Flask'],
 };
 
