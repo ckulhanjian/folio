@@ -78,6 +78,15 @@ html {
   box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
 }
 
+/* Pull each section up over the tail end of the one before it (skips
+   the first, About, since it follows the hero rather than another
+   stack-section) so the rounded top corners cut away to reveal a
+   sliver of the previous section's color underneath, like a page laid
+   on top of another rather than a hard color seam. */
+.stack-section + .stack-section {
+  margin-top: -40px;
+}
+
 .eyebrow {
   font-size: 0.8rem;
   text-transform: uppercase;
@@ -888,6 +897,10 @@ html {
   .stack-section {
     border-radius: 26px 26px 0 0;
     box-shadow: 0 -16px 32px -18px rgba(32, 26, 20, 0.3);
+  }
+
+  .stack-section + .stack-section {
+    margin-top: -26px;
   }
 
   .nav {
