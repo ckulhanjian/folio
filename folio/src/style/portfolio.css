@@ -124,8 +124,7 @@ html {
 .nav-heart {
   width: 26px;
   height: 26px;
-  border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
@@ -960,6 +959,14 @@ html {
 
   .stack-section + .stack-section {
     margin-top: -26px;
+  }
+
+  /* Sections scroll-snap flush to the top of the viewport, but the
+     nav is sticky and overlays that same top strip — without extra
+     clearance here, the eyebrow/title starts underneath the nav
+     instead of below it. */
+  .section {
+    padding-top: 6.5rem;
   }
 
   .nav {
