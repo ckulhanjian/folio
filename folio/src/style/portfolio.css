@@ -636,6 +636,7 @@ html {
 
 .pill-list li {
   background: var(--paper);
+  color: var(--ink);
   border-radius: 999px;
   padding: 0.55em 1.1em;
   font-weight: 600;
@@ -1175,8 +1176,145 @@ html {
   }
 }
 
+/* ---------- mobile stack ---------- */
+/* The entire mobile experience: no separate hero/nav/pages, just this
+   deck of cards. Collapsed, a card shows only its category label;
+   the plus button expands it in place to reveal its title and full
+   content, and the minus button rolls it back up — nothing here ever
+   navigates or scrolls to a different section. */
+.mobile-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-card {
+  --tab-color: var(--paper);
+  --tab-text: var(--ink);
+  position: relative;
+  background: var(--tab-color);
+  color: var(--tab-text);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -12px 26px -16px rgba(32, 26, 20, 0.3);
+}
+
+.mobile-card + .mobile-card {
+  margin-top: -18px;
+}
+
+.mobile-card-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.5rem 1.4rem;
+  background: none;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.mobile-card-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.mobile-card-toggle {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  line-height: 1;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.mobile-card-header:hover .mobile-card-toggle {
+  opacity: 1;
+}
+
+.mobile-home-statement {
+  margin: -0.75rem 1.4rem 1.5rem;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(0.95rem, 4.2vw, 1.15rem);
+  line-height: 1.4;
+}
+
+.mobile-card-title {
+  display: block;
+  padding: 0 1.4rem;
+  margin-bottom: 1.1rem;
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.3rem, 5.5vw, 1.7rem);
+  font-weight: 600;
+  line-height: 1.2;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+}
+
+.mobile-card-expanded .mobile-card-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animating to real "auto" height via a 0fr -> 1fr grid track, rather
+   than max-height guesswork, so content of any length expands and
+   collapses cleanly. */
+.mobile-card-body-wrap {
+  display: grid;
+  grid-template-rows: minmax(0, 0fr);
+  overflow: hidden;
+  transition: grid-template-rows 0.4s ease;
+}
+
+.mobile-card-expanded .mobile-card-body-wrap {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.mobile-card-body {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 1.4rem 2rem;
+}
+
+.mobile-card-content > * + * {
+  margin-top: 1.25rem;
+}
+
+.mobile-home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mobile-home-portrait {
+  width: 55%;
+  max-width: 200px;
+  border-radius: 50%;
+  box-shadow: 0 16px 32px rgba(32, 26, 20, 0.2);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue {
     animation: none;
+  }
+
+  .mobile-card-body-wrap,
+  .mobile-card-title,
+  .mobile-card-toggle {
+    transition: none;
   }
 }
