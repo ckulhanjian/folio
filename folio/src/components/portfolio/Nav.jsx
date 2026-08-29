@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { pageTabs } from '../../data/portfolio.js';
-import heartIcon from '../../assets/heart-icon.jpg';
+import heartIcon from '../../assets/heart-icon-dark.png';
 
 function Nav() {
   const [active, setActive] = useState(pageTabs[0].id);
@@ -57,7 +57,7 @@ function Nav() {
     <nav className="nav">
       <a className="nav-logo" href="#hero">
         <img src={heartIcon} alt="" className="nav-heart" />
-        Cara Kulhanjian
+        <span className="nav-logo-text">Cara Kulhanjian</span>
       </a>
       <div className="nav-right">
         <div className={`mini-nav${showTabs ? ' mini-nav-hidden' : ''}`}>

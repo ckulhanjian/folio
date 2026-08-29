@@ -973,11 +973,53 @@ html {
     flex-shrink: 0;
   }
 
-  /* The secondary nav (page links, colored tabs) is desktop-only —
-     on phones the nav is just the wordmark, keeping it out of the way
-     of the content below. */
-  .nav-right {
+  /* The full wordmark plus five nav links can't share a phone-width
+     row — drop the text and keep just the mark, freeing the space for
+     the links instead. */
+  .nav-logo-text {
     display: none;
+  }
+
+  /* Links don't fit a phone-width row next to the mark, so the row
+     scrolls horizontally instead of wrapping or shrinking to
+     unreadable text. Always show the pill tabs here (skip the
+     plain-text mini-nav crossfade — it's a desktop-only nicety) so
+     there's one consistent, scrollable strip. */
+  .nav-right {
+    flex: 1 1 auto;
+    min-width: 0;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .nav-right::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mini-nav {
+    display: none;
+  }
+
+  .tab-row {
+    position: static;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    width: max-content;
+    justify-content: flex-start;
+    gap: 0.2rem;
+    padding-right: 0.5rem;
+  }
+
+  .tab {
+    flex-shrink: 0;
+    font-size: 0.66rem;
+    padding: 0 0.7em;
+    height: 30px;
   }
 
   .photo-stack-surface {
