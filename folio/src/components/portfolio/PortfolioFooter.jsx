@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { profile, pageTabs } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
 
@@ -7,20 +8,35 @@ const indexEntries = [
 ];
 
 function PortfolioFooter() {
+  const [expandedId, setExpandedId] = useState(null);
+
   return (
     <footer id="contact" className="pf-footer stack-section">
       <Reveal y={20} className="page-index">
-        {indexEntries.map((entry) => (
-          <a
-            key={entry.id}
-            href={`#${entry.id}`}
-            className="page-index-row"
-            style={{ '--tab-color': entry.color, '--tab-text': entry.text }}
-          >
-            <span className="page-index-eyebrow">{entry.eyebrow}</span>
-            <span className="page-index-title">{entry.title}</span>
-          </a>
-        ))}
+        {indexEntries.map((entry) => {
+          const expanded = expandedId === entry.id;
+          return (
+            <div
+              key={entry.id}
+              className={`page-index-row${expanded ? ' page-index-row-expanded' : ''}`}
+              style={{ '--tab-color': entry.color, '--tab-text': entry.text }}
+            >
+              <a href={`#${entry.id}`} className="page-index-link">
+                <span className="page-index-eyebrow">{entry.eyebrow}</span>
+                <span className="page-index-title">{entry.title}</span>
+                {expanded && <span className="page-index-hint">Visit page ↗</span>}
+              </a>
+              <button
+                type="button"
+                className="page-index-toggle"
+                aria-label={expanded ? `Collapse ${entry.eyebrow}` : `Preview ${entry.eyebrow}`}
+                onClick={() => setExpandedId(expanded ? null : entry.id)}
+              >
+                {expanded ? '–' : '+'}
+              </button>
+            </div>
+          );
+        })}
       </Reveal>
 
       <Reveal y={20} delay={0.1} className="contact-close">

@@ -782,6 +782,26 @@ html {
   color: rgba(251, 248, 236, 0.8);
 }
 
+/* ---------- interlude ---------- */
+/* A quiet, unstyled pause between the last colorful card (Resume) and
+   the closing stack — not a stack-section itself, so it doesn't snap
+   or compete with the layered-page metaphor, just breathing room. The
+   line fades in as it arrives and fades back out as it leaves (once:
+   false on the Reveal), rather than staying on screen. */
+.interlude {
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: clamp(4rem, 14vw, 8rem) 1.5rem;
+}
+
+.interlude-text {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  color: var(--ink-soft);
+}
+
 /* ---------- footer ---------- */
 /* Also a stack-section: without its own sticky pin + min-height, this
    final section can end up shorter than the trailing scroll distance
@@ -818,16 +838,16 @@ html {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;
-  border: 2px solid var(--maroon);
-  color: var(--maroon);
+  border: 2px solid var(--paper);
+  color: var(--paper);
   border-radius: 999px;
   padding: 0.6em 1.3em;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .footer-links a:hover {
-  background: var(--maroon);
-  color: var(--cream);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 /* The folder's index — a cropped sliver of each prior page (its color,
@@ -846,25 +866,61 @@ html {
 .page-index-row {
   --tab-color: var(--paper);
   --tab-text: var(--ink);
+  position: relative;
   flex: 1 1 0;
   min-width: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 1.75rem 1.1rem;
   background: var(--tab-color);
-  text-align: left;
-  text-decoration: none;
   overflow: hidden;
-  transition: flex-grow 0.25s ease, background 0.15s ease;
+  transition: flex-grow 0.3s ease;
 }
 
 .page-index-row:hover {
   flex-grow: 1.5;
 }
 
-.page-index .page-index-row {
+.page-index-row.page-index-row-expanded,
+.page-index-row.page-index-row-expanded:hover {
+  flex-grow: 3;
+}
+
+.page-index-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 1.75rem 1.1rem;
+  text-align: left;
+  text-decoration: none;
   color: var(--tab-text);
+}
+
+/* Expand/collapse toggle — mainly a mobile affordance (touch has no
+   hover to preview a tab with), hidden on desktop where hovering a
+   flag stripe already does this. */
+.page-index-toggle {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.9rem;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid var(--tab-text);
+  background: transparent;
+  color: var(--tab-text);
+  font-size: 1.1rem;
+  line-height: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.page-index-toggle:hover {
+  opacity: 1;
 }
 
 .page-index-eyebrow {
@@ -886,8 +942,38 @@ html {
   line-height: 1.15;
 }
 
+.page-index-hint {
+  display: block;
+  margin-top: 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0;
+  animation: page-index-hint-in 0.3s ease 0.1s forwards;
+}
+
+@keyframes page-index-hint-in {
+  to {
+    opacity: 0.85;
+  }
+}
+
+/* The closing Contact card reuses the same stacked-page language as
+   every other section — its own color, rounded top corners, a lift
+   off the card above — instead of just trailing off as plain text. */
 .contact-close {
+  background: var(--ink);
+  color: var(--paper);
   padding: 2.5rem clamp(1.5rem, 6vw, 3rem) 3rem;
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -20px 40px -24px rgba(32, 26, 20, 0.4);
+  margin-top: -20px;
+  position: relative;
+}
+
+.contact-close .eyebrow {
+  color: var(--pink);
 }
 
 .footer-inline-link {
@@ -898,7 +984,7 @@ html {
 .footer-copy {
   margin-top: 2.5rem;
   font-size: 0.78rem;
-  color: var(--ink-soft);
+  color: rgba(251, 248, 236, 0.6);
 }
 
 /* ---------- responsive ---------- */
@@ -1050,10 +1136,8 @@ html {
 
   .page-index-row {
     flex: 1 1 0;
-    justify-content: flex-end;
     height: auto;
     min-height: 64px;
-    padding: 1.1rem 1.25rem;
     border-radius: 20px 20px 0 0;
     box-shadow: 0 -10px 20px -12px rgba(32, 26, 20, 0.25);
   }
@@ -1066,12 +1150,28 @@ html {
     flex-grow: 1;
   }
 
+  .page-index-row.page-index-row-expanded,
+  .page-index-row.page-index-row-expanded:hover {
+    flex-grow: 3.5;
+  }
+
+  .page-index-link {
+    justify-content: flex-end;
+    padding: 1.1rem 1.25rem;
+  }
+
+  .page-index-toggle {
+    display: flex;
+  }
+
   .page-index-title {
     font-size: 1.15rem;
   }
 
   .contact-close {
-    padding: 0 1.25rem 2.5rem;
+    padding: 2.75rem 1.25rem 2.5rem;
+    margin-top: -18px;
+    border-radius: 22px 22px 0 0;
   }
 }
 

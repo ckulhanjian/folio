@@ -5,6 +5,7 @@ import About from './portfolio/About.jsx';
 import Research from './portfolio/Research.jsx';
 import Coursework from './portfolio/Coursework.jsx';
 import Resume from './portfolio/Resume.jsx';
+import Interlude from './portfolio/Interlude.jsx';
 import PortfolioFooter from './portfolio/PortfolioFooter.jsx';
 
 function PortfolioHome() {
@@ -16,6 +17,7 @@ function PortfolioHome() {
       <Research />
       <Coursework />
       <Resume />
+      <Interlude />
       <PortfolioFooter />
     </div>
   );
