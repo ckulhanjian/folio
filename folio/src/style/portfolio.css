@@ -962,11 +962,13 @@ html {
   }
 
   /* Sections scroll-snap flush to the top of the viewport, but the
-     nav is sticky and overlays that same top strip — without extra
-     clearance here, the eyebrow/title starts underneath the nav
-     instead of below it. */
-  .section {
-    padding-top: 6.5rem;
+     nav is sticky and overlays that same top strip. Rather than pad
+     every section's content down (which reads as a big empty gap
+     above the title, especially mid-transition), shift where "top"
+     is for the snap itself, so the section settles just below the
+     nav with its normal padding intact. */
+  html {
+    scroll-padding-top: 68px;
   }
 
   .nav {
@@ -1033,38 +1035,39 @@ html {
     max-width: 220px;
   }
 
-  /* Five full-height columns are unreadable at phone widths — fall
-     back to the stacked rounded cards instead of a flag stripe. */
-  .pf-footer {
-    justify-content: center;
-  }
-
+  /* Five full-height columns are unreadable at phone widths — turn
+     the strip vertical instead: same idea (equal flex shares, full
+     bleed), rotated 90°, styled like the rest of the site's stacked
+     "page" cards (rounded top corners, slight overlap) so it reads
+     as the same deck of pages rather than a different component. */
   .page-index {
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     flex-direction: column;
-    gap: 0.6rem;
-    padding: 0 1.25rem;
-    margin-bottom: 1.5rem;
+    gap: 0;
+    padding: 0;
+    margin-bottom: 0;
   }
 
   .page-index-row {
-    flex: 0 0 auto;
-    justify-content: center;
-    height: 64px;
-    padding: 0 1.1rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(32, 26, 20, 0.14);
+    flex: 1 1 0;
+    justify-content: flex-end;
+    height: auto;
+    min-height: 64px;
+    padding: 1.1rem 1.25rem;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -10px 20px -12px rgba(32, 26, 20, 0.25);
+  }
+
+  .page-index-row + .page-index-row {
+    margin-top: -14px;
   }
 
   .page-index-row:hover {
-    flex-grow: 0;
+    flex-grow: 1;
   }
 
   .page-index-title {
-    font-size: 1rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 1.15rem;
   }
 
   .contact-close {
