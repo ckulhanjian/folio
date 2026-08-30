@@ -7,11 +7,10 @@ import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
 
 const cards = [
-  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
   { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
-  { id: 'resume', label: 'Resume', color: 'var(--finale)', text: 'var(--cream)' },
-  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
+  { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
+  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
 ];
 
 function AboutBody() {
@@ -90,7 +89,7 @@ function ResumeBody() {
   return (
     <>
       <span className="mobile-card-title">Download the full CV</span>
-      <div className="mobile-card-content">
+      <div className="mobile-card-content mobile-resume">
         <p>A complete record of my research, professional experience, and technical skills.</p>
         <a className="btn btn-solid" href={resumeFileUrl} download>
           Download PDF ↓
@@ -181,21 +180,11 @@ function ContactBody() {
   );
 }
 
-function HomeBody() {
-  return (
-    <div className="mobile-card-content mobile-home-content">
-      <img src={me} alt="" className="mobile-home-portrait" />
-      <p className="hero-meta">{profile.meta}</p>
-    </div>
-  );
-}
-
 const bodies = {
   about: AboutBody,
   research: ResearchBody,
   resume: ResumeBody,
   contact: ContactBody,
-  home: HomeBody,
 };
 
 function MobileStack() {
@@ -203,6 +192,23 @@ function MobileStack() {
 
   return (
     <div className="mobile-stack">
+      <section
+        className="mobile-card mobile-home-banner"
+        style={{ '--tab-color': 'var(--cream)', '--tab-text': 'var(--ink)' }}
+      >
+        <div className="mobile-card-header mobile-card-header-static">
+          <span className="mobile-card-label">Home</span>
+        </div>
+        <p className="mobile-home-statement">
+          Cara Kulhanjian / Research, Data and Design (R&amp;D) / Studying Computer Science (CS)
+          at the University of Florida (UF)
+        </p>
+        <div className="mobile-card-content mobile-home-content">
+          <img src={me} alt="" className="mobile-home-portrait" />
+          <p className="hero-meta">{profile.meta}</p>
+        </div>
+      </section>
+
       {cards.map((card) => {
         const expanded = expandedId === card.id;
         const Body = bodies[card.id];
@@ -221,13 +227,6 @@ function MobileStack() {
               <span className="mobile-card-label">{card.label}</span>
               <span className="mobile-card-toggle" aria-hidden="true">{expanded ? '–' : '+'}</span>
             </button>
-
-            {card.id === 'home' && (
-              <p className="mobile-home-statement">
-                Cara Kulhanjian / Research, Data and Design (R&amp;D) / Studying Computer Science
-                (CS) at the University of Florida (UF)
-              </p>
-            )}
 
             <div className="mobile-card-body-wrap">
               <div className="mobile-card-body">

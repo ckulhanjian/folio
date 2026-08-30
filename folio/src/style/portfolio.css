@@ -1242,8 +1242,15 @@ html {
   opacity: 1;
 }
 
+/* The Home banner reuses .mobile-card-header's layout but isn't a
+   button — there's nothing to toggle and nothing to minimize. */
+.mobile-card-header-static {
+  cursor: default;
+  padding-bottom: 0;
+}
+
 .mobile-home-statement {
-  margin: -0.75rem 1.4rem 1.5rem;
+  margin: 0 1.4rem 1.5rem;
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-weight: 500;
@@ -1298,6 +1305,7 @@ html {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  padding: 0 1.4rem 2rem;
 }
 
 .mobile-home-portrait {
@@ -1305,6 +1313,42 @@ html {
   max-width: 200px;
   border-radius: 50%;
   box-shadow: 0 16px 32px rgba(32, 26, 20, 0.2);
+}
+
+/* Resume's mobile card uses the lighter babyblue (not the dark maroon
+   the desktop Resume page sits on), so its cream-tinted card chrome
+   needs an ink-tinted equivalent for contrast instead. */
+.mobile-resume .resume-card {
+  background: rgba(32, 26, 20, 0.05);
+  border-color: rgba(32, 26, 20, 0.14);
+}
+
+.mobile-resume .resume-card h3 {
+  color: var(--maroon);
+}
+
+.mobile-resume .exp-item + .exp-item {
+  border-top-color: rgba(32, 26, 20, 0.14);
+}
+
+.mobile-resume .exp-item .exp-org,
+.mobile-resume .resume-card .edu-sub {
+  color: var(--maroon);
+}
+
+.mobile-resume .exp-item .exp-date,
+.mobile-resume .resume-card .edu-gpa {
+  color: var(--ink-soft);
+}
+
+.mobile-resume .tag-row span {
+  background: rgba(32, 26, 20, 0.08);
+  color: var(--ink);
+}
+
+.mobile-resume .btn-solid {
+  background: var(--maroon);
+  color: var(--cream);
 }
 
 @media (prefers-reduced-motion: reduce) {
