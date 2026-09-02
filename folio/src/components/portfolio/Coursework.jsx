@@ -85,7 +85,7 @@ function Coursework() {
             </div>
           </Reveal>
 
-          <Reveal x={30} y={0} delay={0.2}>
+          <Reveal x={30} y={0} delay={0.2} className="education-side">
             <div className="side-col">
               <h3>Distinctions</h3>
               <ul className="plain-list">

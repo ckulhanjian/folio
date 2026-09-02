@@ -506,13 +506,13 @@ html {
 .research-title {
   font-size: clamp(1.8rem, 3.4vw, 2.6rem);
   max-width: 24ch;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .research-meta {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 2.5rem;
 }
 
@@ -646,7 +646,13 @@ html {
 .coursework-grid {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
-  gap: 2.5rem;
+  gap: 2.5rem 4.5rem;
+}
+
+/* Nudged up relative to the left (Skills / Design Teams) column so the
+   two don't read as a rigid, perfectly aligned grid. */
+.education-side {
+  margin-top: -1.75rem;
 }
 
 .pill-list {
@@ -686,7 +692,7 @@ html {
 }
 
 .side-col + .side-col {
-  margin-top: 1.75rem;
+  margin-top: 3rem;
 }
 
 .plain-list {
@@ -1070,6 +1076,7 @@ li.skill-highlight {
 .pf-footer p {
   max-width: 40ch;
   margin: 0 auto;
+  color: var(--pink);
 }
 
 /* Padding here (not just on the text itself) so the hover zone that
@@ -1112,8 +1119,10 @@ li.skill-highlight {
   text-underline-offset: 2px;
 }
 
-.footer-copy {
-  margin-top: 2.5rem;
+/* Element + class so this beats the higher-specificity ".pf-footer p"
+   / ".portfolio p" rules that would otherwise reset margin-top to 0. */
+p.footer-copy {
+  margin-top: 4rem;
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.6);
 }
