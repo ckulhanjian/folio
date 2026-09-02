@@ -17,11 +17,13 @@ import useIsMobile from '../hooks/useIsMobile.js';
 function PortfolioHome() {
   const isMobile = useIsMobile();
 
-  // Desktop only: each section's own color/background stays invisible
-  // until a meaningful chunk of it has scrolled into view, rather than
+  // Desktop only: each section slides/fades into place once a
+  // meaningful chunk of it has scrolled into view, rather than
   // popping in the instant its first pixel crosses the viewport edge.
   // Sections don't snap into place anymore — this reveal is what
-  // signals "the next page" instead.
+  // signals "the next page" instead. Toggled both ways (not just
+  // added once) so scrolling back up replays the same transition in
+  // reverse instead of leaving every section permanently settled.
   useEffect(() => {
     if (isMobile) return;
     const sections = document.querySelectorAll('.hero-full, .stack-section');
@@ -30,9 +32,7 @@ function PortfolioHome() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('section-visible');
-          }
+          entry.target.classList.toggle('section-visible', entry.isIntersecting);
         });
       },
       { threshold: 0.2 }

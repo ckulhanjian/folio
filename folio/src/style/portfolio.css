@@ -61,10 +61,11 @@ html {
 /* Each main section is a full-screen color "page". svh (stable "small"
    viewport height) instead of vh — vh recalculates as a mobile
    browser's address bar shows/hides mid-scroll.
-   A section's own color/background stays invisible until scrolled
-   far enough into view (.section-visible, toggled from
-   PortfolioHome.jsx via IntersectionObserver) rather than appearing
-   the instant its first pixel crosses into the viewport. */
+   Sections slide up into place (translateY + opacity) as they cross
+   ~20% visible, like a page sliding on top of the one before it, and
+   .section-visible is toggled both ways (PortfolioHome.jsx) — not
+   just added once — so scrolling back up reverses the same
+   animation instead of leaving every section permanently settled. */
 .stack-section {
   position: relative;
   min-height: 100vh;
@@ -72,12 +73,14 @@ html {
   border-radius: 40px 40px 0 0;
   box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transform: translateY(70px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .hero-full.section-visible,
 .stack-section.section-visible {
   opacity: 1;
+  transform: translateY(0);
 }
 
 /* Pull each section up over the tail end of the one before it (skips
@@ -247,7 +250,8 @@ html {
   min-height: 100svh;
   background: var(--cream);
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transform: translateY(70px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -778,7 +782,7 @@ html {
   min-height: 55vh;
   min-height: 55svh;
   background: var(--ink);
-  color: var(--paper);
+  color: #fff;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -829,9 +833,15 @@ html {
   opacity: 0.28;
 }
 
+/* Padding here (not just on the text itself) so the hover zone that
+   dims the following head extends a bit past every line's own edge —
+   moving the cursor to just past a shorter line (like the eyebrow or
+   the centered paragraph) still counts as "over the text" instead of
+   dropping out right at the glyph boundary. */
 .contact-close {
   position: relative;
   z-index: 1;
+  padding: 2rem 3rem;
 }
 
 .footer-links {
@@ -846,15 +856,15 @@ html {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.88rem;
-  border: 2px solid var(--paper);
-  color: var(--paper);
+  border: 2px solid #fff;
+  color: #fff;
   border-radius: 999px;
   padding: 0.6em 1.3em;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .footer-links a:hover {
-  background: var(--paper);
+  background: #fff;
   color: var(--ink);
 }
 
@@ -866,7 +876,7 @@ html {
 .footer-copy {
   margin-top: 2.5rem;
   font-size: 0.78rem;
-  color: rgba(251, 248, 236, 0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 /* ---------- responsive ---------- */

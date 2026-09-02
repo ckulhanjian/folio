@@ -24,27 +24,15 @@ function Nav() {
     sections.forEach((section) => sectionObserver.observe(section));
 
     // The folder-tab nav only makes sense once you've left the cover
-    // (hero) — keep it hidden until the hero text has scrolled out of
-    // view. Watch the text itself (.hero-sticky) rather than the outer
-    // #hero wrapper: on desktop that wrapper is 200vh tall (extra
-    // scroll room for its own background-scroll effect) but the text
-    // occupies only the last viewport of it, and on mobile the wrapper
-    // collapses to exactly one viewport with no extra room at all — an
-    // observer on the actual visible text handles both correctly
-    // without needing to know which case applies.
-    const heroText = document.querySelector('.hero-sticky');
+    // (hero) — keep it hidden until the hero has scrolled out of view.
+    const heroSection = document.getElementById('hero');
     let heroObserver;
-    if (heroText) {
+    if (heroSection) {
       heroObserver = new IntersectionObserver(
         ([entry]) => setShowTabs(!entry.isIntersecting),
-        // Right at the exact release boundary a sub-pixel sliver of
-        // overlap can remain at the top edge (where the text scrolls
-        // out), which would otherwise still count as "intersecting"
-        // and leave the tabs stuck hidden — pull the effective
-        // viewport's top edge down by 20px so a clean break is required.
-        { threshold: 0, rootMargin: '-20px 0px 0px 0px' }
+        { threshold: 0 }
       );
-      heroObserver.observe(heroText);
+      heroObserver.observe(heroSection);
     }
 
     return () => {
@@ -53,16 +41,30 @@ function Nav() {
     };
   }, []);
 
+  // Sections slide into place via a CSS transform that's still mid-
+  // animation (or hasn't started) for anything below the fold, so the
+  // browser's native #hash jump — which measures the element's
+  // current, possibly-offset position — can land short or long. Scroll
+  // by offsetTop instead: that's pure layout position, unaffected by
+  // the reveal transform, so the target is always where the section
+  // actually settles.
+  const jumpTo = (id) => (event) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    event.preventDefault();
+    window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+  };
+
   return (
     <nav className="nav">
-      <a className="nav-logo" href="#hero">
+      <a className="nav-logo" href="#hero" onClick={jumpTo('hero')}>
         <img src={heartIcon} alt="" className="nav-heart" />
         <span className="nav-logo-text">Cara Kulhanjian</span>
       </a>
       <div className="nav-right">
         <div className={`mini-nav${showTabs ? ' mini-nav-hidden' : ''}`}>
           {pageTabs.map((tab) => (
-            <a key={tab.id} href={`#${tab.id}`}>{tab.label}</a>
+            <a key={tab.id} href={`#${tab.id}`} onClick={jumpTo(tab.id)}>{tab.label}</a>
           ))}
         </div>
         <div className={`tab-row${showTabs ? ' tab-row-visible' : ''}`}>
@@ -70,6 +72,7 @@ function Nav() {
             <a
               key={tab.id}
               href={`#${tab.id}`}
+              onClick={jumpTo(tab.id)}
               className={`tab${active === tab.id ? ' tab-active' : ''}`}
             >
               {tab.label}
