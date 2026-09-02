@@ -706,6 +706,12 @@ html {
   color: var(--ink);
 }
 
+.plain-list li a {
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .plain-list li::before {
   content: '—';
   position: absolute;
@@ -738,6 +744,18 @@ html {
   color: var(--maroon);
 }
 
+.involvement-badge {
+  width: 1.3rem;
+  height: 1.3rem;
+  object-fit: contain;
+  border-radius: 4px;
+  vertical-align: -3px;
+  margin-right: 0.45rem;
+  background: #fff;
+  border: 1px solid rgba(32, 26, 20, 0.1);
+  padding: 1px;
+}
+
 /* Skill pills on the Coursework page, distinct from the plain
    Relevant Coursework pills — clicking one highlights whichever
    Involvement / Design Team entries it's tied to. */
@@ -767,7 +785,7 @@ html {
 }
 
 .skill-pill:hover {
-  transform: scale(1.06);
+  transform: scale(1.16);
   box-shadow: 0 6px 14px rgba(32, 26, 20, 0.2);
 }
 
@@ -811,24 +829,31 @@ li.skill-highlight {
   position: relative;
   background: var(--paper);
   border: 1px solid rgba(32, 26, 20, 0.12);
-  padding: 1.5rem 1.5rem 1.5rem 3.6rem;
+  padding: 1.5rem 1.5rem 1.5rem 4.1rem;
   color: var(--ink);
 }
 
 .design-team-badge {
   position: absolute;
-  top: 1.4rem;
-  left: 1.4rem;
-  width: 1.9rem;
-  height: 1.9rem;
-  border-radius: 50%;
-  background: var(--maroon);
-  color: var(--cream);
-  font-weight: 800;
-  font-size: 0.9rem;
+  top: 1.5rem;
+  left: 1.5rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(32, 26, 20, 0.12);
+  box-shadow: 0 2px 6px rgba(32, 26, 20, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  padding: 3px;
+}
+
+.design-team-badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .design-team-card .exp-role {
@@ -855,6 +880,12 @@ li.skill-highlight {
 .design-team-bullets li {
   font-weight: 500;
   font-size: 0.85rem;
+}
+
+/* Bullet points instead of the plain-list dash, scoped to the Design
+   Team cards specifically. */
+.design-teams .design-team-bullets li::before {
+  content: '•';
 }
 
 /* ---------- resume ---------- */

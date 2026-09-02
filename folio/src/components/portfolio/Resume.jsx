@@ -42,6 +42,13 @@ function Resume() {
                 <span key={item.id}>{item.label}</span>
               ))}
             </div>
+
+            <h3 style={{ marginTop: '1.4rem' }}>Skills</h3>
+            <div className="tag-row">
+              {[...skills.languagesTools, ...skills.libraries].map((skill) => (
+                <span key={skill}>{skill}</span>
+              ))}
+            </div>
           </Reveal>
 
           <Reveal className="resume-card" y={30} delay={0.25}>

@@ -88,32 +88,39 @@ export const academics = {
     'Signals and Systems',
     'Algorithm Design',
   ],
-  distinctions: ['Honors College, University of Florida', 'IBM Design Thinking Practitioner Certification'],
+  distinctions: [
+    { text: 'Honors College, University of Florida' },
+    { text: 'IBM Design Thinking Practitioner Certification' },
+    {
+      text: 'AI Scholar, University of Florida 2026',
+      url: 'https://ai.ufl.edu/news-archive/news/scholars-2026/',
+    },
+  ],
   involvement: [
     {
       id: 'swe',
-      title: 'Society of Women Engineers (SWE) Member (2024–Present)',
-      sub: ['Project Lead (2025–26)'],
+      title: 'Society of Women Engineers (SWE)',
+      sub: ['Team Tech Project Lead (2025–26)'],
     },
     {
       id: 'wicse',
-      title: 'Women in Computer Science & Engineering (WiCSE) Member (2023–Present)',
+      title: 'Women in Computer Science & Engineering (WiCSE)',
       sub: ['Corporate Mentorship & Project (2025)'],
     },
     {
       id: 'khoshbouei-lab',
-      title: 'Khoshbouei Research Lab (2026–Present)',
+      title: 'Khoshbouei Research Lab',
+      sub: [],
+    },
+    {
+      id: 'ieee-sps',
+      title: 'IEEE Signal Processing Society',
       sub: [],
     },
     {
       id: 'venus',
-      title: 'Venus A Cappella Member (2024–Present)',
+      title: 'Venus A Cappella',
       sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
-    },
-    {
-      id: 'ieee-sps',
-      title: 'IEEE Signal Processing Society Member (2026–Present)',
-      sub: [],
     },
   ],
   designTeams: [

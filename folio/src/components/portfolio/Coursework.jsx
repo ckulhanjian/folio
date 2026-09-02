@@ -1,6 +1,21 @@
 import { useState } from 'react';
 import { academics, skills, skillLinks } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
+import badgeSwe from '../../assets/badge-swe.png';
+import badgeWicse from '../../assets/badge-wicse.png';
+import badgeSps from '../../assets/badge-sps.png';
+import badgeDreamTeam from '../../assets/badge-dream-team.png';
+
+const involvementBadges = {
+  swe: badgeSwe,
+  wicse: badgeWicse,
+  'ieee-sps': badgeSps,
+};
+
+const designTeamBadges = {
+  'swe-pm': badgeSwe,
+  dreamteam: badgeDreamTeam,
+};
 
 function Coursework() {
   const [activeSkill, setActiveSkill] = useState(null);
@@ -23,14 +38,7 @@ function Coursework() {
 
         <div className="coursework-grid">
           <Reveal x={-30} y={0} delay={0.1}>
-            <h3 style={{ fontStyle: 'italic', marginBottom: '0.8rem' }}>Relevant Coursework</h3>
-            <ul className="pill-list">
-              {academics.courses.map((course) => (
-                <li key={course}>{course}</li>
-              ))}
-            </ul>
-
-            <h3 style={{ fontStyle: 'italic', margin: '1.6rem 0 0.8rem' }}>Skills</h3>
+            <h3 style={{ fontStyle: 'italic', marginBottom: '0.8rem' }}>Skills</h3>
             <p className="skills-hint">Click a skill to see where it's shown up.</p>
             <ul className="pill-list skill-pill-list">
               {skills.topSkills.map((skill) => (
@@ -46,6 +54,13 @@ function Coursework() {
                 </li>
               ))}
             </ul>
+
+            <h3 style={{ fontStyle: 'italic', margin: '1.6rem 0 0.8rem' }}>Relevant Coursework</h3>
+            <ul className="pill-list">
+              {academics.courses.map((course) => (
+                <li key={course}>{course}</li>
+              ))}
+            </ul>
           </Reveal>
 
           <Reveal x={30} y={0} delay={0.2}>
@@ -53,7 +68,15 @@ function Coursework() {
               <h3>Distinctions</h3>
               <ul className="plain-list">
                 {academics.distinctions.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item.text}>
+                    {item.url ? (
+                      <a href={item.url} target="_blank" rel="noreferrer">
+                        {item.text}
+                      </a>
+                    ) : (
+                      item.text
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
@@ -66,6 +89,9 @@ function Coursework() {
                     key={item.id}
                     className={highlighted.includes(item.id) ? 'skill-highlight' : ''}
                   >
+                    {involvementBadges[item.id] && (
+                      <img src={involvementBadges[item.id]} alt="" className="involvement-badge" />
+                    )}
                     {item.title}
                     {item.sub.length > 0 && (
                       <ul className="involvement-sub">
@@ -89,7 +115,9 @@ function Coursework() {
                 key={team.id}
                 className={`resume-card design-team-card${highlighted.includes(team.id) ? ' skill-highlight' : ''}`}
               >
-                <span className="design-team-badge" aria-hidden="true">{team.org.slice(0, 1)}</span>
+                <span className="design-team-badge" aria-hidden="true">
+                  <img src={designTeamBadges[team.id]} alt="" />
+                </span>
                 <div className="exp-role">{team.role}</div>
                 <div className="exp-org">{team.org}</div>
                 <div className="exp-date">{team.date}</div>

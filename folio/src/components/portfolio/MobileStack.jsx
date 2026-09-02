@@ -3,6 +3,21 @@ import { profile, research, academics, skills, experience, resumeFileUrl } from 
 import headshotDots from '../../assets/about-headshot-dots.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
+import badgeSwe from '../../assets/badge-swe.png';
+import badgeWicse from '../../assets/badge-wicse.png';
+import badgeSps from '../../assets/badge-sps.png';
+import badgeDreamTeam from '../../assets/badge-dream-team.png';
+
+const involvementBadges = {
+  swe: badgeSwe,
+  wicse: badgeWicse,
+  'ieee-sps': badgeSps,
+};
+
+const designTeamBadges = {
+  'swe-pm': badgeSwe,
+  dreamteam: badgeDreamTeam,
+};
 
 const cards = [
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
@@ -109,6 +124,13 @@ function ResumeBody() {
                 <span key={item.id}>{item.label}</span>
               ))}
             </div>
+
+            <h3 style={{ marginTop: '1.4rem' }}>Skills</h3>
+            <div className="tag-row">
+              {[...skills.languagesTools, ...skills.libraries].map((skill) => (
+                <span key={skill}>{skill}</span>
+              ))}
+            </div>
           </div>
 
           <div className="resume-card">
@@ -133,7 +155,15 @@ function ResumeBody() {
             <h3>Distinctions</h3>
             <ul className="plain-list">
               {academics.distinctions.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.text}>
+                  {item.url ? (
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      {item.text}
+                    </a>
+                  ) : (
+                    item.text
+                  )}
+                </li>
               ))}
             </ul>
           </div>
@@ -143,6 +173,9 @@ function ResumeBody() {
             <ul className="plain-list involvement-list">
               {academics.involvement.map((item) => (
                 <li key={item.id}>
+                  {involvementBadges[item.id] && (
+                    <img src={involvementBadges[item.id]} alt="" className="involvement-badge" />
+                  )}
                   {item.title}
                   {item.sub.length > 0 && (
                     <ul className="involvement-sub">
@@ -162,7 +195,9 @@ function ResumeBody() {
           <div className="resume-cards">
             {academics.designTeams.map((team) => (
               <div className="resume-card design-team-card" key={team.id}>
-                <span className="design-team-badge" aria-hidden="true">{team.org.slice(0, 1)}</span>
+                <span className="design-team-badge" aria-hidden="true">
+                  <img src={designTeamBadges[team.id]} alt="" />
+                </span>
                 <div className="exp-role">{team.role}</div>
                 <div className="exp-org">{team.org}</div>
                 <div className="exp-date">{team.date}</div>
