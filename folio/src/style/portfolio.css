@@ -83,6 +83,23 @@ html {
   transform: translateY(0);
 }
 
+/* Slid down and still fading in, the next section's own translateY
+   leaves a sliver below the current one where the page's base color
+   would otherwise show through. A same-colored strip trailing off the
+   bottom of every section — painted here, behind whatever comes next
+   in the DOM — keeps that sliver looking like a seamless continuation
+   of the current page instead of a flash of white. */
+.hero-full::after,
+.stack-section::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -100px;
+  height: 100px;
+  background-color: inherit;
+}
+
 /* Pull each section up over the tail end of the one before it (skips
    the first, About, since it follows the hero rather than another
    stack-section) so the rounded top corners cut away to reveal a
@@ -629,6 +646,17 @@ html {
   font-weight: 600;
   font-size: 0.88rem;
   border: 1px solid rgba(32, 26, 20, 0.1);
+  cursor: default;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pill-list li:hover {
+  background: var(--maroon);
+  color: var(--cream);
+  border-color: var(--maroon);
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(32, 26, 20, 0.25);
 }
 
 .side-col h3 {
@@ -789,6 +817,8 @@ html {
   align-items: center;
   justify-content: center;
   padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
 }
 
 .pf-footer .eyebrow {
@@ -809,6 +839,10 @@ html {
    PortfolioFooter.jsx) instead of rotating in place — fully opaque by
    default, and fades back so it doesn't sit on top of the contact
    text/buttons while you're actually reading or clicking them. */
+/* No frame, no backdrop — just the character's own silhouette, with a
+   white outline traced around it (stacked drop-shadows, since it's a
+   transparent-background PNG rather than a geometric shape a normal
+   border could follow). */
 .footer-head-img {
   position: absolute;
   /* Resting spot before the mouse has moved — off to a corner rather
@@ -818,12 +852,19 @@ html {
   left: 14%;
   transform: translate(-50%, -50%);
   z-index: 0;
-  width: clamp(140px, 16vw, 210px);
-  height: clamp(140px, 16vw, 210px);
-  object-fit: cover;
-  border-radius: 50%;
-  border: 6px solid var(--paper);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  width: clamp(150px, 17vw, 220px);
+  height: auto;
+  aspect-ratio: 346 / 342;
+  filter:
+    drop-shadow(2.5px 0 0 #fff)
+    drop-shadow(-2.5px 0 0 #fff)
+    drop-shadow(0 2.5px 0 #fff)
+    drop-shadow(0 -2.5px 0 #fff)
+    drop-shadow(1.8px 1.8px 0 #fff)
+    drop-shadow(-1.8px 1.8px 0 #fff)
+    drop-shadow(1.8px -1.8px 0 #fff)
+    drop-shadow(-1.8px -1.8px 0 #fff)
+    drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
   opacity: 1;
   pointer-events: none;
   transition: top 0.15s ease-out, left 0.15s ease-out, opacity 0.3s ease;
