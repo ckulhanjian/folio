@@ -19,9 +19,13 @@
   /* Kept in sync with whichever section is centered in the viewport
      (PortfolioHome.jsx) so the base layer showing through any gap in
      the slide-in transition is always the right color, not a flash of
-     this default. */
+     this default. No transition here: animating background-color on
+     the sticky nav's direct parent caused a visible ghosting/repaint
+     glitch in the nav during scroll (Chromium recompositing the sticky
+     layer each frame the transition was running) — an instant swap
+     doesn't have that problem, and it happens off-screen from the
+     seam it's meant to cover anyway. */
   background-color: var(--paper);
-  transition: background-color 0.4s ease;
 }
 
 /* Prevent horizontal scroll without breaking position: sticky inside
@@ -66,24 +70,41 @@ html {
 /* Each main section is a full-screen color "page". svh (stable "small"
    viewport height) instead of vh — vh recalculates as a mobile
    browser's address bar shows/hides mid-scroll.
-   Sections slide up into place (translateY + opacity) as they cross
-   ~20% visible, like a page sliding on top of the one before it, and
-   .section-visible is toggled both ways (PortfolioHome.jsx) — not
-   just added once — so scrolling back up reverses the same
-   animation instead of leaving every section permanently settled. */
+   The section itself (background, border-radius, box-shadow) stays
+   always fully opaque at its true layout position — no opacity fade,
+   transform, or clip-path here. Both were tried and both broke
+   something: translateY moved the section's PAINTED position away
+   from its LAYOUT position, and since IntersectionObserver geometry
+   and the -40px overlap between sections are keyed to layout
+   position, that gap exposed the previous section's own trailing
+   content as a ghosted duplicate right at the seam. clip-path avoided
+   that (it never moves the box) but a fully-clipped element reads to
+   Chromium's IntersectionObserver as having zero intersection —
+   .section-visible could never be added in the first place, so
+   nothing ever revealed at all. Keeping the section itself static
+   sidesteps both: the reveal motion now lives on an inner
+   .section-reveal wrapper instead (see below), which can't desync
+   from the section's own geometry because it never has any of its
+   own. */
 .stack-section {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   border-radius: 40px 40px 0 0;
   box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
-  opacity: 0;
-  transform: translateY(70px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.hero-full.section-visible,
-.stack-section.section-visible {
+/* The actual reveal: content fades/rises into place once its section
+   crosses ~20% visible (.section-visible, toggled both ways so
+   scrolling back up reverses it). */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-full.section-visible .section-reveal,
+.stack-section.section-visible .section-reveal {
   opacity: 1;
   transform: translateY(0);
 }
@@ -117,6 +138,14 @@ html {
   justify-content: space-between;
   padding: 1.1rem clamp(1.5rem, 6vw, 3rem);
   background: none;
+  /* Isolates the sticky nav on its own compositing layer. Without
+     this, the transform animation running on the section scrolling
+     underneath it was causing Chromium to occasionally leave a
+     ghosted duplicate of the nav's own previous frame behind as it
+     repainted — a known class of bug with position: sticky next to
+     heavy transform activity. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .nav-logo {
@@ -254,16 +283,19 @@ html {
   min-height: 100vh;
   min-height: 100svh;
   background: var(--cream);
-  opacity: 0;
-  transform: translateY(70px);
-  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
   padding: 0 1.5rem;
   text-align: center;
+}
+
+.hero-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
 }
 
 /* Decorative ASCII-art graphics behind the statement — rendered as a

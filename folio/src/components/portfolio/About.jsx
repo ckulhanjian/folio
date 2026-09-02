@@ -5,7 +5,7 @@ import Reveal from './Reveal.jsx';
 function About() {
   return (
     <section id="about" className="section about stack-section">
-      <div className="about-spread">
+      <div className="about-spread section-reveal">
         <Reveal className="about-copy" y={26}>
           <span className="eyebrow">About</span>
           <h2 className="about-theme accent">Carpe Diem.</h2>
