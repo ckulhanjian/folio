@@ -5,11 +5,16 @@ import badgeSwe from '../../assets/badge-swe.png';
 import badgeWicse from '../../assets/badge-wicse.png';
 import badgeSps from '../../assets/badge-sps.png';
 import badgeDreamTeam from '../../assets/badge-dream-team.png';
+import badgeKhoshbouei from '../../assets/badge-khoshbouei.jpg';
+import badgeVenus from '../../assets/badge-venus.jpg';
 
 const involvementBadges = {
   swe: badgeSwe,
   wicse: badgeWicse,
+  'khoshbouei-lab': badgeKhoshbouei,
+  dreamteam: badgeDreamTeam,
   'ieee-sps': badgeSps,
+  venus: badgeVenus,
 };
 
 const designTeamBadges = {
@@ -39,7 +44,7 @@ function Coursework() {
         <div className="coursework-grid">
           <Reveal x={-30} y={0} delay={0.1}>
             <h3 style={{ fontStyle: 'italic', marginBottom: '0.8rem' }}>Skills</h3>
-            <p className="skills-hint">Click a skill to see where it's shown up.</p>
+            <p className="skills-hint">Click a skill to see where it's been applied.</p>
             <ul className="pill-list skill-pill-list">
               {skills.topSkills.map((skill) => (
                 <li key={skill.id}>
@@ -52,13 +57,6 @@ function Coursework() {
                     {skill.label}
                   </button>
                 </li>
-              ))}
-            </ul>
-
-            <h3 style={{ fontStyle: 'italic', margin: '1.6rem 0 0.8rem' }}>Relevant Coursework</h3>
-            <ul className="pill-list">
-              {academics.courses.map((course) => (
-                <li key={course}>{course}</li>
               ))}
             </ul>
           </Reveal>

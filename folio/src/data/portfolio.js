@@ -113,6 +113,11 @@ export const academics = {
       sub: [],
     },
     {
+      id: 'dreamteam',
+      title: 'Dream Team Engineering (DTE)',
+      sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
+    },
+    {
       id: 'ieee-sps',
       title: 'IEEE Signal Processing Society',
       sub: [],

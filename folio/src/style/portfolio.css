@@ -719,6 +719,17 @@ html {
   color: var(--maroon);
 }
 
+/* Every Involvement entry now carries its own org icon, so the plain
+   dash marker (still used by Distinctions) is dropped here in favor of
+   the icon itself. */
+.involvement-list li {
+  padding-left: 0;
+}
+
+.involvement-list li::before {
+  content: none;
+}
+
 .involvement-sub {
   list-style: none;
   padding: 0;
@@ -770,6 +781,26 @@ html {
   margin: 0;
 }
 
+/* Undo the plain .pill-list li's own pill chrome (bg/border/padding)
+   and its hover fill here — the skill-pill button inside each <li>
+   draws its own pill shape and owns its own hover style, so the two
+   must not stack. */
+.skill-pill-list li {
+  background: none;
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  cursor: default;
+}
+
+.skill-pill-list li:hover {
+  background: none;
+  color: inherit;
+  border-color: transparent;
+  transform: none;
+  box-shadow: none;
+}
+
 .skill-pill {
   font: inherit;
   background: var(--paper);
@@ -785,6 +816,8 @@ html {
 }
 
 .skill-pill:hover {
+  background: transparent;
+  border-color: var(--maroon);
   transform: scale(1.16);
   box-shadow: 0 6px 14px rgba(32, 26, 20, 0.2);
 }
@@ -793,6 +826,13 @@ html {
   background: var(--maroon);
   color: var(--cream);
   border-color: var(--maroon);
+}
+
+/* Keep the selected fill when re-hovering an already-active pill —
+   only a plain (unselected) pill loses its background on hover. */
+.skill-pill.skill-pill-active:hover {
+  background: var(--maroon);
+  color: var(--cream);
 }
 
 /* Applied to whatever Involvement / Design Team entry the active

@@ -36,13 +36,6 @@ function Resume() {
               ))}
             </div>
 
-            <h3 style={{ marginTop: '1.4rem' }}>Top Skills</h3>
-            <div className="tag-row">
-              {skills.topSkills.map((item) => (
-                <span key={item.id}>{item.label}</span>
-              ))}
-            </div>
-
             <h3 style={{ marginTop: '1.4rem' }}>Skills</h3>
             <div className="tag-row">
               {[...skills.languagesTools, ...skills.libraries].map((skill) => (
@@ -56,6 +49,13 @@ function Resume() {
             <div className="edu-line">{academics.major}</div>
             <div className="edu-sub">{academics.school}</div>
             <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
+
+            <h3 style={{ fontStyle: 'italic', margin: '1.4rem 0 0.8rem' }}>Relevant Coursework</h3>
+            <ul className="pill-list">
+              {academics.courses.map((course) => (
+                <li key={course}>{course}</li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </div>

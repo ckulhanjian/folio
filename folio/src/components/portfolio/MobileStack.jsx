@@ -7,11 +7,16 @@ import badgeSwe from '../../assets/badge-swe.png';
 import badgeWicse from '../../assets/badge-wicse.png';
 import badgeSps from '../../assets/badge-sps.png';
 import badgeDreamTeam from '../../assets/badge-dream-team.png';
+import badgeKhoshbouei from '../../assets/badge-khoshbouei.jpg';
+import badgeVenus from '../../assets/badge-venus.jpg';
 
 const involvementBadges = {
   swe: badgeSwe,
   wicse: badgeWicse,
+  'khoshbouei-lab': badgeKhoshbouei,
+  dreamteam: badgeDreamTeam,
   'ieee-sps': badgeSps,
+  venus: badgeVenus,
 };
 
 const designTeamBadges = {
@@ -118,13 +123,6 @@ function ResumeBody() {
               ))}
             </div>
 
-            <h3 style={{ marginTop: '1.4rem' }}>Top Skills</h3>
-            <div className="tag-row">
-              {skills.topSkills.map((item) => (
-                <span key={item.id}>{item.label}</span>
-              ))}
-            </div>
-
             <h3 style={{ marginTop: '1.4rem' }}>Skills</h3>
             <div className="tag-row">
               {[...skills.languagesTools, ...skills.libraries].map((skill) => (
@@ -138,19 +136,17 @@ function ResumeBody() {
             <div className="edu-line">{academics.major}</div>
             <div className="edu-sub">{academics.school}</div>
             <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
-          </div>
-        </div>
 
-        <div className="coursework-grid">
-          <div>
-            <h3 style={{ fontStyle: 'italic', marginBottom: '0.8rem' }}>Relevant Coursework</h3>
+            <h3 style={{ fontStyle: 'italic', margin: '1.4rem 0 0.8rem' }}>Relevant Coursework</h3>
             <ul className="pill-list">
               {academics.courses.map((course) => (
                 <li key={course}>{course}</li>
               ))}
             </ul>
           </div>
+        </div>
 
+        <div className="coursework-grid">
           <div className="side-col">
             <h3>Distinctions</h3>
             <ul className="plain-list">
