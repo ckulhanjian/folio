@@ -130,6 +130,10 @@ html {
   flex-shrink: 0;
 }
 
+.nav-logo-text {
+  color: var(--ink-soft);
+}
+
 /* Two nav states sharing one slot at top right: a constant, very thin
    text-link nav with no background while the landing page is in view,
    crossfading into the colorful folder tabs once you scroll past it. */
@@ -272,18 +276,18 @@ html {
   background-color: hsl(0 0% calc(76% - var(--art-progress, 0) * 46%));
 }
 
-.hero-art-rose {
+.hero-art-left {
   top: -6%;
   left: -8%;
-  width: clamp(280px, 36vw, 480px);
-  aspect-ratio: 502 / 857;
+  width: clamp(320px, 42vw, 540px);
+  aspect-ratio: 571 / 772;
 }
 
-.hero-art-vine {
+.hero-art-right {
   bottom: 2%;
   right: -6%;
-  width: clamp(170px, 20vw, 280px);
-  aspect-ratio: 571 / 772;
+  width: clamp(240px, 30vw, 400px);
+  aspect-ratio: 502 / 857;
 }
 
 .hero-statement,
@@ -767,11 +771,12 @@ html {
    overlap illusion, just the next (black) page starting exactly where
    Resume ends. Same ink background / paper text / pink eyebrow this
    section always used, just applied to the whole page instead of a
-   nested card. */
+   nested card. Deliberately shorter than the full-screen pages above
+   it — a closing note, not another full page. */
 .pf-footer {
   position: relative;
-  min-height: 100vh;
-  min-height: 100svh;
+  min-height: 55vh;
+  min-height: 55svh;
   background: var(--ink);
   color: var(--paper);
   text-align: center;
@@ -797,12 +802,16 @@ html {
 }
 
 /* Follows the cursor anywhere in the section (position set from
-   PortfolioFooter.jsx) instead of rotating in place — faint until you
-   hover a button or the contact text, where it turns fully opaque. */
+   PortfolioFooter.jsx) instead of rotating in place — fully opaque by
+   default, and fades back so it doesn't sit on top of the contact
+   text/buttons while you're actually reading or clicking them. */
 .footer-head-img {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  /* Resting spot before the mouse has moved — off to a corner rather
+     than dead center, since it's opaque by default and centered would
+     sit right on top of "Contact me!". */
+  top: 18%;
+  left: 14%;
   transform: translate(-50%, -50%);
   z-index: 0;
   width: clamp(140px, 16vw, 210px);
@@ -811,13 +820,13 @@ html {
   border-radius: 50%;
   border: 6px solid var(--paper);
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
-  opacity: 0.32;
+  opacity: 1;
   pointer-events: none;
   transition: top 0.15s ease-out, left 0.15s ease-out, opacity 0.3s ease;
 }
 
-.footer-head-img-opaque {
-  opacity: 1;
+.footer-head-img-dimmed {
+  opacity: 0.28;
 }
 
 .contact-close {

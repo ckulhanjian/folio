@@ -6,7 +6,7 @@ import me from '../../assets/me.png';
 function PortfolioFooter() {
   const footerRef = useRef(null);
   const headRef = useRef(null);
-  const [isOpaque, setIsOpaque] = useState(false);
+  const [isDimmed, setIsDimmed] = useState(false);
 
   useEffect(() => {
     const footer = footerRef.current;
@@ -30,14 +30,14 @@ function PortfolioFooter() {
         src={me}
         alt=""
         aria-hidden="true"
-        className={`footer-head-img${isOpaque ? ' footer-head-img-opaque' : ''}`}
+        className={`footer-head-img${isDimmed ? ' footer-head-img-dimmed' : ''}`}
       />
 
       <Reveal
         y={20}
         className="contact-close"
-        onMouseEnter={() => setIsOpaque(true)}
-        onMouseLeave={() => setIsOpaque(false)}
+        onMouseEnter={() => setIsDimmed(true)}
+        onMouseLeave={() => setIsDimmed(false)}
       >
         <span className="eyebrow">Contact</span>
         <h2 className="accent">Contact me!</h2>

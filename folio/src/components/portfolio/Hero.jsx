@@ -31,8 +31,8 @@ function Hero() {
 
   return (
     <section id="hero" className="hero-full" ref={sectionRef}>
-      <div className="hero-art hero-art-rose" aria-hidden="true" style={{ '--art-src': `url(${roseArt})` }} />
-      <div className="hero-art hero-art-vine" aria-hidden="true" style={{ '--art-src': `url(${vineArt})` }} />
+      <div className="hero-art hero-art-left" aria-hidden="true" style={{ '--art-src': `url(${vineArt})` }} />
+      <div className="hero-art hero-art-right" aria-hidden="true" style={{ '--art-src': `url(${roseArt})` }} />
 
       <h1 className="hero-statement">
         <span className="accent">Cara Kulhanjian</span> / Research, Data &amp; Design / studying Computer
