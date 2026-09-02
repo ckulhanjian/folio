@@ -1,14 +1,44 @@
+import { useEffect, useRef, useState } from 'react';
 import { profile } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
-import RotatingHead from './RotatingHead.jsx';
 import me from '../../assets/me.png';
 
 function PortfolioFooter() {
-  return (
-    <footer id="contact" className="pf-footer">
-      <RotatingHead src={me} alt="" className="footer-head-img" trackParent />
+  const footerRef = useRef(null);
+  const headRef = useRef(null);
+  const [isOpaque, setIsOpaque] = useState(false);
 
-      <Reveal y={20} className="contact-close">
+  useEffect(() => {
+    const footer = footerRef.current;
+    const head = headRef.current;
+    if (!footer || !head) return;
+
+    const handleMouseMove = (event) => {
+      const rect = footer.getBoundingClientRect();
+      head.style.left = `${event.clientX - rect.left}px`;
+      head.style.top = `${event.clientY - rect.top}px`;
+    };
+
+    footer.addEventListener('mousemove', handleMouseMove);
+    return () => footer.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  return (
+    <footer id="contact" className="pf-footer" ref={footerRef}>
+      <img
+        ref={headRef}
+        src={me}
+        alt=""
+        aria-hidden="true"
+        className={`footer-head-img${isOpaque ? ' footer-head-img-opaque' : ''}`}
+      />
+
+      <Reveal
+        y={20}
+        className="contact-close"
+        onMouseEnter={() => setIsOpaque(true)}
+        onMouseLeave={() => setIsOpaque(false)}
+      >
         <span className="eyebrow">Contact</span>
         <h2 className="accent">Contact me!</h2>
         <p>

@@ -19,15 +19,11 @@
   background: var(--paper);
 }
 
-/* Prevent horizontal scroll without breaking position: sticky inside .portfolio
-   (overflow-x on that element would turn it into a scroll container).
-   scroll-snap-type here (not on a wrapper) gives every .stack-section a
-   consistent, deliberate "slide to the next screen" feel on scroll —
-   proximity rather than mandatory so it settles into place without
-   ever forcing a jump or trapping the scroll. */
+/* Prevent horizontal scroll without breaking position: sticky inside
+   .portfolio (overflow-x on that element would turn it into a scroll
+   container). */
 html {
   overflow-x: hidden;
-  scroll-snap-type: y proximity;
 }
 
 .portfolio * {
@@ -62,20 +58,26 @@ html {
   padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 6vw, 5rem);
 }
 
-/* Each main section is a full-screen color "page" that the scroll
-   snaps cleanly to the top of — a consistent, deliberate slide from
-   screen to screen no matter how tall any one section's content is
-   (sticky-based pinning gave every section a different "stuck"
-   duration depending on its height, which read as inconsistent).
-   svh (stable "small" viewport height) instead of vh — vh recalculates
-   as a mobile browser's address bar shows/hides mid-scroll. */
+/* Each main section is a full-screen color "page". svh (stable "small"
+   viewport height) instead of vh — vh recalculates as a mobile
+   browser's address bar shows/hides mid-scroll.
+   A section's own color/background stays invisible until scrolled
+   far enough into view (.section-visible, toggled from
+   PortfolioHome.jsx via IntersectionObserver) rather than appearing
+   the instant its first pixel crosses into the viewport. */
 .stack-section {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
   border-radius: 40px 40px 0 0;
   box-shadow: 0 -30px 60px -30px rgba(32, 26, 20, 0.35);
-  scroll-snap-align: start;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.hero-full.section-visible,
+.stack-section.section-visible {
+  opacity: 1;
 }
 
 /* Pull each section up over the tail end of the one before it (skips
@@ -234,15 +236,14 @@ html {
 /* ---------- hero ---------- */
 /* A normal full-screen section now — the statement scrolls up with
    the page like everything else instead of staying pinned behind a
-   separately-scrolling background layer. Still snaps like the other
-   pages for a consistent feel, just without their rounded top corners
-   (there's nothing above it to visually cut into). */
+   separately-scrolling background layer. */
 .hero-full {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  scroll-snap-align: start;
   background: var(--cream);
+  opacity: 0;
+  transition: opacity 0.6s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,21 +253,43 @@ html {
   text-align: center;
 }
 
-.rotating-head-zone {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1;
+/* Decorative ASCII-art graphics behind the statement — rendered as a
+   CSS mask (their alpha channel) filled with a flat color, rather
+   than baked-in pixels, so that color can shift on scroll (see
+   --art-progress, set from Hero.jsx) without swapping images. */
+.hero-art {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: var(--art-src);
+  mask-image: var(--art-src);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background-color: hsl(0 0% calc(76% - var(--art-progress, 0) * 46%));
 }
 
-.rotating-head {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 6px solid var(--paper);
-  box-shadow: 0 16px 32px rgba(32, 26, 20, 0.25);
-  transform-origin: 50% 50%;
-  transition: transform 0.06s linear;
+.hero-art-rose {
+  top: -6%;
+  left: -8%;
+  width: clamp(280px, 36vw, 480px);
+  aspect-ratio: 502 / 857;
+}
+
+.hero-art-vine {
+  bottom: 2%;
+  right: -6%;
+  width: clamp(170px, 20vw, 280px);
+  aspect-ratio: 571 / 772;
+}
+
+.hero-statement,
+.hero-full .scroll-cue {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-statement {
@@ -749,7 +772,6 @@ html {
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  scroll-snap-align: start;
   background: var(--ink);
   color: var(--paper);
   text-align: center;
@@ -774,10 +796,33 @@ html {
   margin: 0 auto;
 }
 
+/* Follows the cursor anywhere in the section (position set from
+   PortfolioFooter.jsx) instead of rotating in place — faint until you
+   hover a button or the contact text, where it turns fully opaque. */
 .footer-head-img {
-  width: clamp(180px, 20vw, 260px);
-  height: clamp(180px, 20vw, 260px);
-  margin-bottom: 2rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  width: clamp(140px, 16vw, 210px);
+  height: clamp(140px, 16vw, 210px);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid var(--paper);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
+  opacity: 0.32;
+  pointer-events: none;
+  transition: top 0.15s ease-out, left 0.15s ease-out, opacity 0.3s ease;
+}
+
+.footer-head-img-opaque {
+  opacity: 1;
+}
+
+.contact-close {
+  position: relative;
+  z-index: 1;
 }
 
 .footer-links {
@@ -845,8 +890,7 @@ html {
 }
 
 /* Phones: lighten the effects that are cheapest to feel as jank on a
-   touch device — large blurred shadows, heavy backdrop blur. The
-   scroll-snap itself stays on at every width for a consistent feel. */
+   touch device — large blurred shadows, heavy backdrop blur. */
 @media (max-width: 640px) {
   * {
     -webkit-tap-highlight-color: transparent;
@@ -859,16 +903,6 @@ html {
 
   .stack-section + .stack-section {
     margin-top: -26px;
-  }
-
-  /* Sections scroll-snap flush to the top of the viewport, but the
-     nav is sticky and overlays that same top strip. Rather than pad
-     every section's content down (which reads as a big empty gap
-     above the title, especially mid-transition), shift where "top"
-     is for the snap itself, so the section settles just below the
-     nav with its normal padding intact. */
-  html {
-    scroll-padding-top: 68px;
   }
 
   .nav {

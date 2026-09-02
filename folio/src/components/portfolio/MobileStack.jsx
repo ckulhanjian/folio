@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { profile, research, academics, skills, experience, resumeFileUrl } from '../../data/portfolio.js';
 import headshotDots from '../../assets/about-headshot-dots.jpg';
-import candidDots from '../../assets/about-candid-dots.jpg';
-import laptopScreen from '../../assets/about-laptop-screen.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
 
@@ -37,16 +35,6 @@ function AboutBody() {
             <img src={headshotDots} alt={profile.name} />
             <figcaption>{profile.name}</figcaption>
           </figure>
-          <div className="about-photo-row">
-            <figure className="about-photo about-photo-small">
-              <img src={candidDots} alt="Working on a side project" />
-              <figcaption>Deep in a side project</figcaption>
-            </figure>
-            <figure className="about-photo about-photo-small">
-              <img src={laptopScreen} alt="Code editor showing a networking project" />
-              <figcaption>Networking project, mid-build</figcaption>
-            </figure>
-          </div>
         </div>
         <p className="hero-meta">{profile.meta}</p>
       </div>
