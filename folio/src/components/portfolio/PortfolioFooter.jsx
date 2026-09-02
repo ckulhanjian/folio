@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { profile } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
+import ContactStickers from './ContactStickers.jsx';
 import me from '../../assets/me.png';
 
 function PortfolioFooter() {
@@ -25,6 +26,8 @@ function PortfolioFooter() {
 
   return (
     <footer id="contact" className="pf-footer" ref={footerRef}>
+      <ContactStickers />
+
       <img
         ref={headRef}
         src={me}
