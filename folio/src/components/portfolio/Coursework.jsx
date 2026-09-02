@@ -31,10 +31,10 @@ function Coursework() {
   };
 
   return (
-    <section id="coursework" className="section coursework stack-section">
+    <section id="education" className="section coursework stack-section">
       <div className="section-reveal">
         <Reveal className="coursework-head" y={22}>
-          <span className="eyebrow">Coursework</span>
+          <span className="eyebrow">Education</span>
           <h2>{academics.major}</h2>
           <p className="degree">
             {academics.school} · {academics.grad} · GPA {academics.gpa}
@@ -59,6 +59,30 @@ function Coursework() {
                 </li>
               ))}
             </ul>
+
+            <div className="design-teams">
+              <h3>Design Teams</h3>
+              <div className="resume-cards">
+                {academics.designTeams.map((team) => (
+                  <div
+                    key={team.id}
+                    className={`resume-card design-team-card${highlighted.includes(team.id) ? ' skill-highlight' : ''}`}
+                  >
+                    <span className="design-team-badge" aria-hidden="true">
+                      <img src={designTeamBadges[team.id]} alt="" />
+                    </span>
+                    <div className="exp-role">{team.role}</div>
+                    <div className="exp-org">{team.org}</div>
+                    <div className="exp-date">{team.date}</div>
+                    <ul className="plain-list design-team-bullets">
+                      {team.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Reveal>
 
           <Reveal x={30} y={0} delay={0.2}>
@@ -104,30 +128,6 @@ function Coursework() {
             </div>
           </Reveal>
         </div>
-
-        <Reveal y={20} delay={0.15} className="design-teams">
-          <h3>Design Teams</h3>
-          <div className="resume-cards">
-            {academics.designTeams.map((team) => (
-              <div
-                key={team.id}
-                className={`resume-card design-team-card${highlighted.includes(team.id) ? ' skill-highlight' : ''}`}
-              >
-                <span className="design-team-badge" aria-hidden="true">
-                  <img src={designTeamBadges[team.id]} alt="" />
-                </span>
-                <div className="exp-role">{team.role}</div>
-                <div className="exp-org">{team.org}</div>
-                <div className="exp-date">{team.date}</div>
-                <ul className="plain-list design-team-bullets">
-                  {team.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </Reveal>
       </div>
     </section>
   );

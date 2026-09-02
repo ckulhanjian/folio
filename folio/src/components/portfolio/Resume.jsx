@@ -50,12 +50,12 @@ function Resume() {
             <div className="edu-sub">{academics.school}</div>
             <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
 
-            <h3 style={{ fontStyle: 'italic', margin: '1.4rem 0 0.8rem' }}>Relevant Coursework</h3>
-            <ul className="pill-list">
+            <h3 style={{ marginTop: '1.4rem' }}>Relevant Coursework</h3>
+            <div className="tag-row">
               {academics.courses.map((course) => (
-                <li key={course}>{course}</li>
+                <span key={course}>{course}</span>
               ))}
-            </ul>
+            </div>
           </Reveal>
         </div>
       </div>

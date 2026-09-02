@@ -713,10 +713,11 @@ html {
 }
 
 .plain-list li::before {
-  content: '—';
+  content: '★';
   position: absolute;
   left: 0;
   color: var(--maroon);
+  font-size: 0.72em;
 }
 
 /* Every Involvement entry now carries its own org icon, so the plain
@@ -860,6 +861,7 @@ li.skill-highlight {
 }
 
 .design-teams .resume-cards {
+  grid-template-columns: 1fr;
   gap: 1.5rem;
 }
 
@@ -1189,6 +1191,14 @@ li.skill-highlight {
   bottom: 13%;
   right: 8%;
   width: clamp(52px, 5.5vw, 78px);
+}
+
+/* These two are square source images with a circular mark centered in
+   a white margin — round the white backing itself into a circle
+   rather than leaving square corners. */
+.contact-sticker-uf img,
+.contact-sticker-eye img {
+  border-radius: 50%;
 }
 
 .contact-sticker-music {

@@ -137,12 +137,33 @@ function ResumeBody() {
             <div className="edu-sub">{academics.school}</div>
             <div className="edu-gpa">GPA {academics.gpa} · {academics.grad}</div>
 
-            <h3 style={{ fontStyle: 'italic', margin: '1.4rem 0 0.8rem' }}>Relevant Coursework</h3>
-            <ul className="pill-list">
+            <h3 style={{ marginTop: '1.4rem' }}>Relevant Coursework</h3>
+            <div className="tag-row">
               {academics.courses.map((course) => (
-                <li key={course}>{course}</li>
+                <span key={course}>{course}</span>
               ))}
-            </ul>
+            </div>
+          </div>
+        </div>
+
+        <div className="design-teams">
+          <h3>Design Teams</h3>
+          <div className="resume-cards">
+            {academics.designTeams.map((team) => (
+              <div className="resume-card design-team-card" key={team.id}>
+                <span className="design-team-badge" aria-hidden="true">
+                  <img src={designTeamBadges[team.id]} alt="" />
+                </span>
+                <div className="exp-role">{team.role}</div>
+                <div className="exp-org">{team.org}</div>
+                <div className="exp-date">{team.date}</div>
+                <ul className="plain-list design-team-bullets">
+                  {team.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -183,27 +204,6 @@ function ResumeBody() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-
-        <div className="design-teams">
-          <h3>Design Teams</h3>
-          <div className="resume-cards">
-            {academics.designTeams.map((team) => (
-              <div className="resume-card design-team-card" key={team.id}>
-                <span className="design-team-badge" aria-hidden="true">
-                  <img src={designTeamBadges[team.id]} alt="" />
-                </span>
-                <div className="exp-role">{team.role}</div>
-                <div className="exp-org">{team.org}</div>
-                <div className="exp-date">{team.date}</div>
-                <ul className="plain-list design-team-bullets">
-                  {team.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
           </div>
         </div>
       </div>

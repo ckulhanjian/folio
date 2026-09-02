@@ -19,7 +19,7 @@ const sectionColors = {
   hero: 'var(--cream)',
   about: 'var(--paper)',
   research: 'var(--pink)',
-  coursework: 'var(--babyblue)',
+  education: 'var(--babyblue)',
   resume: 'var(--finale)',
 };
 

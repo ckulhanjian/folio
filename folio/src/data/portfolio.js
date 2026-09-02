@@ -21,11 +21,11 @@ export const pageTabs = [
     title: 'Methamphetamine Use Disorder & GLP-1',
   },
   {
-    id: 'coursework',
-    label: 'Coursework',
+    id: 'education',
+    label: 'Education',
     color: 'var(--babyblue)',
     text: 'var(--ink)',
-    eyebrow: 'Coursework',
+    eyebrow: 'Education',
     title: 'Bachelor of Science in Computer Science',
   },
   {
