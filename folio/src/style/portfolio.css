@@ -232,29 +232,17 @@ html {
 }
 
 /* ---------- hero ---------- */
-/* Extra-tall wrapper: the cream layer scrolls away at normal speed while
-   the statement text stays pinned via sticky, so the background visibly
-   leaves before the content does. */
+/* A normal full-screen section now — the statement scrolls up with
+   the page like everything else instead of staying pinned behind a
+   separately-scrolling background layer. Still snaps like the other
+   pages for a consistent feel, just without their rounded top corners
+   (there's nothing above it to visually cut into). */
 .hero-full {
   position: relative;
-  height: 200vh;
-  height: 200svh;
-  background: var(--paper);
-}
-
-.hero-bg-layer {
-  position: absolute;
-  inset: 0;
-  height: 100vh;
-  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
+  scroll-snap-align: start;
   background: var(--cream);
-}
-
-.hero-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  height: 100svh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -262,30 +250,6 @@ html {
   gap: 2.5rem;
   padding: 0 1.5rem;
   text-align: center;
-}
-
-.hero-collage {
-  position: absolute;
-  top: 14%;
-  right: clamp(1.5rem, 8vw, 6rem);
-  width: clamp(120px, 15vw, 210px);
-}
-
-.hero-pattern-swatch {
-  position: absolute;
-  inset: 0;
-  transform: translate(16px, 16px) rotate(-4deg);
-  border-radius: 18px;
-  background: var(--pink);
-  overflow: hidden;
-}
-
-.hero-pattern-swatch img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  mix-blend-mode: multiply;
-  opacity: 0.8;
 }
 
 .rotating-head-zone {
@@ -303,14 +267,6 @@ html {
   box-shadow: 0 16px 32px rgba(32, 26, 20, 0.25);
   transform-origin: 50% 50%;
   transition: transform 0.06s linear;
-}
-
-@media (max-width: 860px) {
-  .hero-collage {
-    width: clamp(90px, 24vw, 130px);
-    top: 8%;
-    right: 1.25rem;
-  }
 }
 
 .hero-statement {
@@ -783,48 +739,45 @@ html {
   color: rgba(251, 248, 236, 0.8);
 }
 
-/* ---------- interlude ---------- */
-/* A quiet, unstyled pause between the last colorful card (Resume) and
-   the closing stack — not a stack-section itself, so it doesn't snap
-   or compete with the layered-page metaphor, just breathing room. The
-   line fades in as it arrives and fades back out as it leaves (once:
-   false on the Reveal), rather than staying on screen. */
-.interlude {
-  background: var(--paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: clamp(4rem, 14vw, 8rem) 1.5rem;
-}
-
-.interlude-text {
-  font-size: clamp(1.3rem, 3vw, 1.9rem);
-  color: var(--ink-soft);
-}
-
-/* ---------- footer ---------- */
-/* Also a stack-section: without its own sticky pin + min-height, this
-   final section can end up shorter than the trailing scroll distance
-   Resume needs to fully release on narrow screens (its card grid goes
-   single-column and grows past one viewport there), leaving a stuck
-   sliver of Resume visible above the footer. */
+/* ---------- footer / contact ---------- */
+/* Straight edges, flush against Resume — no rounded corners, no
+   overlap illusion, just the next (black) page starting exactly where
+   Resume ends. Same ink background / paper text / pink eyebrow this
+   section always used, just applied to the whole page instead of a
+   nested card. */
 .pf-footer {
-  background: var(--paper);
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  scroll-snap-align: start;
+  background: var(--ink);
+  color: var(--paper);
   text-align: center;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 6vw, 6rem) clamp(1.5rem, 6vw, 5rem);
+}
+
+.pf-footer .eyebrow {
+  color: var(--pink);
 }
 
 .pf-footer h2 {
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.8rem, 3.4vw, 2.6rem);
   margin-bottom: 0.5rem;
 }
 
 .pf-footer p {
   max-width: 40ch;
   margin: 0 auto;
+}
+
+.footer-head-img {
+  width: clamp(180px, 20vw, 260px);
+  height: clamp(180px, 20vw, 260px);
+  margin-bottom: 2rem;
 }
 
 .footer-links {
@@ -849,132 +802,6 @@ html {
 .footer-links a:hover {
   background: var(--paper);
   color: var(--ink);
-}
-
-/* The folder's index — a cropped sliver of each prior page (its color,
-   eyebrow, and title only), spanning the full width edge to edge like
-   colored flag stripes, and filling all the vertical space the closing
-   text below doesn't need, so the whole page reads as full-bleed.
-   Clicking one jumps to that section, same as the nav. */
-.page-index {
-  width: 100%;
-  min-width: 0;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
-}
-
-.page-index-row {
-  --tab-color: var(--paper);
-  --tab-text: var(--ink);
-  position: relative;
-  flex: 1 1 0;
-  min-width: 0;
-  background: var(--tab-color);
-  overflow: hidden;
-  transition: flex-grow 0.3s ease;
-}
-
-.page-index-row:hover {
-  flex-grow: 1.5;
-}
-
-.page-index-row.page-index-row-expanded,
-.page-index-row.page-index-row-expanded:hover {
-  flex-grow: 3;
-}
-
-.page-index-link {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  width: 100%;
-  height: 100%;
-  padding: 1.75rem 1.1rem;
-  text-align: left;
-  text-decoration: none;
-  color: var(--tab-text);
-}
-
-/* Expand/collapse toggle — mainly a mobile affordance (touch has no
-   hover to preview a tab with), hidden on desktop where hovering a
-   flag stripe already does this. */
-.page-index-toggle {
-  position: absolute;
-  top: 0.85rem;
-  right: 0.9rem;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 1.5px solid var(--tab-text);
-  background: transparent;
-  color: var(--tab-text);
-  font-size: 1.1rem;
-  line-height: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  cursor: pointer;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
-}
-
-.page-index-toggle:hover {
-  opacity: 1;
-}
-
-.page-index-eyebrow {
-  display: block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.7;
-}
-
-.page-index-title {
-  display: block;
-  min-width: 0;
-  margin-top: 0.3rem;
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1rem, 1.6vw, 1.35rem);
-  font-weight: 600;
-  line-height: 1.15;
-}
-
-.page-index-hint {
-  display: block;
-  margin-top: 0.6rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  opacity: 0;
-  animation: page-index-hint-in 0.3s ease 0.1s forwards;
-}
-
-@keyframes page-index-hint-in {
-  to {
-    opacity: 0.85;
-  }
-}
-
-/* The closing Contact card reuses the same stacked-page language as
-   every other section — its own color, rounded top corners, a lift
-   off the card above — instead of just trailing off as plain text. */
-.contact-close {
-  background: var(--ink);
-  color: var(--paper);
-  padding: 2.5rem clamp(1.5rem, 6vw, 3rem) 3rem;
-  border-radius: 32px 32px 0 0;
-  box-shadow: 0 -20px 40px -24px rgba(32, 26, 20, 0.4);
-  margin-top: -20px;
-  position: relative;
-}
-
-.contact-close .eyebrow {
-  color: var(--pink);
 }
 
 .footer-inline-link {
@@ -1015,20 +842,6 @@ html {
     font-size: 1.05rem;
   }
 
-  /* The scroll-away-background effect needs extra scroll room to
-     work, but that "dead" scroll distance is the same kind of jank we
-     fixed for the other sections below — on mobile it just reads as
-     an empty page that won't move. Collapse the hero to exactly one
-     screen here instead: the text and background transition to About
-     immediately, in normal flow, no gimmick, no dead zone. */
-  .hero-full {
-    height: 100vh;
-    height: 100svh;
-  }
-
-  .hero-sticky {
-    position: relative;
-  }
 }
 
 /* Phones: lighten the effects that are cheapest to feel as jank on a
@@ -1122,58 +935,6 @@ html {
     max-width: 220px;
   }
 
-  /* Five full-height columns are unreadable at phone widths — turn
-     the strip vertical instead: same idea (equal flex shares, full
-     bleed), rotated 90°, styled like the rest of the site's stacked
-     "page" cards (rounded top corners, slight overlap) so it reads
-     as the same deck of pages rather than a different component. */
-  .page-index {
-    flex: 1 1 auto;
-    flex-direction: column;
-    gap: 0;
-    padding: 0;
-    margin-bottom: 0;
-  }
-
-  .page-index-row {
-    flex: 1 1 0;
-    height: auto;
-    min-height: 64px;
-    border-radius: 20px 20px 0 0;
-    box-shadow: 0 -10px 20px -12px rgba(32, 26, 20, 0.25);
-  }
-
-  .page-index-row + .page-index-row {
-    margin-top: -14px;
-  }
-
-  .page-index-row:hover {
-    flex-grow: 1;
-  }
-
-  .page-index-row.page-index-row-expanded,
-  .page-index-row.page-index-row-expanded:hover {
-    flex-grow: 3.5;
-  }
-
-  .page-index-link {
-    justify-content: flex-end;
-    padding: 1.1rem 1.25rem;
-  }
-
-  .page-index-toggle {
-    display: flex;
-  }
-
-  .page-index-title {
-    font-size: 1.15rem;
-  }
-
-  .contact-close {
-    padding: 2.75rem 1.25rem 2.5rem;
-    margin-top: -18px;
-    border-radius: 22px 22px 0 0;
-  }
 }
 
 /* ---------- mobile stack ---------- */

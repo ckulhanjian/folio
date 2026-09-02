@@ -1,45 +1,14 @@
-import { useState } from 'react';
-import { profile, pageTabs } from '../../data/portfolio.js';
+import { profile } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
-
-const indexEntries = [
-  { id: 'hero', eyebrow: 'Home', title: profile.name, color: 'var(--cream)', text: 'var(--ink)' },
-  ...pageTabs.filter((tab) => tab.id !== 'contact'),
-];
+import RotatingHead from './RotatingHead.jsx';
+import me from '../../assets/me.png';
 
 function PortfolioFooter() {
-  const [expandedId, setExpandedId] = useState(null);
-
   return (
-    <footer id="contact" className="pf-footer stack-section">
-      <Reveal y={20} className="page-index">
-        {indexEntries.map((entry) => {
-          const expanded = expandedId === entry.id;
-          return (
-            <div
-              key={entry.id}
-              className={`page-index-row${expanded ? ' page-index-row-expanded' : ''}`}
-              style={{ '--tab-color': entry.color, '--tab-text': entry.text }}
-            >
-              <a href={`#${entry.id}`} className="page-index-link">
-                <span className="page-index-eyebrow">{entry.eyebrow}</span>
-                <span className="page-index-title">{entry.title}</span>
-                {expanded && <span className="page-index-hint">Visit page ↗</span>}
-              </a>
-              <button
-                type="button"
-                className="page-index-toggle"
-                aria-label={expanded ? `Collapse ${entry.eyebrow}` : `Preview ${entry.eyebrow}`}
-                onClick={() => setExpandedId(expanded ? null : entry.id)}
-              >
-                {expanded ? '–' : '+'}
-              </button>
-            </div>
-          );
-        })}
-      </Reveal>
+    <footer id="contact" className="pf-footer">
+      <RotatingHead src={me} alt="" className="footer-head-img" trackParent />
 
-      <Reveal y={20} delay={0.1} className="contact-close">
+      <Reveal y={20} className="contact-close">
         <span className="eyebrow">Contact</span>
         <h2 className="accent">Contact me!</h2>
         <p>
