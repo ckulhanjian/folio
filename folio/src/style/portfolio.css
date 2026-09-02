@@ -16,7 +16,12 @@
 .portfolio {
   font-family: 'Inter', system-ui, sans-serif;
   color: var(--ink);
-  background: var(--paper);
+  /* Kept in sync with whichever section is centered in the viewport
+     (PortfolioHome.jsx) so the base layer showing through any gap in
+     the slide-in transition is always the right color, not a flash of
+     this default. */
+  background-color: var(--paper);
+  transition: background-color 0.4s ease;
 }
 
 /* Prevent horizontal scroll without breaking position: sticky inside
@@ -81,23 +86,6 @@ html {
 .stack-section.section-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Slid down and still fading in, the next section's own translateY
-   leaves a sliver below the current one where the page's base color
-   would otherwise show through. A same-colored strip trailing off the
-   bottom of every section — painted here, behind whatever comes next
-   in the DOM — keeps that sliver looking like a seamless continuation
-   of the current page instead of a flash of white. */
-.hero-full::after,
-.stack-section::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -100px;
-  height: 100px;
-  background-color: inherit;
 }
 
 /* Pull each section up over the tail end of the one before it (skips
@@ -852,19 +840,12 @@ html {
   left: 14%;
   transform: translate(-50%, -50%);
   z-index: 0;
-  width: clamp(150px, 17vw, 220px);
-  height: auto;
-  aspect-ratio: 346 / 342;
-  filter:
-    drop-shadow(2.5px 0 0 #fff)
-    drop-shadow(-2.5px 0 0 #fff)
-    drop-shadow(0 2.5px 0 #fff)
-    drop-shadow(0 -2.5px 0 #fff)
-    drop-shadow(1.8px 1.8px 0 #fff)
-    drop-shadow(-1.8px 1.8px 0 #fff)
-    drop-shadow(1.8px -1.8px 0 #fff)
-    drop-shadow(-1.8px -1.8px 0 #fff)
-    drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+  width: clamp(120px, 13vw, 180px);
+  height: clamp(120px, 13vw, 180px);
+  object-fit: cover;
+  border-radius: 50%;
+  border: 6px solid var(--paper);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
   opacity: 1;
   pointer-events: none;
   transition: top 0.15s ease-out, left 0.15s ease-out, opacity 0.3s ease;

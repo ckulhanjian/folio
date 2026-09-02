@@ -10,6 +10,19 @@ import PortfolioFooter from './portfolio/PortfolioFooter.jsx';
 import MobileStack from './portfolio/MobileStack.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
 
+// The color each full-screen section reveals — used to keep the
+// page's own base background in sync with whichever section is
+// currently centered, so a gap in the slide-in transition (the
+// incoming section still mid-translateY) shows a continuation of the
+// current page's color instead of a flash of the page's default.
+const sectionColors = {
+  hero: 'var(--cream)',
+  about: 'var(--paper)',
+  research: 'var(--pink)',
+  coursework: 'var(--babyblue)',
+  resume: 'var(--finale)',
+};
+
 // Two different experiences share one data source (data/portfolio.js):
 // desktop scrolls through full-screen pages behind a top nav, mobile
 // collapses everything into one screen of expand/collapse cards with
@@ -36,6 +49,31 @@ function PortfolioHome() {
         });
       },
       { threshold: 0.2 }
+    );
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [isMobile]);
+
+  // Desktop only: track whichever section is centered in the viewport
+  // (same idea as Nav's active-tab tracking) and paint the page's own
+  // background to match it.
+  useEffect(() => {
+    if (isMobile) return;
+    const portfolioEl = document.querySelector('.portfolio');
+    const sections = Object.keys(sectionColors)
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+    if (!portfolioEl || !sections.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            portfolioEl.style.backgroundColor = sectionColors[entry.target.id];
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();

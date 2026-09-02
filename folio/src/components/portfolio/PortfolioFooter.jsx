@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { profile } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
-import me from '../../assets/me-transparent.png';
+import me from '../../assets/me.png';
 
 function PortfolioFooter() {
   const footerRef = useRef(null);
