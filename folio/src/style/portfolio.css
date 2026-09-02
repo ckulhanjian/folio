@@ -713,6 +713,150 @@ html {
   color: var(--maroon);
 }
 
+.involvement-sub {
+  list-style: none;
+  padding: 0;
+  margin: 0.35rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.involvement-sub li {
+  font-weight: 500;
+  font-size: 0.82rem;
+  padding-left: 1.1em;
+  position: relative;
+  color: var(--ink);
+  opacity: 0.75;
+}
+
+.involvement-sub li::before {
+  content: '·';
+  position: absolute;
+  left: 0.15em;
+  color: var(--maroon);
+}
+
+/* Skill pills on the Coursework page, distinct from the plain
+   Relevant Coursework pills — clicking one highlights whichever
+   Involvement / Design Team entries it's tied to. */
+.skills-hint {
+  font-size: 0.82rem;
+  font-style: italic;
+  opacity: 0.7;
+  margin: -0.3rem 0 0.7rem;
+}
+
+.skill-pill-list {
+  margin: 0;
+}
+
+.skill-pill {
+  font: inherit;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.55em 1.1em;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid rgba(32, 26, 20, 0.15);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-pill:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 14px rgba(32, 26, 20, 0.2);
+}
+
+.skill-pill-active {
+  background: var(--maroon);
+  color: var(--cream);
+  border-color: var(--maroon);
+}
+
+/* Applied to whatever Involvement / Design Team entry the active
+   skill pill is linked to. */
+.skill-highlight {
+  position: relative;
+  outline: 2px solid var(--maroon);
+  outline-offset: 4px;
+  border-radius: 6px;
+  transition: outline-color 0.2s ease;
+}
+
+li.skill-highlight {
+  color: var(--maroon);
+}
+
+.design-teams {
+  margin-top: 2.5rem;
+}
+
+.design-teams > h3 {
+  font-size: 1rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+}
+
+.design-teams .resume-cards {
+  gap: 1.5rem;
+}
+
+/* Doubled-up class selector so this wins over the later, less-specific
+   .resume-card padding rule regardless of source order. */
+.resume-card.design-team-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid rgba(32, 26, 20, 0.12);
+  padding: 1.5rem 1.5rem 1.5rem 3.6rem;
+  color: var(--ink);
+}
+
+.design-team-badge {
+  position: absolute;
+  top: 1.4rem;
+  left: 1.4rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: var(--maroon);
+  color: var(--cream);
+  font-weight: 800;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.design-team-card .exp-role {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.design-team-card .exp-org {
+  font-size: 0.82rem;
+  color: var(--maroon);
+  margin-top: 0.1rem;
+}
+
+.design-team-card .exp-date {
+  font-size: 0.75rem;
+  opacity: 0.65;
+  margin-top: 0.15rem;
+}
+
+.design-team-bullets {
+  margin-top: 0.9rem;
+}
+
+.design-team-bullets li {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
 /* ---------- resume ---------- */
 .resume {
   background: var(--finale);
@@ -855,38 +999,6 @@ html {
   margin: 0 auto;
 }
 
-/* Follows the cursor anywhere in the section (position set from
-   PortfolioFooter.jsx) instead of rotating in place — fully opaque by
-   default, and fades back so it doesn't sit on top of the contact
-   text/buttons while you're actually reading or clicking them. */
-/* No frame, no backdrop — just the character's own silhouette, with a
-   white outline traced around it (stacked drop-shadows, since it's a
-   transparent-background PNG rather than a geometric shape a normal
-   border could follow). */
-.footer-head-img {
-  position: absolute;
-  /* Resting spot before the mouse has moved — off to a corner rather
-     than dead center, since it's opaque by default and centered would
-     sit right on top of "Contact me!". */
-  top: 18%;
-  left: 14%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  width: clamp(120px, 13vw, 180px);
-  height: clamp(120px, 13vw, 180px);
-  object-fit: cover;
-  border-radius: 50%;
-  border: 6px solid var(--paper);
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.4);
-  opacity: 1;
-  pointer-events: none;
-  transition: top 0.15s ease-out, left 0.15s ease-out, opacity 0.3s ease;
-}
-
-.footer-head-img-dimmed {
-  opacity: 0.28;
-}
-
 /* Padding here (not just on the text itself) so the hover zone that
    dims the following head extends a bit past every line's own edge —
    moving the cursor to just past a shorter line (like the eyebrow or
@@ -992,6 +1104,43 @@ html {
   bottom: 9%;
   left: 6%;
   width: clamp(140px, 15vw, 200px);
+}
+
+.contact-sticker-uf {
+  --sticker-rot: -6deg;
+  top: 9%;
+  left: 7%;
+  width: clamp(76px, 8vw, 116px);
+}
+
+.contact-sticker-eye {
+  --sticker-rot: 11deg;
+  bottom: 13%;
+  right: 8%;
+  width: clamp(52px, 5.5vw, 78px);
+}
+
+.contact-sticker-music {
+  --sticker-rot: -13deg;
+  top: 40%;
+  left: 3%;
+  width: clamp(68px, 7.5vw, 104px);
+}
+
+/* The spiral illustration keeps its own dark, textured background —
+   framed like a little art print instead of cut out like the other
+   silhouette stickers. */
+.contact-sticker-spiral {
+  --sticker-rot: 8deg;
+  top: 38%;
+  right: 4%;
+  width: clamp(58px, 6.5vw, 88px);
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.4));
+}
+
+.contact-sticker-spiral img {
+  border-radius: 6px;
+  border: 3px solid #fdfdfb;
 }
 
 @keyframes contact-sticker-bounce {

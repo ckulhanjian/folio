@@ -90,15 +90,76 @@ export const academics = {
   ],
   distinctions: ['Honors College, University of Florida', 'IBM Design Thinking Practitioner Certification'],
   involvement: [
-    'Society of Women Engineers (SWE) Design Team — Team Tech Project Manager',
-    'UF Dream Team Engineering — Speech Language Development Team',
-    'AMEX x UF WiCSE Corporate Mentorship Program',
+    {
+      id: 'swe',
+      title: 'Society of Women Engineers (SWE) Member (2024–Present)',
+      sub: ['Project Lead (2025–26)'],
+    },
+    {
+      id: 'wicse',
+      title: 'Women in Computer Science & Engineering (WiCSE) Member (2023–Present)',
+      sub: ['Corporate Mentorship & Project (2025)'],
+    },
+    {
+      id: 'khoshbouei-lab',
+      title: 'Khoshbouei Research Lab (2026–Present)',
+      sub: [],
+    },
+    {
+      id: 'venus',
+      title: 'Venus A Cappella Member (2024–Present)',
+      sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
+    },
+    {
+      id: 'ieee-sps',
+      title: 'IEEE Signal Processing Society Member (2026–Present)',
+      sub: [],
+    },
+  ],
+  designTeams: [
+    {
+      id: 'swe-pm',
+      org: 'Society of Women Engineers (SWE) Design Team',
+      role: 'Project Manager',
+      date: 'August 2024 – May 2026',
+      bullets: [
+        'Led multi-disciplinary development in partnership with CACI to build a machine learning web application that optimizes flight paths between airports, returning the optimal route with >80% accuracy in under 1 minute.',
+        'Managed project timelines, requirements, and deliverables using Kanban-based task tracking, coordinating development through a hybrid Agile–Waterfall methodology to ensure on-time execution.',
+      ],
+    },
+    {
+      id: 'dreamteam',
+      org: 'UF Dream Team Engineering — Speech Language Development Team',
+      role: 'Backend Developer',
+      date: 'September 2025 – Present',
+      bullets: [
+        'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
+      ],
+    },
   ],
 };
 
 export const skills = {
   languagesTools: ['Python', 'C++', 'MATLAB', 'HTML & CSS', 'SQL', 'JavaScript', 'Figma', 'Gemini Enterprise Platform', 'Microsoft Power Platform'],
   libraries: ['Matplotlib', 'Seaborn', 'Scikit-learn', 'Pandas', 'NumPy', 'React', 'Flask'],
+  careerInterests: ['Machine Learning', 'Signal Processing', 'Data Science'],
+  topSkills: [
+    { id: 'python', label: 'Python' },
+    { id: 'data-viz', label: 'Data Visualization' },
+    { id: 'data-cleaning', label: 'Data Cleaning & Analysis' },
+    { id: 'project-management', label: 'Project Management (Agile/Scrum/Waterfall)' },
+    { id: 'ux-ui', label: 'UX/UI (Design Thinking)' },
+  ],
+};
+
+// Which Coursework-page items (involvement + design team ids above, or
+// experience ids below) light up when a Top Skill pill is clicked.
+export const skillLinks = {
+  python: ['dreamteam', 'khoshbouei-lab'],
+  'data-viz': ['khoshbouei-lab'],
+  'data-cleaning': ['khoshbouei-lab'],
+  'project-management': ['swe-pm', 'swe'],
+  'ux-ui': ['swe-pm'],
 };
 
 export const experience = [
@@ -123,12 +184,13 @@ export const experience = [
     ],
   },
   {
-    org: 'Travel Wizards',
-    role: 'Backend Developer Intern',
-    location: 'Remote',
-    date: 'July – August 2025',
+    org: 'UF Computer Science Department',
+    role: 'Undergraduate Teaching Assistant',
+    location: 'Gainesville, FL',
+    date: 'August – December 2024',
     bullets: [
-      'Automated invoice processing with Python (OS, PyMuPDF), cutting a 2-hour manual task to under 5 seconds.',
+      'Instructed and mentored 30+ students in weekly discussion sessions, strengthening their understanding of procedural and object-oriented programming through hands-on debugging support.',
+      'Created supplemental instructional materials — coding review sheets and practice problems — to prepare 700+ students for exams and reinforce core concepts.',
     ],
   },
 ];

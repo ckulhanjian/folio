@@ -29,10 +29,17 @@ function Resume() {
           </Reveal>
 
           <Reveal className="resume-card" y={30} delay={0.15}>
-            <h3>Skills</h3>
+            <h3>Career Interests</h3>
             <div className="tag-row">
-              {[...skills.languagesTools, ...skills.libraries].map((skill) => (
-                <span key={skill}>{skill}</span>
+              {skills.careerInterests.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+
+            <h3 style={{ marginTop: '1.4rem' }}>Top Skills</h3>
+            <div className="tag-row">
+              {skills.topSkills.map((item) => (
+                <span key={item.id}>{item.label}</span>
               ))}
             </div>
           </Reveal>

@@ -96,10 +96,17 @@ function ResumeBody() {
           </div>
 
           <div className="resume-card">
-            <h3>Skills</h3>
+            <h3>Career Interests</h3>
             <div className="tag-row">
-              {[...skills.languagesTools, ...skills.libraries].map((skill) => (
-                <span key={skill}>{skill}</span>
+              {skills.careerInterests.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+
+            <h3 style={{ marginTop: '1.4rem' }}>Top Skills</h3>
+            <div className="tag-row">
+              {skills.topSkills.map((item) => (
+                <span key={item.id}>{item.label}</span>
               ))}
             </div>
           </div>
@@ -133,11 +140,39 @@ function ResumeBody() {
 
           <div className="side-col">
             <h3>Involvement</h3>
-            <ul className="plain-list">
+            <ul className="plain-list involvement-list">
               {academics.involvement.map((item) => (
-                <li key={item}>{item}</li>
+                <li key={item.id}>
+                  {item.title}
+                  {item.sub.length > 0 && (
+                    <ul className="involvement-sub">
+                      {item.sub.map((sub) => (
+                        <li key={sub}>{sub}</li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        <div className="design-teams">
+          <h3>Design Teams</h3>
+          <div className="resume-cards">
+            {academics.designTeams.map((team) => (
+              <div className="resume-card design-team-card" key={team.id}>
+                <span className="design-team-badge" aria-hidden="true">{team.org.slice(0, 1)}</span>
+                <div className="exp-role">{team.role}</div>
+                <div className="exp-org">{team.org}</div>
+                <div className="exp-date">{team.date}</div>
+                <ul className="plain-list design-team-bullets">
+                  {team.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import meOutline from '../../assets/me-outline.png';
-import loveYourMother from '../../assets/love-your-mother.svg';
+import loveYourMother from '../../assets/sticker-love-your-mother.png';
+import eyeSticker from '../../assets/sticker-eye.png';
+import musicStars from '../../assets/sticker-music-stars.png';
+import spiralSticker from '../../assets/sticker-spiral.jpg';
+import ufSeal from '../../assets/sticker-uf.png';
 
 const stickers = [
   {
@@ -14,6 +18,30 @@ const stickers = [
     src: loveYourMother,
     alt: 'Love Your Mother sticker',
     className: 'contact-sticker-lym',
+  },
+  {
+    id: 'uf',
+    src: ufSeal,
+    alt: 'University of Florida seal',
+    className: 'contact-sticker-uf',
+  },
+  {
+    id: 'eye',
+    src: eyeSticker,
+    alt: '',
+    className: 'contact-sticker-eye',
+  },
+  {
+    id: 'music-stars',
+    src: musicStars,
+    alt: '',
+    className: 'contact-sticker-music',
+  },
+  {
+    id: 'spiral',
+    src: spiralSticker,
+    alt: '',
+    className: 'contact-sticker-spiral',
   },
 ];
 

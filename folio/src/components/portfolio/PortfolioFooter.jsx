@@ -1,47 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
 import { profile } from '../../data/portfolio.js';
 import Reveal from './Reveal.jsx';
 import ContactStickers from './ContactStickers.jsx';
-import me from '../../assets/me.png';
 
 function PortfolioFooter() {
-  const footerRef = useRef(null);
-  const headRef = useRef(null);
-  const [isDimmed, setIsDimmed] = useState(false);
-
-  useEffect(() => {
-    const footer = footerRef.current;
-    const head = headRef.current;
-    if (!footer || !head) return;
-
-    const handleMouseMove = (event) => {
-      const rect = footer.getBoundingClientRect();
-      head.style.left = `${event.clientX - rect.left}px`;
-      head.style.top = `${event.clientY - rect.top}px`;
-    };
-
-    footer.addEventListener('mousemove', handleMouseMove);
-    return () => footer.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <footer id="contact" className="pf-footer" ref={footerRef}>
+    <footer id="contact" className="pf-footer">
       <ContactStickers />
 
-      <img
-        ref={headRef}
-        src={me}
-        alt=""
-        aria-hidden="true"
-        className={`footer-head-img${isDimmed ? ' footer-head-img-dimmed' : ''}`}
-      />
-
-      <Reveal
-        y={20}
-        className="contact-close"
-        onMouseEnter={() => setIsDimmed(true)}
-        onMouseLeave={() => setIsDimmed(false)}
-      >
+      <Reveal y={20} className="contact-close">
         <span className="eyebrow">Contact</span>
         <h2 className="accent">Contact me!</h2>
         <p>
