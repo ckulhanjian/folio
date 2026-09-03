@@ -1394,6 +1394,8 @@ p.footer-copy {
 }
 
 .mobile-card-header {
+  position: relative;
+  z-index: 2;
   width: 100%;
   display: flex;
   align-items: center;
@@ -1434,13 +1436,9 @@ p.footer-copy {
   opacity: 1;
 }
 
-/* The Home banner reuses .mobile-card-header's layout but isn't a
-   button — there's nothing to toggle and nothing to minimize. */
-.mobile-card-header-static {
-  cursor: default;
-  padding-bottom: 0;
-}
-
+/* Home's headline plays the same role as .mobile-card-title on every
+   other card — its own typography, but the same fade-in-on-expand
+   behavior so Home behaves like a normal card in the stack. */
 .mobile-home-statement {
   margin: 0 1.4rem 1.5rem;
   font-family: 'Fraunces', serif;
@@ -1448,6 +1446,14 @@ p.footer-copy {
   font-weight: 500;
   font-size: clamp(0.95rem, 4.2vw, 1.15rem);
   line-height: 1.4;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.35s ease 0.05s, transform 0.35s ease 0.05s;
+}
+
+.mobile-card-expanded .mobile-home-statement {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .mobile-card-title {
@@ -1541,6 +1547,69 @@ p.footer-copy {
 .mobile-resume .btn-solid {
   background: var(--maroon);
   color: var(--cream);
+}
+
+/* Element + class so this reliably beats the higher-specificity
+   ".portfolio p" rule that would otherwise reset this back to
+   ink-soft (unreadable on the card's dark background). */
+p.contact-intro {
+  color: var(--pink);
+}
+
+/* A lighter, smaller-scale set of the desktop contact stickers — the
+   mobile Contact card is much narrower, so sizes and spots are
+   overridden rather than reused as-is, and two of the six are dropped
+   to keep the card from feeling cluttered. Extra room is opened up
+   below the copyright line (rather than fighting for space between
+   existing text) and all four stickers live in that reserved strip,
+   each anchored on a single axis per side so top/bottom or left/right
+   are never both set at once (that stretches the sticker instead of
+   just moving it). */
+.mobile-card .contact-sticker-music,
+.mobile-card .contact-sticker-spiral {
+  display: none;
+}
+
+.mobile-card .footer-copy {
+  margin-bottom: 5rem;
+}
+
+.mobile-card .contact-sticker-uf {
+  top: auto;
+  bottom: 2%;
+  left: 4%;
+  right: auto;
+  width: clamp(42px, 12vw, 54px);
+}
+
+.mobile-card .contact-sticker-eye {
+  top: auto;
+  bottom: 2%;
+  left: 32%;
+  right: auto;
+  width: clamp(30px, 8.5vw, 40px);
+}
+
+.mobile-card .contact-sticker-lym {
+  top: auto;
+  bottom: 0;
+  left: auto;
+  right: 4%;
+  width: clamp(80px, 23vw, 104px);
+}
+
+.mobile-card .contact-sticker-portrait {
+  top: auto;
+  bottom: 2%;
+  left: auto;
+  right: 34%;
+  width: clamp(38px, 10.5vw, 48px);
+}
+
+/* A bit more breathing room between Distinctions and Involvement at
+   phone width, where they're always stacked in one column. */
+.mobile-resume .side-col + .side-col {
+  margin-top: 3.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

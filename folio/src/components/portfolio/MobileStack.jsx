@@ -3,6 +3,7 @@ import { profile, research, academics, skills, experience, resumeFileUrl } from 
 import headshotDots from '../../assets/about-headshot-dots.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
+import ContactStickers from './ContactStickers.jsx';
 import badgeSwe from '../../assets/badge-swe.png';
 import badgeWicse from '../../assets/badge-wicse.png';
 import badgeSps from '../../assets/badge-sps.png';
@@ -25,11 +26,27 @@ const designTeamBadges = {
 };
 
 const cards = [
+  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
   { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
   { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
   { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
 ];
+
+function HomeBody() {
+  return (
+    <>
+      <p className="mobile-home-statement">
+        Cara Kulhanjian / Research, Data and Design (R&amp;D) / Studying Computer Science (CS) at
+        the University of Florida (UF)
+      </p>
+      <div className="mobile-card-content mobile-home-content">
+        <img src={me} alt="" className="mobile-home-portrait" />
+        <p className="hero-meta">{profile.meta}</p>
+      </div>
+    </>
+  );
+}
 
 function AboutBody() {
   return (
@@ -216,7 +233,7 @@ function ContactBody() {
     <>
       <span className="mobile-card-title">Let's connect.</span>
       <div className="mobile-card-content">
-        <p>
+        <p className="contact-intro">
           I'm currently looking for new opportunities — reach out on{' '}
           <a href={profile.linkedin} target="_blank" rel="noreferrer" className="footer-inline-link">
             LinkedIn
@@ -235,6 +252,7 @@ function ContactBody() {
 }
 
 const bodies = {
+  home: HomeBody,
   about: AboutBody,
   research: ResearchBody,
   resume: ResumeBody,
@@ -242,27 +260,12 @@ const bodies = {
 };
 
 function MobileStack() {
-  const [expandedId, setExpandedId] = useState(null);
+  // Home starts open as the front-most card in the stack; every other
+  // card starts collapsed and stacks up behind it.
+  const [expandedId, setExpandedId] = useState('home');
 
   return (
     <div className="mobile-stack">
-      <section
-        className="mobile-card mobile-home-banner"
-        style={{ '--tab-color': 'var(--cream)', '--tab-text': 'var(--ink)' }}
-      >
-        <div className="mobile-card-header mobile-card-header-static">
-          <span className="mobile-card-label">Home</span>
-        </div>
-        <p className="mobile-home-statement">
-          Cara Kulhanjian / Research, Data and Design (R&amp;D) / Studying Computer Science (CS)
-          at the University of Florida (UF)
-        </p>
-        <div className="mobile-card-content mobile-home-content">
-          <img src={me} alt="" className="mobile-home-portrait" />
-          <p className="hero-meta">{profile.meta}</p>
-        </div>
-      </section>
-
       {cards.map((card) => {
         const expanded = expandedId === card.id;
         const Body = bodies[card.id];
@@ -287,6 +290,8 @@ function MobileStack() {
                 <Body />
               </div>
             </div>
+
+            {card.id === 'contact' && expanded && <ContactStickers />}
           </section>
         );
       })}
