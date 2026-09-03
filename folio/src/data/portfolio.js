@@ -101,52 +101,57 @@ export const academics = {
       id: 'swe',
       title: 'Society of Women Engineers (SWE)',
       sub: ['Team Tech Project Lead (2025–26)'],
+      detail:
+        'Led multi-disciplinary development in partnership with CACI to build a machine ' +
+        'learning web application that optimizes flight paths between airports, returning ' +
+        "the optimal route with >80% accuracy in under 1 minute — now leads SWE's Team " +
+        'Tech projects as Project Lead.',
+      image: 'swe',
     },
     {
       id: 'wicse',
       title: 'Women in Computer Science & Engineering (WiCSE)',
       sub: ['Corporate Mentorship & Project (2025)'],
+      detail:
+        'Building a web application through the AMEX x WiCSE Corporate Mentorship Program ' +
+        'that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ' +
+        'ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
     },
     {
       id: 'khoshbouei-lab',
       title: 'Khoshbouei Research Lab',
       sub: [],
+      detail:
+        'Processes 800,000+ patient records from the All of Us database to build a ' +
+        'predictive relapse model, and creates heatmaps and regression analyses of brain ' +
+        'imaging data to map regional concentrations.',
     },
     {
       id: 'dreamteam',
       title: 'Dream Team Engineering (DTE)',
       sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
+      detail:
+        'Developed Python scripts using NLTK and spaCy to parse child speech transcripts ' +
+        'and automatically apply SALT speech formatting, helping researchers more ' +
+        'efficiently identify child speech disorders.',
+      image: 'dreamteam',
     },
     {
       id: 'ieee-sps',
       title: 'IEEE Signal Processing Society',
       sub: [],
+      detail:
+        'Active member of the IEEE Signal Processing Society, engaging with signal ' +
+        'processing research and professional development within the field.',
     },
     {
       id: 'venus',
       title: 'Venus A Cappella',
       sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
-    },
-  ],
-  designTeams: [
-    {
-      id: 'swe-pm',
-      org: 'Society of Women Engineers (SWE) Design Team',
-      role: 'Project Manager',
-      date: 'August 2024 – May 2026',
-      bullets: [
-        'Led multi-disciplinary development in partnership with CACI to build a machine learning web application that optimizes flight paths between airports, returning the optimal route with >80% accuracy in under 1 minute.',
-        'Managed project timelines, requirements, and deliverables using Kanban-based task tracking, coordinating development through a hybrid Agile–Waterfall methodology to ensure on-time execution.',
-      ],
-    },
-    {
-      id: 'dreamteam',
-      org: 'UF Dream Team Engineering — Speech Language Development Team',
-      role: 'Backend Developer',
-      date: 'September 2025 – Present',
-      bullets: [
-        'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
-      ],
+      detail:
+        "Served as Creative Director in 2025, shaping the group's artistic direction and " +
+        'performance repertoire, and now leads as Music Director, directing arrangements ' +
+        'and rehearsals.',
     },
   ],
 };
@@ -164,14 +169,36 @@ export const skills = {
   ],
 };
 
-// Which Coursework-page items (involvement + design team ids above, or
-// experience ids below) light up when a Top Skill pill is clicked.
+const slugify = (text) =>
+  text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+// The Education page's Skills section shows every skill from both the
+// curated Top Skills and the full Resume skill list, deduped by label
+// (Top Skills wins so its id — and any skillLinks entry — is kept).
+const topSkillLabels = new Set(skills.topSkills.map((s) => s.label.toLowerCase()));
+export const allSkills = [
+  ...skills.topSkills,
+  ...[...skills.languagesTools, ...skills.libraries]
+    .filter((label) => !topSkillLabels.has(label.toLowerCase()))
+    .map((label) => ({ id: slugify(label), label })),
+];
+
+// Which Involvement entries light up when a skill pill is clicked.
 export const skillLinks = {
   python: ['dreamteam', 'khoshbouei-lab'],
   'data-viz': ['khoshbouei-lab'],
   'data-cleaning': ['khoshbouei-lab'],
-  'project-management': ['swe-pm', 'swe'],
-  'ux-ui': ['swe-pm'],
+  'project-management': ['swe'],
+  'ux-ui': ['swe'],
+  matplotlib: ['khoshbouei-lab'],
+  seaborn: ['khoshbouei-lab'],
+  pandas: ['khoshbouei-lab'],
+  numpy: ['khoshbouei-lab'],
+  'scikit-learn': ['khoshbouei-lab'],
+  sql: ['wicse'],
 };
 
 export const experience = [

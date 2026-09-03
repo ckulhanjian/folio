@@ -20,11 +20,6 @@ const involvementBadges = {
   venus: badgeVenus,
 };
 
-const designTeamBadges = {
-  'swe-pm': badgeSwe,
-  dreamteam: badgeDreamTeam,
-};
-
 const cards = [
   { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
@@ -111,6 +106,8 @@ function ResearchBody() {
 }
 
 function ResumeBody() {
+  const [expandedInvolvement, setExpandedInvolvement] = useState(null);
+
   return (
     <>
       <span className="mobile-card-title">Download the full CV</span>
@@ -163,27 +160,6 @@ function ResumeBody() {
           </div>
         </div>
 
-        <div className="design-teams">
-          <h3>Design Teams</h3>
-          <div className="resume-cards">
-            {academics.designTeams.map((team) => (
-              <div className="resume-card design-team-card" key={team.id}>
-                <span className="design-team-badge" aria-hidden="true">
-                  <img src={designTeamBadges[team.id]} alt="" />
-                </span>
-                <div className="exp-role">{team.role}</div>
-                <div className="exp-org">{team.org}</div>
-                <div className="exp-date">{team.date}</div>
-                <ul className="plain-list design-team-bullets">
-                  {team.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="coursework-grid">
           <div className="side-col">
             <h3>Distinctions</h3>
@@ -205,21 +181,41 @@ function ResumeBody() {
           <div className="side-col">
             <h3>Involvement</h3>
             <ul className="plain-list involvement-list">
-              {academics.involvement.map((item) => (
-                <li key={item.id}>
-                  {involvementBadges[item.id] && (
-                    <img src={involvementBadges[item.id]} alt="" className="involvement-badge" />
-                  )}
-                  {item.title}
-                  {item.sub.length > 0 && (
-                    <ul className="involvement-sub">
-                      {item.sub.map((sub) => (
-                        <li key={sub}>{sub}</li>
-                      ))}
-                    </ul>
-                  )}
-                </li>
-              ))}
+              {academics.involvement.map((item) => {
+                const isExpanded = expandedInvolvement === item.id;
+                return (
+                  <li key={item.id}>
+                    <button
+                      type="button"
+                      className="involvement-toggle"
+                      onClick={() => setExpandedInvolvement((cur) => (cur === item.id ? null : item.id))}
+                      aria-expanded={isExpanded}
+                    >
+                      {involvementBadges[item.id] && (
+                        <img src={involvementBadges[item.id]} alt="" className="involvement-badge" />
+                      )}
+                      <span className="involvement-title">{item.title}</span>
+                    </button>
+                    {item.sub.length > 0 && (
+                      <ul className="involvement-sub">
+                        {item.sub.map((sub) => (
+                          <li key={sub}>{sub}</li>
+                        ))}
+                      </ul>
+                    )}
+                    {isExpanded && (
+                      <div className="involvement-detail">
+                        <p>{item.detail}</p>
+                        {item.link && (
+                          <a href={item.link} target="_blank" rel="noreferrer">
+                            View on GitHub ↗
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

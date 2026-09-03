@@ -660,7 +660,7 @@ html {
 .pill-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.1rem;
+  gap: 0.5rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -776,6 +776,68 @@ html {
   padding: 1px;
 }
 
+/* Clicking an Involvement row expands a detail panel — the row itself
+   is a full-width button so the whole title (badge + text) is
+   tappable, not just the text glyphs. */
+.involvement-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* A smaller, single version of the old Design Team card — a couple of
+   sentences about the experience, with an optional link. */
+.involvement-detail {
+  margin: 0.6rem 0 0 1.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--paper);
+  border: 1px solid rgba(32, 26, 20, 0.12);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.involvement-detail p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.involvement-detail a {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.education-involvement {
+  margin-top: 2.5rem;
+}
+
+/* Reserved next to Distinctions, below it — only takes up space once
+   an expanded Involvement entry actually has an image. */
+.involvement-image-slot {
+  margin-top: 2.5rem;
+}
+
+.involvement-image-slot img {
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(32, 26, 20, 0.12);
+  box-shadow: 0 14px 28px rgba(32, 26, 20, 0.18);
+}
+
 /* Skill pills on the Coursework page, distinct from the plain
    Relevant Coursework pills — clicking one highlights whichever
    Involvement / Design Team entries it's tied to. */
@@ -824,11 +886,10 @@ html {
     transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Hover only ever changes the border color — no size change, so a
+   full row of pills never shifts or touches its neighbors. */
 .skill-pill:hover {
-  background: var(--paper);
   border-color: var(--maroon);
-  transform: scale(1.12);
-  box-shadow: 0 6px 14px rgba(32, 26, 20, 0.2);
 }
 
 .skill-pill-active {
@@ -837,105 +898,20 @@ html {
   border-color: var(--maroon);
 }
 
-/* Keep the selected fill when re-hovering an already-active pill —
-   only a plain (unselected) pill loses its background on hover. */
-.skill-pill.skill-pill-active:hover {
+/* Applied to an Involvement entry's title (not the whole row) when
+   the active skill pill is linked to it — a tight highlighter-style
+   badge rather than an outline box, in the section's own accent
+   colors (the same maroon/cream pairing as an active skill pill). */
+.involvement-title {
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  margin: -0.05em -0.35em;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.involvement-title.skill-highlight {
   background: var(--maroon);
   color: var(--cream);
-}
-
-/* Applied to whatever Involvement / Design Team entry the active
-   skill pill is linked to. */
-.skill-highlight {
-  position: relative;
-  outline: 2px solid var(--maroon);
-  outline-offset: 4px;
-  border-radius: 6px;
-  transition: outline-color 0.2s ease;
-}
-
-li.skill-highlight {
-  color: var(--maroon);
-}
-
-.design-teams {
-  margin-top: 2.5rem;
-}
-
-.design-teams > h3 {
-  font-size: 1rem;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-
-.design-teams .resume-cards {
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-}
-
-/* Doubled-up class selector so this wins over the later, less-specific
-   .resume-card padding rule regardless of source order. */
-.resume-card.design-team-card {
-  position: relative;
-  background: var(--paper);
-  border: 1px solid rgba(32, 26, 20, 0.12);
-  padding: 1.5rem 1.5rem 1.5rem 4.1rem;
-  color: var(--ink);
-}
-
-.design-team-badge {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
-  width: 2.2rem;
-  height: 2.2rem;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid rgba(32, 26, 20, 0.12);
-  box-shadow: 0 2px 6px rgba(32, 26, 20, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  padding: 3px;
-}
-
-.design-team-badge img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.design-team-card .exp-role {
-  font-weight: 700;
-  font-size: 0.95rem;
-}
-
-.design-team-card .exp-org {
-  font-size: 0.82rem;
-  color: var(--maroon);
-  margin-top: 0.1rem;
-}
-
-.design-team-card .exp-date {
-  font-size: 0.75rem;
-  opacity: 0.65;
-  margin-top: 0.15rem;
-}
-
-.design-team-bullets {
-  margin-top: 0.9rem;
-}
-
-.design-team-bullets li {
-  font-weight: 500;
-  font-size: 0.85rem;
-}
-
-/* Bullet points instead of the plain-list dash, scoped to the Design
-   Team cards specifically. */
-.design-teams .design-team-bullets li::before {
-  content: '•';
 }
 
 /* ---------- resume ---------- */
