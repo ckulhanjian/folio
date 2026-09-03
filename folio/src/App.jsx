@@ -1,17 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
-
-// import Home from './components/Home.jsx'
-import Home from './components/Home.jsx'
-
+import PortfolioHome from './components/PortfolioHome.jsx'
 
 function App() {
-  return (
-    // <Routes>
-    //   <Route path="/" element={<Home />} />
-    //   <Route path="/track/:id" element={<TrackPage />} />
-    // </Routes>
-    <Home />
-  )
+  return <PortfolioHome />
 }
 
 export default App;
