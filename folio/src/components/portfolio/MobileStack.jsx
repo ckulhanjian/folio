@@ -123,7 +123,7 @@ function ProjectsBody() {
       <span className="mobile-card-title">Selected Projects</span>
       <div className="mobile-card-content">
         {selected ? (
-          <div className="project-detail">
+          <div className="project-detail" key={selected.id}>
             <button type="button" className="project-back" onClick={() => setSelectedId(null)}>
               ← Back to Projects
             </button>
@@ -134,15 +134,25 @@ function ProjectsBody() {
                 <span key={item}>{item}</span>
               ))}
             </div>
+            {selected.image && (
+              <div className="project-detail-image">
+                <img src={selected.image} alt={`${selected.title} preview`} />
+              </div>
+            )}
             {selected.description.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
-            <a className="btn btn-outline" href={selected.repoUrl} target="_blank" rel="noreferrer">
+            <a
+              className="btn btn-outline project-github-link"
+              href={selected.repoUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               View on GitHub ↗
             </a>
           </div>
         ) : (
-          <div className="projects-bar">
+          <div className="projects-bar" key="mobile-projects-bar">
             {projects.map((project) => (
               <button
                 key={project.id}

@@ -57,9 +57,8 @@ function Nav() {
 
   return (
     <nav className="nav">
-      <a className="nav-logo" href="#hero" onClick={jumpTo('hero')}>
+      <a className="nav-logo" href="#hero" onClick={jumpTo('hero')} aria-label="Cara Kulhanjian — Home">
         <img src={heartIcon} alt="" className="nav-heart" />
-        <span className="nav-logo-text">Cara Kulhanjian</span>
       </a>
       <div className="nav-right">
         <div className={`mini-nav${showTabs ? ' mini-nav-hidden' : ''}`}>

@@ -151,14 +151,6 @@ export const academics = {
       image: 'dreamteam',
     },
     {
-      id: 'ieee-sps',
-      title: 'IEEE Signal Processing Society',
-      sub: [],
-      detail:
-        'Active member of the IEEE Signal Processing Society, engaging with signal ' +
-        'processing research and professional development within the field.',
-    },
-    {
       id: 'venus',
       title: 'Venus A Cappella',
       sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
@@ -210,49 +202,24 @@ export const experience = [
 ];
 
 // The Education page's timeline — professional experience and
-// involvement merged into one reverse-chronological list. Badge keys
-// match the icons already used elsewhere (see involvementBadges in
-// Coursework.jsx); entries with no logo just get a plain dot.
+// involvement merged into one chronological (oldest → newest) list.
+// Badge keys match the icons already used elsewhere (see
+// involvementBadges in Coursework.jsx) — shown in the expanded detail
+// panel only; the timeline track itself just uses a plain dot.
 export const timeline = [
   {
-    id: 'arthrex',
-    heading: 'IT Project Analyst Intern',
-    org: 'Arthrex Inc.',
-    date: 'May – August 2026',
+    id: 'wicse',
+    short: 'WiCSE',
+    heading: 'Women in Computer Science & Engineering (WiCSE)',
+    sub: ['Corporate Mentorship & Project (2025)'],
+    date: '2023 – Present',
     bullets: [
-      'Drove end-to-end development of a SAP analytics dashboard, gathering requirements from stakeholders and prototyping a 7-report Figma interface.',
-      'Developed a custom Power Apps solution to streamline registration and logistics for a recurring company event.',
+      'Building a web application through the AMEX x WiCSE Corporate Mentorship Program that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
     ],
-  },
-  {
-    id: 'khoshbouei-lab',
-    heading: 'Undergraduate Researcher',
-    org: 'Khoshbouei Research Lab',
-    date: 'February 2026 – Present',
-    bullets: [
-      'Processes 800,000+ patient records from the All of Us database to build a predictive relapse model, and creates heatmaps and regression analyses of brain imaging data to map regional concentrations.',
-    ],
-  },
-  {
-    id: 'ieee-sps',
-    heading: 'IEEE Signal Processing Society',
-    date: '2026 – Present',
-    bullets: [
-      'Active member of the IEEE Signal Processing Society, engaging with signal processing research and professional development within the field.',
-    ],
-  },
-  {
-    id: 'dreamteam',
-    heading: 'Dream Team Engineering (DTE)',
-    sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
-    date: '2025 – Present',
-    bullets: [
-      'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
-    ],
-    image: 'dreamteam',
   },
   {
     id: 'swe',
+    short: 'SWE',
     heading: 'Society of Women Engineers (SWE)',
     sub: ['Team Tech Project Lead (2025–26)'],
     date: '2024 – Present',
@@ -263,6 +230,7 @@ export const timeline = [
   },
   {
     id: 'venus',
+    short: 'Venus A Cappella',
     heading: 'Venus A Cappella',
     sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
     date: '2024 – Present',
@@ -272,6 +240,7 @@ export const timeline = [
   },
   {
     id: 'ta',
+    short: 'Teaching Assistant',
     heading: 'Undergraduate Teaching Assistant',
     org: 'UF Computer Science Department',
     date: 'August – December 2024',
@@ -281,15 +250,43 @@ export const timeline = [
     ],
   },
   {
-    id: 'wicse',
-    heading: 'Women in Computer Science & Engineering (WiCSE)',
-    sub: ['Corporate Mentorship & Project (2025)'],
-    date: '2023 – Present',
+    id: 'dreamteam',
+    short: 'Dream Team',
+    heading: 'Dream Team Engineering (DTE)',
+    sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
+    date: '2025 – Present',
     bullets: [
-      'Building a web application through the AMEX x WiCSE Corporate Mentorship Program that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
+      'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
+    ],
+    image: 'dreamteam',
+  },
+  {
+    id: 'khoshbouei-lab',
+    short: 'Khoshbouei Lab',
+    heading: 'Undergraduate Researcher',
+    org: 'Khoshbouei Research Lab',
+    date: 'February 2026 – Present',
+    bullets: [
+      'Processes 800,000+ patient records from the All of Us database to build a predictive relapse model, and creates heatmaps and regression analyses of brain imaging data to map regional concentrations.',
+    ],
+  },
+  {
+    id: 'arthrex',
+    short: 'Arthrex',
+    heading: 'IT Project Analyst Intern',
+    org: 'Arthrex Inc.',
+    date: 'May – August 2026',
+    bullets: [
+      'Drove end-to-end development of a SAP analytics dashboard, gathering requirements from stakeholders and prototyping a 7-report Figma interface.',
+      'Developed a custom Power Apps solution to streamline registration and logistics for a recurring company event.',
     ],
   },
 ];
+
+// Each project's image is GitHub's own auto-generated social preview
+// card for that repo (opengraph.githubassets.com) — a real, live image
+// specific to the repo with no local asset needed.
+const ogImage = (owner, repo) => `https://opengraph.githubassets.com/1/${owner}/${repo}`;
 
 export const projects = [
   {
@@ -298,6 +295,7 @@ export const projects = [
     tagline: 'AMEX x WiCSE Corporate Mentorship Program',
     tech: ['Python', 'Gemini Vision', 'Gemini Pro', 'SQLite'],
     repoUrl: 'https://github.com/ckulhanjian/nutrition-scanner',
+    image: ogImage('ckulhanjian', 'nutrition-scanner'),
     summary: 'A web app that scans a nutrition label and flags ingredients against dietary filters.',
     description: [
       'Built as part of the AMEX x WiCSE Corporate Mentorship Program, this web application ' +
@@ -314,6 +312,7 @@ export const projects = [
     tagline: 'CIS4930 — Introduction to Machine Learning, Final Project',
     tech: ['Python', 'Jupyter', 'scikit-learn'],
     repoUrl: 'https://github.com/danielgeorge922/cis4930-intro-to-ml-final-project',
+    image: ogImage('danielgeorge922', 'cis4930-intro-to-ml-final-project'),
     summary: 'A team final project classifying chest X-rays for COVID-19 using a Kaggle imaging dataset.',
     description: [
       'A team final project for Introduction to Machine Learning, built around Kaggle\'s ' +
@@ -329,6 +328,7 @@ export const projects = [
     tagline: 'Khoshbouei Neuroscience Lab — Undergraduate Research',
     tech: ['Python', 'Matplotlib', 'Seaborn', 'Statistical Analysis'],
     repoUrl: 'https://github.com/ckulhanjian/Khoshbouei-monocyte_cns_candidiasis',
+    image: ogImage('ckulhanjian', 'Khoshbouei-monocyte_cns_candidiasis'),
     summary: 'Correlating fungal burden and immune cell infiltration across brain regions during CNS infection.',
     description: [
       'A research analysis, mentored by Leah Phan alongside fellow researchers Devon Borg and ' +
@@ -337,6 +337,55 @@ export const projects = [
       'Generates correlation scatter plots and heatmaps examining the relationship between ' +
         'fungal burden and immune cell (monocyte) infiltration across different brain regions, ' +
         'organized around original, cleaned, and generated-visualization datasets.',
+    ],
+  },
+  {
+    id: 'teamtech',
+    title: 'Team Tech Project 2025–26',
+    tagline: 'Society of Women Engineers (SWE) — Team Tech',
+    tech: ['JavaScript', 'Node.js', 'Machine Learning'],
+    repoUrl: 'https://github.com/ufswe/teamtech25-26',
+    image: ogImage('ufswe', 'teamtech25-26'),
+    summary: 'A machine learning web app, built with SWE, that optimizes flight paths between airports.',
+    description: [
+      'Built in partnership with CACI as SWE\'s Team Tech project, this full-stack web ' +
+        'application uses machine learning to optimize flight paths between airports, ' +
+        'returning the optimal route with >80% accuracy in under 1 minute.',
+      'Coordinated as Project Lead using Kanban-based task tracking and a hybrid ' +
+        'Agile–Waterfall methodology across a multi-disciplinary team to keep development on ' +
+        'schedule.',
+    ],
+  },
+  {
+    id: 'sld',
+    title: 'Speech Language Development (SLD)',
+    tagline: 'UF Dream Team Engineering',
+    tech: ['Python', 'NLTK', 'spaCy'],
+    repoUrl: 'https://github.com/DreamTeamSE/SLD',
+    image: ogImage('DreamTeamSE', 'SLD'),
+    summary: 'Parses child speech transcripts and automatically applies SALT speech formatting.',
+    description: [
+      'Built with UF Dream Team Engineering\'s Speech Language Development team, this project ' +
+        'uses Python scripts with NLTK and spaCy to parse child speech transcripts and ' +
+        'automatically apply SALT speech formatting.',
+      'The automated formatting helps researchers more efficiently identify child speech ' +
+        'disorders, cutting down on the manual transcription work a speech-language study ' +
+        'would otherwise require.',
+    ],
+  },
+  {
+    id: 'spiceitup',
+    title: 'SpiceItUp',
+    tagline: 'Personal Project',
+    tech: ['React Native', 'TypeScript', 'Firebase', 'NativeWind'],
+    repoUrl: 'https://github.com/KopikoCappu/spiceitup',
+    image: ogImage('KopikoCappu', 'spiceitup'),
+    summary: 'A React Native recipe app for browsing, saving, and organizing recipes.',
+    description: [
+      'A mobile recipe app built with React Native and Expo, using Firebase for ' +
+        'authentication and data storage and NativeWind for styling.',
+      'Includes a seeded recipe library and a personal recipe store, letting users browse, ' +
+        'save, and organize recipes from a phone.',
     ],
   },
 ];

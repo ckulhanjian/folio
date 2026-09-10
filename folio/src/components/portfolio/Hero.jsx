@@ -1,6 +1,7 @@
-import heartIcon from '../../assets/heart-icon-dark.png';
 import roseArt from '../../assets/ascii-art-rose.png';
 import vineArt from '../../assets/ascii-art-vine.png';
+import candidPhoto from '../../assets/about-candid-dots.jpg';
+import headshotPhoto from '../../assets/about-headshot-dots.jpg';
 
 function Hero() {
   return (
@@ -21,7 +22,10 @@ function Hero() {
           </span>
         </div>
 
-        <img src={heartIcon} alt="" className="hero-float-logo" aria-hidden="true" />
+        <div className="hero-photos" aria-hidden="true">
+          <img src={headshotPhoto} alt="" className="hero-photo hero-photo-back" />
+          <img src={candidPhoto} alt="" className="hero-photo hero-photo-front" />
+        </div>
       </div>
     </section>
   );

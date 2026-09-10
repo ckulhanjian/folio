@@ -32,19 +32,35 @@ function ProjectDetail({ project, onBack }) {
       <button type="button" className="project-back" onClick={onBack}>
         ← Back to Projects
       </button>
-      <h3>{project.title}</h3>
-      <p className="project-detail-tagline">{project.tagline}</p>
-      <div className="project-tags">
-        {project.tech.map((item) => (
-          <span key={item}>{item}</span>
-        ))}
+
+      <div className="project-detail-grid">
+        <div className="project-detail-text">
+          <h3>{project.title}</h3>
+          <p className="project-detail-tagline">{project.tagline}</p>
+          <div className="project-tags">
+            {project.tech.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+          {project.description.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+          <a
+            className="btn btn-outline project-github-link"
+            href={project.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            View on GitHub ↗
+          </a>
+        </div>
+
+        {project.image && (
+          <div className="project-detail-image">
+            <img src={project.image} alt={`${project.title} preview`} />
+          </div>
+        )}
       </div>
-      {project.description.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
-      ))}
-      <a className="btn btn-outline" href={project.repoUrl} target="_blank" rel="noreferrer">
-        View on GitHub ↗
-      </a>
     </div>
   );
 }
@@ -63,9 +79,9 @@ function Projects() {
         </Reveal>
 
         {selected ? (
-          <ProjectDetail project={selected} onBack={() => setSelectedId(null)} />
+          <ProjectDetail key={selected.id} project={selected} onBack={() => setSelectedId(null)} />
         ) : (
-          <ProjectsBar onSelect={setSelectedId} />
+          <ProjectsBar key="projects-bar" onSelect={setSelectedId} />
         )}
       </div>
     </section>
