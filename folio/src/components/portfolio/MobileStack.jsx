@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { profile, research, academics, skills, experience, resumeFileUrl } from '../../data/portfolio.js';
+import { profile, research, academics, skills, experience, projects, resumeFileUrl } from '../../data/portfolio.js';
 import headshotDots from '../../assets/about-headshot-dots.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
@@ -23,6 +23,7 @@ const involvementBadges = {
 const cards = [
   { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
+  { id: 'projects', label: 'Projects', color: 'var(--sage)', text: 'var(--ink)' },
   { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
   { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
   { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
@@ -93,6 +94,14 @@ function ResearchBody() {
         </div>
         <p>{research.summary}</p>
         <PhotoStack />
+        <div className="research-summary">
+          <h3>Summary</h3>
+          <ul className="plain-list">
+            {research.keyFindings.map((finding) => (
+              <li key={finding}>{finding}</li>
+            ))}
+          </ul>
+        </div>
         <div className="research-links">
           {research.links.map((link) => (
             <a key={link.url} href={link.url} target="_blank" rel="noreferrer">
@@ -100,6 +109,59 @@ function ResearchBody() {
             </a>
           ))}
         </div>
+      </div>
+    </>
+  );
+}
+
+function ProjectsBody() {
+  const [selectedId, setSelectedId] = useState(null);
+  const selected = projects.find((project) => project.id === selectedId);
+
+  return (
+    <>
+      <span className="mobile-card-title">Selected Projects</span>
+      <div className="mobile-card-content">
+        {selected ? (
+          <div className="project-detail">
+            <button type="button" className="project-back" onClick={() => setSelectedId(null)}>
+              ← Back to Projects
+            </button>
+            <h3>{selected.title}</h3>
+            <p className="project-detail-tagline">{selected.tagline}</p>
+            <div className="project-tags">
+              {selected.tech.map((item) => (
+                <span key={item}>{item}</span>
+              ))}
+            </div>
+            {selected.description.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+            <a className="btn btn-outline" href={selected.repoUrl} target="_blank" rel="noreferrer">
+              View on GitHub ↗
+            </a>
+          </div>
+        ) : (
+          <div className="projects-bar">
+            {projects.map((project) => (
+              <button
+                key={project.id}
+                type="button"
+                className="project-chip"
+                onClick={() => setSelectedId(project.id)}
+              >
+                <span className="project-chip-title">{project.title}</span>
+                <span className="project-chip-tagline">{project.tagline}</span>
+                <p className="project-chip-summary">{project.summary}</p>
+                <div className="project-tags">
+                  {project.tech.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );
@@ -250,6 +312,7 @@ function ContactBody() {
 const bodies = {
   home: HomeBody,
   about: AboutBody,
+  projects: ProjectsBody,
   research: ResearchBody,
   resume: ResumeBody,
   contact: ContactBody,

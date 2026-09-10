@@ -3,8 +3,9 @@ import '../style/portfolio.css';
 import Nav from './portfolio/Nav.jsx';
 import Hero from './portfolio/Hero.jsx';
 import About from './portfolio/About.jsx';
-import Research from './portfolio/Research.jsx';
 import Coursework from './portfolio/Coursework.jsx';
+import Projects from './portfolio/Projects.jsx';
+import Research from './portfolio/Research.jsx';
 import Resume from './portfolio/Resume.jsx';
 import PortfolioFooter from './portfolio/PortfolioFooter.jsx';
 import MobileStack from './portfolio/MobileStack.jsx';
@@ -18,8 +19,9 @@ import useIsMobile from '../hooks/useIsMobile.js';
 const sectionColors = {
   hero: 'var(--cream)',
   about: 'var(--paper)',
-  research: 'var(--pink)',
   education: 'var(--babyblue)',
+  projects: 'var(--sage)',
+  research: 'var(--pink)',
   resume: 'var(--finale)',
 };
 
@@ -92,8 +94,9 @@ function PortfolioHome() {
       <Nav />
       <Hero />
       <About />
-      <Research />
       <Coursework />
+      <Projects />
+      <Research />
       <Resume />
       <PortfolioFooter />
     </div>

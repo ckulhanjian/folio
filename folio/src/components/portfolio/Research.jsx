@@ -36,6 +36,15 @@ function Research() {
           </Reveal>
         </div>
 
+        <Reveal className="research-summary" y={18} delay={0.1}>
+          <h3>Summary</h3>
+          <ul className="plain-list">
+            {research.keyFindings.map((finding) => (
+              <li key={finding}>{finding}</li>
+            ))}
+          </ul>
+        </Reveal>
+
         <Reveal className="research-links" y={18}>
           {research.links.map((link) => (
             <a key={link.url} href={link.url} target="_blank" rel="noreferrer">

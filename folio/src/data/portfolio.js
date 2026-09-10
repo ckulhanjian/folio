@@ -13,20 +13,28 @@ export const pageTabs = [
     title: 'Computer Science Student & Data-Driven Researcher',
   },
   {
-    id: 'research',
-    label: 'Research',
-    color: 'var(--pink)',
-    text: 'var(--ink)',
-    eyebrow: 'Research Project',
-    title: 'Methamphetamine Use Disorder & GLP-1',
-  },
-  {
     id: 'education',
     label: 'Education',
     color: 'var(--babyblue)',
     text: 'var(--ink)',
     eyebrow: 'Education',
     title: 'Bachelor of Science in Computer Science',
+  },
+  {
+    id: 'projects',
+    label: 'Projects',
+    color: 'var(--sage)',
+    text: 'var(--ink)',
+    eyebrow: 'Projects',
+    title: 'Selected Projects',
+  },
+  {
+    id: 'research',
+    label: 'Research',
+    color: 'var(--pink)',
+    text: 'var(--ink)',
+    eyebrow: 'Research Project',
+    title: 'Methamphetamine Use Disorder & GLP-1',
   },
   {
     id: 'resume',
@@ -70,6 +78,12 @@ export const research = {
     'in Matplotlib and Seaborn to visualize regional infection concentrations, and present findings ' +
     'to the lab team on a regular basis.',
   links: [{ label: 'All of Us Research Program', url: 'https://www.researchallofus.org' }],
+  keyFindings: [
+    'Isolated a 7,000+ person study cohort from 800,000+ All of Us patient records with a history of methamphetamine use and GLP-1 exposure.',
+    'Built a predictive model in Python (pandas, NumPy, scikit-learn) to flag recovery vs. relapse risk from cohort features.',
+    'Mapped regional concentrations in brain imaging data with heatmaps and regression analysis in Matplotlib and Seaborn.',
+    'Findings presented to the Khoshbouei Neuroscience Lab team on a recurring basis to guide the next round of analysis.',
+  ],
 };
 
 export const academics = {
@@ -160,45 +174,6 @@ export const skills = {
   languagesTools: ['Python', 'C++', 'MATLAB', 'HTML & CSS', 'SQL', 'JavaScript', 'Figma', 'Gemini Enterprise Platform', 'Microsoft Power Platform'],
   libraries: ['Matplotlib', 'Seaborn', 'Scikit-learn', 'Pandas', 'NumPy', 'React', 'Flask'],
   careerInterests: ['Machine Learning', 'Signal Processing', 'Data Science'],
-  topSkills: [
-    { id: 'python', label: 'Python' },
-    { id: 'data-viz', label: 'Data Visualization' },
-    { id: 'data-cleaning', label: 'Data Cleaning & Analysis' },
-    { id: 'project-management', label: 'Project Management (Agile/Scrum/Waterfall)' },
-    { id: 'ux-ui', label: 'UX/UI (Design Thinking)' },
-  ],
-};
-
-const slugify = (text) =>
-  text
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '');
-
-// The Education page's Skills section shows every skill from both the
-// curated Top Skills and the full Resume skill list, deduped by label
-// (Top Skills wins so its id — and any skillLinks entry — is kept).
-const topSkillLabels = new Set(skills.topSkills.map((s) => s.label.toLowerCase()));
-export const allSkills = [
-  ...skills.topSkills,
-  ...[...skills.languagesTools, ...skills.libraries]
-    .filter((label) => !topSkillLabels.has(label.toLowerCase()))
-    .map((label) => ({ id: slugify(label), label })),
-];
-
-// Which Involvement entries light up when a skill pill is clicked.
-export const skillLinks = {
-  python: ['dreamteam', 'khoshbouei-lab'],
-  'data-viz': ['khoshbouei-lab'],
-  'data-cleaning': ['khoshbouei-lab'],
-  'project-management': ['swe'],
-  'ux-ui': ['swe'],
-  matplotlib: ['khoshbouei-lab'],
-  seaborn: ['khoshbouei-lab'],
-  pandas: ['khoshbouei-lab'],
-  numpy: ['khoshbouei-lab'],
-  'scikit-learn': ['khoshbouei-lab'],
-  sql: ['wicse'],
 };
 
 export const experience = [
@@ -230,6 +205,138 @@ export const experience = [
     bullets: [
       'Instructed and mentored 30+ students in weekly discussion sessions, strengthening their understanding of procedural and object-oriented programming through hands-on debugging support.',
       'Created supplemental instructional materials — coding review sheets and practice problems — to prepare 700+ students for exams and reinforce core concepts.',
+    ],
+  },
+];
+
+// The Education page's timeline — professional experience and
+// involvement merged into one reverse-chronological list. Badge keys
+// match the icons already used elsewhere (see involvementBadges in
+// Coursework.jsx); entries with no logo just get a plain dot.
+export const timeline = [
+  {
+    id: 'arthrex',
+    heading: 'IT Project Analyst Intern',
+    org: 'Arthrex Inc.',
+    date: 'May – August 2026',
+    bullets: [
+      'Drove end-to-end development of a SAP analytics dashboard, gathering requirements from stakeholders and prototyping a 7-report Figma interface.',
+      'Developed a custom Power Apps solution to streamline registration and logistics for a recurring company event.',
+    ],
+  },
+  {
+    id: 'khoshbouei-lab',
+    heading: 'Undergraduate Researcher',
+    org: 'Khoshbouei Research Lab',
+    date: 'February 2026 – Present',
+    bullets: [
+      'Processes 800,000+ patient records from the All of Us database to build a predictive relapse model, and creates heatmaps and regression analyses of brain imaging data to map regional concentrations.',
+    ],
+  },
+  {
+    id: 'ieee-sps',
+    heading: 'IEEE Signal Processing Society',
+    date: '2026 – Present',
+    bullets: [
+      'Active member of the IEEE Signal Processing Society, engaging with signal processing research and professional development within the field.',
+    ],
+  },
+  {
+    id: 'dreamteam',
+    heading: 'Dream Team Engineering (DTE)',
+    sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
+    date: '2025 – Present',
+    bullets: [
+      'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
+    ],
+    image: 'dreamteam',
+  },
+  {
+    id: 'swe',
+    heading: 'Society of Women Engineers (SWE)',
+    sub: ['Team Tech Project Lead (2025–26)'],
+    date: '2024 – Present',
+    bullets: [
+      "Led multi-disciplinary development in partnership with CACI to build a machine learning web application that optimizes flight paths between airports, returning the optimal route with >80% accuracy in under 1 minute — now leads SWE's Team Tech projects as Project Lead.",
+    ],
+    image: 'swe',
+  },
+  {
+    id: 'venus',
+    heading: 'Venus A Cappella',
+    sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
+    date: '2024 – Present',
+    bullets: [
+      "Served as Creative Director in 2025, shaping the group's artistic direction and performance repertoire, and now leads as Music Director, directing arrangements and rehearsals.",
+    ],
+  },
+  {
+    id: 'ta',
+    heading: 'Undergraduate Teaching Assistant',
+    org: 'UF Computer Science Department',
+    date: 'August – December 2024',
+    bullets: [
+      'Instructed and mentored 30+ students in weekly discussion sessions, strengthening their understanding of procedural and object-oriented programming through hands-on debugging support.',
+      'Created supplemental instructional materials — coding review sheets and practice problems — to prepare 700+ students for exams and reinforce core concepts.',
+    ],
+  },
+  {
+    id: 'wicse',
+    heading: 'Women in Computer Science & Engineering (WiCSE)',
+    sub: ['Corporate Mentorship & Project (2025)'],
+    date: '2023 – Present',
+    bullets: [
+      'Building a web application through the AMEX x WiCSE Corporate Mentorship Program that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
+    ],
+  },
+];
+
+export const projects = [
+  {
+    id: 'nutrition-scanner',
+    title: 'Nutrition Label Scanner',
+    tagline: 'AMEX x WiCSE Corporate Mentorship Program',
+    tech: ['Python', 'Gemini Vision', 'Gemini Pro', 'SQLite'],
+    repoUrl: 'https://github.com/ckulhanjian/nutrition-scanner',
+    summary: 'A web app that scans a nutrition label and flags ingredients against dietary filters.',
+    description: [
+      'Built as part of the AMEX x WiCSE Corporate Mentorship Program, this web application ' +
+        'analyzes nutrition labels using Gemini Vision for optical character recognition and ' +
+        'Gemini Pro to interpret the extracted ingredient list.',
+      'Results are stored in SQLite for fast repeat lookups, and the app checks each label ' +
+        'against 6 different dietary filters, making it easier for users to spot allergens or ' +
+        'ingredients they need to avoid at a glance.',
+    ],
+  },
+  {
+    id: 'covid-xray-ml',
+    title: 'COVID-19 X-Ray Classification',
+    tagline: 'CIS4930 — Introduction to Machine Learning, Final Project',
+    tech: ['Python', 'Jupyter', 'scikit-learn'],
+    repoUrl: 'https://github.com/danielgeorge922/cis4930-intro-to-ml-final-project',
+    summary: 'A team final project classifying chest X-rays for COVID-19 using a Kaggle imaging dataset.',
+    description: [
+      'A team final project for Introduction to Machine Learning, built around Kaggle\'s ' +
+        'COVID X-Ray dataset. The pipeline automates dataset download and preprocessing, with ' +
+        'Jupyter notebooks handling exploration, model training, and evaluation.',
+      'Focused on translating a real diagnostic imaging problem into a working classification ' +
+        'pipeline end-to-end, from raw image data to a trained, evaluated model.',
+    ],
+  },
+  {
+    id: 'cns-candidiasis',
+    title: 'Monocyte Dynamics in CNS Candidiasis',
+    tagline: 'Khoshbouei Neuroscience Lab — Undergraduate Research',
+    tech: ['Python', 'Matplotlib', 'Seaborn', 'Statistical Analysis'],
+    repoUrl: 'https://github.com/ckulhanjian/Khoshbouei-monocyte_cns_candidiasis',
+    summary: 'Correlating fungal burden and immune cell infiltration across brain regions during CNS infection.',
+    description: [
+      'A research analysis, mentored by Leah Phan alongside fellow researchers Devon Borg and ' +
+        'Sabrina Campos under PI Dr. Habibeh Khoshbouei, investigating neuroimmune responses ' +
+        'during central nervous system candidiasis infections.',
+      'Generates correlation scatter plots and heatmaps examining the relationship between ' +
+        'fungal burden and immune cell (monocyte) infiltration across different brain regions, ' +
+        'organized around original, cleaned, and generated-visualization datasets.',
     ],
   },
 ];
