@@ -160,7 +160,7 @@ function ProjectsBody() {
                 className="project-chip"
                 onClick={() => setSelectedId(project.id)}
               >
-                {project.icon && <img src={project.icon} alt="" className="project-chip-icon" />}
+                {project.icon && <span className="project-chip-icon" aria-hidden="true">{project.icon}</span>}
                 <span className="project-chip-title">{project.title}</span>
                 <span className="project-chip-tagline">{project.tagline}</span>
                 <p className="project-chip-summary">{project.summary}</p>

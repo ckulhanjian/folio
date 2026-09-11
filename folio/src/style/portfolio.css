@@ -375,6 +375,9 @@ html {
   right: -6%;
   width: clamp(240px, 30vw, 400px);
   aspect-ratio: 502 / 857;
+  /* Opposite phase from the left piece, so the two pulse at
+     alternating times rather than in sync. */
+  animation-delay: -3.5s;
 }
 
 .hero-statement,
@@ -624,26 +627,131 @@ html {
 }
 
 .photo-card-face {
-  margin: auto;
-  text-align: center;
-  padding: 0 1.5rem;
+  position: absolute;
+  inset: 0;
+  padding: 0.8rem;
+  display: flex;
 }
 
-.photo-card-label {
-  display: block;
+/* ---------- research figure cards (inside the photo stack) ---------- */
+.chart-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.chart-card-title {
   font-family: 'Fraunces', serif;
   font-style: italic;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 0.8rem;
   color: var(--ink);
+  line-height: 1.2;
 }
 
-.photo-card-sub {
-  display: block;
-  margin-top: 0.4rem;
-  font-size: 0.75rem;
+.chart-heatmap {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+}
+
+.chart-heatmap-cell {
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: 0.3rem;
+  text-align: center;
+}
+
+.chart-heatmap-value {
+  font-weight: 700;
+  font-size: 0.78rem;
+}
+
+.chart-heatmap-label {
+  font-size: 0.55rem;
+  opacity: 0.85;
+  line-height: 1.15;
+}
+
+.chart-stackbars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1.4rem;
+  padding-bottom: 0.2rem;
+}
+
+.chart-stackbar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chart-stackbar {
+  width: 2.6rem;
+  height: 6.6rem;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(32, 26, 20, 0.15);
+}
+
+.chart-stackbar-seg + .chart-stackbar-seg {
+  border-top: 1px solid rgba(251, 248, 236, 0.5);
+}
+
+.chart-stackbar-caption {
+  font-size: 0.58rem;
   font-weight: 600;
   color: var(--ink-soft);
+  text-align: center;
+  line-height: 1.25;
+}
+
+.chart-rankbars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.chart-rankbar-row {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.chart-rankbar-label {
+  font-size: 0.58rem;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chart-rankbar-track {
+  display: block;
+  height: 0.45rem;
+  background: rgba(32, 26, 20, 0.08);
+  border-radius: 999px;
+}
+
+.chart-rankbar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--maroon);
 }
 
 .stack-hint {
@@ -881,230 +989,82 @@ html {
   font-weight: 700;
 }
 
-/* ---------- education timeline (angled, plotted by date) ---------- */
-.timeline-v2 {
-  margin-top: 1rem;
-  max-width: 100%;
+/* ---------- education timeline (diagonal, one point per year) ---------- */
+/* Oldest (freshman) at the bottom-left, newest (senior) at the
+   top-right, connected by a single diagonal line — each year's
+   content sits to the right of its point on the line and cascades
+   downward from there, like a hand-drawn ramp of tour dates. */
+.timeline-diag {
+  position: relative;
+  height: 36rem;
+  margin: 1rem 0 2rem;
 }
 
-/* Reserved space above the axis for the clicked detail card — present
-   (and empty) from first load, so opening a card never shifts the
-   axis or the content below it. */
-.timeline-v2-detail {
-  min-height: 15rem;
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 1.5rem;
+.timeline-diag-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.timeline-v2-detail-body {
+.timeline-diag-line line {
+  stroke: rgba(32, 26, 20, 0.3);
+  stroke-width: 1.5;
+}
+
+.timeline-diag-point {
+  position: absolute;
   display: flex;
-  gap: 1rem;
   align-items: flex-start;
-  max-width: 62ch;
-  animation: timeline-detail-fade 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  gap: 0.7rem;
+  transform: translate(-0.3rem, -0.3rem);
 }
 
-@keyframes timeline-detail-fade {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.timeline-v2-detail-logo {
+.timeline-diag-dot {
   flex-shrink: 0;
-  width: 2.6rem;
-  height: 2.6rem;
-  object-fit: contain;
-  border-radius: 8px;
-  background: #fff;
-  border: 1px solid rgba(32, 26, 20, 0.12);
-  padding: 3px;
+  margin-top: 0.3rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--ink);
 }
 
-.timeline-v2-detail-text h4 {
+.timeline-diag-content {
+  max-width: 22rem;
+}
+
+.timeline-diag-content h4 {
   font-family: 'Fraunces', serif;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 600;
 }
 
-.timeline-org {
-  font-weight: 600;
-  font-size: 0.82rem;
-  color: var(--maroon);
-  margin-top: 0.15rem;
+.timeline-diag-range {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
 }
 
-.timeline-v2-detail-text p {
-  margin: 0.6rem 0 0;
+.timeline-diag-content ul {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.timeline-diag-content li {
   font-size: 0.9rem;
   color: var(--ink);
+  line-height: 1.35;
 }
 
-.timeline-v2-detail-text a {
-  display: inline-block;
-  margin-top: 0.6rem;
-  font-weight: 700;
-  font-size: 0.82rem;
+.timeline-diag-content li::before {
+  content: '– ';
   color: var(--maroon);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-/* The axis itself — a plain line spanning freshman → senior year, with
-   year/class markers and each experience plotted at its real start
-   date, alternating above/below at a slight angle like pins stuck
-   into a real timeline. */
-.timeline-v2-axis {
-  position: relative;
-  height: 16rem;
-  margin: 0 0.5rem;
-}
-
-.timeline-v2-line {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: rgba(32, 26, 20, 0.16);
-}
-
-/* Sits well clear of the "below" node tags (which hug the line), so a
-   year marker never collides with a nearby entry's label. */
-.timeline-v2-year {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, 4.4rem);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.1rem;
-}
-
-.timeline-v2-year::before {
-  content: '';
-  position: absolute;
-  top: -4.4rem;
-  left: 50%;
-  width: 1px;
-  height: 4.2rem;
-  background: rgba(32, 26, 20, 0.18);
-}
-
-.timeline-v2-year-num {
   font-weight: 700;
-  font-size: 0.78rem;
-  color: var(--ink);
-}
-
-.timeline-v2-year-label {
-  font-size: 0.66rem;
-  color: var(--ink-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.timeline-v2-node {
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  background: none;
-  border: 0;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-/* Small, subtle dot on the line itself — just an outline until the
-   entry is the active one, when it fills solid black. */
-.timeline-v2-dot {
-  display: block;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 1.5px solid var(--ink);
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.timeline-v2-node:hover .timeline-v2-dot {
-  border-color: var(--maroon);
-}
-
-.timeline-v2-node.active .timeline-v2-dot {
-  background: var(--ink);
-  border-color: var(--ink);
-  transform: scale(1.2);
-}
-
-/* The tag (short name + date) sits off to one side of its dot at a
-   slight angle, connected by a thin stem — both rotate together so
-   the whole pin reads as one tilted mark, like a hand-labeled map. */
-.timeline-v2-tag {
-  position: absolute;
-  left: 50%;
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  max-width: 9rem;
-  transform-origin: center bottom;
-}
-
-.timeline-v2-node.above .timeline-v2-tag {
-  bottom: 1.6rem;
-  align-items: center;
-  transform: translateX(-50%) rotate(-6deg);
-}
-
-.timeline-v2-node.below .timeline-v2-tag {
-  top: 1.6rem;
-  align-items: center;
-  transform: translateX(-50%) rotate(6deg);
-  transform-origin: center top;
-}
-
-.timeline-v2-tag::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  width: 1px;
-  height: 1.1rem;
-  background: rgba(32, 26, 20, 0.28);
-}
-
-.timeline-v2-node.above .timeline-v2-tag::after {
-  bottom: -1.1rem;
-}
-
-.timeline-v2-node.below .timeline-v2-tag::after {
-  top: -1.1rem;
-}
-
-.timeline-v2-tag-name {
-  font-weight: 700;
-  font-size: 0.78rem;
-  text-align: center;
-  line-height: 1.2;
-  white-space: nowrap;
-}
-
-.timeline-v2-tag-date {
-  font-size: 0.64rem;
-  color: var(--ink-soft);
-  text-align: center;
-  white-space: nowrap;
-}
-
-.timeline-v2-node.active .timeline-v2-tag-name {
-  color: var(--maroon);
 }
 
 .education-distinctions {
@@ -1115,7 +1075,7 @@ html {
 /* ---------- projects ---------- */
 .projects-bar {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   animation: project-list-in 0.6s ease both;
 }
@@ -1170,9 +1130,9 @@ html {
 }
 
 .project-chip-icon {
-  width: 2rem;
-  height: 2rem;
-  image-rendering: pixelated;
+  display: block;
+  font-size: 1.9rem;
+  line-height: 1;
 }
 
 .project-chip-title {

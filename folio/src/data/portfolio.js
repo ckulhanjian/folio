@@ -1,13 +1,6 @@
 // Content for the CUR E-Portfolio sections.
 // Sourced from Cara's resume (Aug 2026) and confirmed lab details.
 
-import iconNutrition from '../assets/icon-nutrition.png';
-import iconXray from '../assets/icon-xray.png';
-import iconCells from '../assets/icon-cells.png';
-import iconPlane from '../assets/icon-plane.png';
-import iconSpeech from '../assets/icon-speech.png';
-import iconChili from '../assets/icon-chili.png';
-
 // The "pages" of the folder — hero is the cover underneath everything else,
 // these are the tabbed pages stacked on top of it in scroll order.
 export const pageTabs = [
@@ -216,109 +209,54 @@ export const experience = [
   },
 ];
 
-// The Education page's timeline — professional experience and
-// involvement merged into one chronological (oldest → newest) list.
-// Badge keys match the icons already used elsewhere (see
-// involvementBadges in Coursework.jsx) — shown in the expanded detail
-// panel only; the timeline track itself just uses a plain dot.
+// The Education page's timeline — one entry per academic year, each a
+// short list of everything that happened that year. Ordered oldest
+// (freshman) to newest (senior); Coursework.jsx renders this bottom
+// (old) to top (new) along its diagonal line.
 export const timeline = [
   {
-    id: 'wicse',
-    short: 'WiCSE',
-    heading: 'Women in Computer Science & Engineering (WiCSE)',
-    sub: ['Corporate Mentorship Program (2025)'],
-    date: '2023 – Present',
-    bullets: [
-      "WiCSE is UF's student organization supporting and empowering women in computer science " +
-        'and engineering through mentorship, professional development, and community events.',
-      "I've been an active member since 2023, and in 2025 joined the AMEX x WiCSE Corporate " +
-        'Mentorship Program as a mentee.',
+    id: 'freshman',
+    label: 'Freshman Year',
+    range: '2023 – 2024',
+    events: [
+      'WiCSE Member — Winghacks Committee',
+      'SWE Member',
     ],
-    link: 'https://ufwicse.com/',
   },
   {
-    id: 'swe',
-    short: 'SWE',
-    heading: 'Society of Women Engineers (SWE)',
-    sub: ['Team Tech Project Lead (2025–26)'],
-    date: '2024 – Present',
-    bullets: [
-      'SWE is a national society supporting women in engineering; the UF chapter runs a Team ' +
-        'Tech program that pairs student teams with industry sponsors on real-world projects.',
-      "I joined as a member in 2024 and now lead SWE's Team Tech program as Project Lead.",
+    id: 'sophomore',
+    label: 'Sophomore Year',
+    range: '2024 – 2025',
+    events: [
+      'SWE Team Tech Design Team — Backend Member',
+      'Programming Teaching Assistant',
+      'SWE Council',
+      'Joined Venus A Cappella',
     ],
-    image: 'swe',
-    link: 'https://uf.swe.org/',
   },
   {
-    id: 'venus',
-    short: 'Venus A Cappella',
-    heading: 'Venus A Cappella',
-    sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
-    date: '2024 – Present',
-    bullets: [
-      'Venus A Cappella is a UF student a cappella group built around original arrangements ' +
-        'and live performance.',
-      "I joined in 2024, served as Creative Director in 2025 shaping the group's artistic " +
-        'direction, and now serve as Music Director leading rehearsals and arrangements.',
+    id: 'junior',
+    label: 'Junior Year',
+    range: '2025 – 2026',
+    events: [
+      'Team Tech Chair — Leading Design Team for SWE',
+      'Joined Dream Team Engineering',
+      'Started Neuroscience Research',
+      'Creative Director for Venus',
+      'Arthrex Internship',
+      'Grace Hopper Conference',
     ],
-    link: 'https://www.instagram.com/venusacappella/',
   },
   {
-    id: 'ta',
-    short: 'Teaching Assistant',
-    heading: 'Undergraduate Teaching Assistant',
-    org: 'UF Computer & Information Science & Engineering (CISE)',
-    date: 'August – December 2024',
-    bullets: [
-      "As a TA for one of the department's introductory programming courses, I supported " +
-        'students in weekly discussion sections and helped prepare instructional materials for ' +
-        'a class of 700+ students.',
+    id: 'senior',
+    label: 'Senior Year',
+    range: '2026 – 2027',
+    events: [
+      'IEEE Signal Processing Society',
+      'AI Scholar (GLP-1 & Meth Research)',
+      'Music Director for Venus',
+      'SWE Conference',
     ],
-    link: 'https://www.cise.ufl.edu/',
-  },
-  {
-    id: 'dreamteam',
-    short: 'Dream Team',
-    heading: 'Dream Team Engineering (DTE)',
-    sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
-    date: '2025 – Present',
-    bullets: [
-      'Dream Team Engineering is a UF student organization that builds assistive medical ' +
-        'devices and software for patients at UF Health Shands.',
-      'I joined the Speech & Language Development team in 2025 and now serve as a Research ' +
-        'Liaison connecting the software and research branches.',
-    ],
-    image: 'dreamteam',
-    link: 'https://www.dreamteameng.org/',
-  },
-  {
-    id: 'khoshbouei-lab',
-    short: 'Khoshbouei Lab',
-    heading: 'Undergraduate Researcher',
-    org: 'Khoshbouei Neuroscience Lab',
-    date: 'February 2026 – Present',
-    bullets: [
-      'The Khoshbouei Lab studies dopamine transmission and its role in neurological and ' +
-        'neuropsychiatric disease.',
-      'I joined as an undergraduate researcher in February 2026, working at the intersection ' +
-        'of neuroscience and data science.',
-    ],
-    link: 'http://www.khoshboueilab.org/',
-  },
-  {
-    id: 'arthrex',
-    short: 'Arthrex',
-    heading: 'IT Project Analyst Intern',
-    org: 'Arthrex Inc.',
-    date: 'May – August 2026',
-    bullets: [
-      'Arthrex is a global medical device company specializing in orthopedic surgical products ' +
-        'and technologies.',
-      'I interned on the IT team over the summer, working alongside stakeholders on internal ' +
-        'analytics and operations tooling.',
-    ],
-    link: 'https://www.arthrex.com/',
   },
 ];
 
@@ -330,7 +268,7 @@ const ogImage = (owner, repo) => `https://opengraph.githubassets.com/1/${owner}/
 export const projects = [
   {
     id: 'nutrition-scanner',
-    icon: iconNutrition,
+    icon: '🍎',
     title: 'Nutrition Label Scanner',
     tagline: 'AMEX x WiCSE Corporate Mentorship Program',
     tech: ['Python', 'Gemini Vision', 'Gemini Pro', 'SQLite'],
@@ -348,7 +286,7 @@ export const projects = [
   },
   {
     id: 'covid-xray-ml',
-    icon: iconXray,
+    icon: '🩻',
     title: 'COVID-19 X-Ray Classification',
     tagline: 'CIS4930 — Introduction to Machine Learning, Final Project',
     tech: ['Python', 'Jupyter', 'scikit-learn'],
@@ -365,7 +303,7 @@ export const projects = [
   },
   {
     id: 'cns-candidiasis',
-    icon: iconCells,
+    icon: '🦠',
     title: 'Monocyte Dynamics in CNS Candidiasis',
     tagline: 'Khoshbouei Neuroscience Lab — Undergraduate Research',
     tech: ['Python', 'Matplotlib', 'Seaborn', 'Statistical Analysis'],
@@ -383,7 +321,7 @@ export const projects = [
   },
   {
     id: 'teamtech',
-    icon: iconPlane,
+    icon: '✈️',
     title: 'Team Tech Project 2025–26',
     tagline: 'Society of Women Engineers (SWE) — Team Tech',
     tech: ['JavaScript', 'Node.js', 'Machine Learning'],
@@ -401,7 +339,7 @@ export const projects = [
   },
   {
     id: 'sld',
-    icon: iconSpeech,
+    icon: '💬',
     title: 'Speech Language Development (SLD)',
     tagline: 'UF Dream Team Engineering',
     tech: ['Python', 'NLTK', 'spaCy'],
@@ -419,7 +357,7 @@ export const projects = [
   },
   {
     id: 'spiceitup',
-    icon: iconChili,
+    icon: '📖',
     title: 'SpiceItUp',
     tagline: 'Personal Project',
     tech: ['React Native', 'TypeScript', 'Firebase', 'NativeWind'],
