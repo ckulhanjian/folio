@@ -996,8 +996,68 @@ html {
    downward from there, like a hand-drawn ramp of tour dates. */
 .timeline-diag {
   position: relative;
-  height: 36rem;
+  height: 40rem;
   margin: 1rem 0 2rem;
+}
+
+/* Reserved far-left space for a clicked "big involvement" (a club,
+   design team, or research lab) — present and empty from first load
+   so opening it never shifts the diagram below. */
+.timeline-diag-detail {
+  min-height: 9rem;
+  max-width: 26rem;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-diag-detail-body {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  animation: timeline-detail-fade 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes timeline-detail-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-diag-detail-logo {
+  flex-shrink: 0;
+  width: 2.6rem;
+  height: 2.6rem;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+  border: 1px solid rgba(32, 26, 20, 0.12);
+  padding: 3px;
+}
+
+.timeline-diag-detail-text h4 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.timeline-diag-detail-text p {
+  margin: 0.5rem 0 0;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.timeline-diag-detail-text a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .timeline-diag-line {
@@ -1030,7 +1090,7 @@ html {
 }
 
 .timeline-diag-content {
-  max-width: 22rem;
+  max-width: 20rem;
 }
 
 .timeline-diag-content h4 {
@@ -1061,10 +1121,39 @@ html {
   line-height: 1.35;
 }
 
-.timeline-diag-content li::before {
+.timeline-diag-content li:not(.timeline-diag-event-clickable)::before {
   content: '– ';
   color: var(--maroon);
   font-weight: 700;
+}
+
+/* Bigger, ongoing involvements (clubs, design teams, research) get a
+   bold left-pointing arrow instead of a dash, and are clickable —
+   opening their detail in the reserved box at the far left. */
+.timeline-diag-event-clickable button {
+  display: inline;
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.timeline-diag-event-clickable button::before {
+  content: '◂ ';
+  color: var(--maroon);
+  font-weight: 700;
+}
+
+.timeline-diag-event-clickable button:hover,
+.timeline-diag-event-clickable button[aria-expanded='true'] {
+  color: var(--maroon);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .education-distinctions {
@@ -1131,8 +1220,9 @@ html {
 
 .project-chip-icon {
   display: block;
-  font-size: 1.9rem;
-  line-height: 1;
+  width: 2rem;
+  height: 2rem;
+  image-rendering: pixelated;
 }
 
 .project-chip-title {

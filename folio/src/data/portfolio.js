@@ -1,6 +1,13 @@
 // Content for the CUR E-Portfolio sections.
 // Sourced from Cara's resume (Aug 2026) and confirmed lab details.
 
+import iconNutrition from '../assets/icon-nutrition.png';
+import iconXray from '../assets/icon-xray.png';
+import iconCells from '../assets/icon-cells.png';
+import iconPlane from '../assets/icon-plane.png';
+import iconSpeech from '../assets/icon-speech.png';
+import iconChili from '../assets/icon-chili.png';
+
 // The "pages" of the folder — hero is the cover underneath everything else,
 // these are the tabbed pages stacked on top of it in scroll order.
 export const pageTabs = [
@@ -167,6 +174,16 @@ export const academics = {
         'leading rehearsals and arrangements.',
       link: 'https://www.instagram.com/venusacappella/',
     },
+    {
+      id: 'ieee-sps',
+      title: 'IEEE Signal Processing Society',
+      sub: [],
+      detail:
+        'The IEEE Signal Processing Society is the professional community for research and ' +
+        "practice in signal processing. I'm a member exploring the field alongside my " +
+        'coursework in signals and systems.',
+      link: 'https://signalprocessingsociety.org/',
+    },
   ],
 };
 
@@ -212,15 +229,19 @@ export const experience = [
 // The Education page's timeline — one entry per academic year, each a
 // short list of everything that happened that year. Ordered oldest
 // (freshman) to newest (senior); Coursework.jsx renders this bottom
-// (old) to top (new) along its diagonal line.
+// (old) to top (new) along its diagonal line. An event with an `org`
+// key is a bigger, ongoing involvement (a club, design team, or
+// research lab) — Coursework.jsx makes those clickable, pulling their
+// detail from academics.involvement by id; everything else is just a
+// one-off line.
 export const timeline = [
   {
     id: 'freshman',
     label: 'Freshman Year',
     range: '2023 – 2024',
     events: [
-      'WiCSE Member — Winghacks Committee',
-      'SWE Member',
+      { text: 'WiCSE Member — Winghacks Committee', org: 'wicse' },
+      { text: 'SWE Member', org: 'swe' },
     ],
   },
   {
@@ -228,10 +249,10 @@ export const timeline = [
     label: 'Sophomore Year',
     range: '2024 – 2025',
     events: [
-      'SWE Team Tech Design Team — Backend Member',
-      'Programming Teaching Assistant',
-      'SWE Council',
-      'Joined Venus A Cappella',
+      { text: 'SWE Team Tech Design Team — Backend Member', org: 'swe' },
+      { text: 'Programming Teaching Assistant' },
+      { text: 'SWE Council', org: 'swe' },
+      { text: 'Joined Venus A Cappella', org: 'venus' },
     ],
   },
   {
@@ -239,12 +260,12 @@ export const timeline = [
     label: 'Junior Year',
     range: '2025 – 2026',
     events: [
-      'Team Tech Chair — Leading Design Team for SWE',
-      'Joined Dream Team Engineering',
-      'Started Neuroscience Research',
-      'Creative Director for Venus',
-      'Arthrex Internship',
-      'Grace Hopper Conference',
+      { text: 'Team Tech Chair — Leading Design Team for SWE', org: 'swe' },
+      { text: 'Joined Dream Team Engineering', org: 'dreamteam' },
+      { text: 'Started Neuroscience Research', org: 'khoshbouei-lab' },
+      { text: 'Creative Director for Venus', org: 'venus' },
+      { text: 'Arthrex Internship' },
+      { text: 'Grace Hopper Conference' },
     ],
   },
   {
@@ -252,10 +273,10 @@ export const timeline = [
     label: 'Senior Year',
     range: '2026 – 2027',
     events: [
-      'IEEE Signal Processing Society',
-      'AI Scholar (GLP-1 & Meth Research)',
-      'Music Director for Venus',
-      'SWE Conference',
+      { text: 'IEEE Signal Processing Society', org: 'ieee-sps' },
+      { text: 'AI Scholar (GLP-1 & Meth Research)' },
+      { text: 'Music Director for Venus', org: 'venus' },
+      { text: 'SWE Conference' },
     ],
   },
 ];
@@ -268,7 +289,7 @@ const ogImage = (owner, repo) => `https://opengraph.githubassets.com/1/${owner}/
 export const projects = [
   {
     id: 'nutrition-scanner',
-    icon: '🍎',
+    icon: iconNutrition,
     title: 'Nutrition Label Scanner',
     tagline: 'AMEX x WiCSE Corporate Mentorship Program',
     tech: ['Python', 'Gemini Vision', 'Gemini Pro', 'SQLite'],
@@ -286,7 +307,7 @@ export const projects = [
   },
   {
     id: 'covid-xray-ml',
-    icon: '🩻',
+    icon: iconXray,
     title: 'COVID-19 X-Ray Classification',
     tagline: 'CIS4930 — Introduction to Machine Learning, Final Project',
     tech: ['Python', 'Jupyter', 'scikit-learn'],
@@ -303,7 +324,7 @@ export const projects = [
   },
   {
     id: 'cns-candidiasis',
-    icon: '🦠',
+    icon: iconCells,
     title: 'Monocyte Dynamics in CNS Candidiasis',
     tagline: 'Khoshbouei Neuroscience Lab — Undergraduate Research',
     tech: ['Python', 'Matplotlib', 'Seaborn', 'Statistical Analysis'],
@@ -321,7 +342,7 @@ export const projects = [
   },
   {
     id: 'teamtech',
-    icon: '✈️',
+    icon: iconPlane,
     title: 'Team Tech Project 2025–26',
     tagline: 'Society of Women Engineers (SWE) — Team Tech',
     tech: ['JavaScript', 'Node.js', 'Machine Learning'],
@@ -339,7 +360,7 @@ export const projects = [
   },
   {
     id: 'sld',
-    icon: '💬',
+    icon: iconSpeech,
     title: 'Speech Language Development (SLD)',
     tagline: 'UF Dream Team Engineering',
     tech: ['Python', 'NLTK', 'spaCy'],
@@ -357,7 +378,7 @@ export const projects = [
   },
   {
     id: 'spiceitup',
-    icon: '📖',
+    icon: iconChili,
     title: 'SpiceItUp',
     tagline: 'Personal Project',
     tech: ['React Native', 'TypeScript', 'Firebase', 'NativeWind'],
