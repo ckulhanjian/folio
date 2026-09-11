@@ -46,33 +46,9 @@ function Coursework() {
           </p>
         </Reveal>
 
-        <div className="timeline-diag-detail">
-          {selected && (
-            <div className="timeline-diag-detail-body" key={selected.id}>
-              {involvementBadges[selected.id] && (
-                <img src={involvementBadges[selected.id]} alt="" className="timeline-diag-detail-logo" />
-              )}
-              <div className="timeline-diag-detail-text">
-                <h4>{selected.title}</h4>
-                {selected.sub && selected.sub.length > 0 && (
-                  <ul className="involvement-sub">
-                    {selected.sub.map((sub) => (
-                      <li key={sub}>{sub}</li>
-                    ))}
-                  </ul>
-                )}
-                <p>{selected.detail}</p>
-                {selected.link && (
-                  <a href={selected.link} target="_blank" rel="noreferrer">
-                    Visit Website ↗
-                  </a>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-
-        <Reveal y={20} delay={0.1} className="timeline-diag">
+        <div className="timeline-diag">
+          {/* The connecting line is always visible — only the year
+              points/content reveal (and un-reveal) as you scroll. */}
           <svg className="timeline-diag-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <line
               x1={POINTS[0].left}
@@ -83,11 +59,41 @@ function Coursework() {
             />
           </svg>
 
+          <div className="timeline-diag-detail">
+            {selected && (
+              <div className="timeline-diag-detail-body" key={selected.id}>
+                {involvementBadges[selected.id] && (
+                  <img src={involvementBadges[selected.id]} alt="" className="timeline-diag-detail-logo" />
+                )}
+                <div className="timeline-diag-detail-text">
+                  <h4>{selected.title}</h4>
+                  {selected.sub && selected.sub.length > 0 && (
+                    <ul className="involvement-sub">
+                      {selected.sub.map((sub) => (
+                        <li key={sub}>{sub}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <p>{selected.detail}</p>
+                  {selected.link && (
+                    <a href={selected.link} target="_blank" rel="noreferrer">
+                      Visit Website ↗
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
           {timeline.map((yearItem, index) => {
             const point = POINTS[index];
             return (
-              <div
+              <Reveal
                 key={yearItem.id}
+                as="div"
+                once={false}
+                y={24}
+                delay={index * 0.12}
                 className="timeline-diag-point"
                 style={{ left: `${point.left}%`, top: `${point.top}%` }}
               >
@@ -114,10 +120,10 @@ function Coursework() {
                     )}
                   </ul>
                 </div>
-              </div>
+              </Reveal>
             );
           })}
-        </Reveal>
+        </div>
 
         <Reveal y={20} delay={0.2} className="side-col education-distinctions">
           <h3>Distinctions</h3>

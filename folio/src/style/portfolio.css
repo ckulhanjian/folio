@@ -310,30 +310,34 @@ html {
   max-width: 640px;
 }
 
-/* The About page's candid photo, reused here beside the statement on
-   a flat white card — no rotation, no second photo, square corners. */
+/* A scan of a real Dear Data postcard (Giorgia Lupi), on a flat white
+   card — no rotation, no second photo, square corners. */
 .hero-photos {
   position: relative;
   z-index: 1;
   flex-shrink: 0;
-  width: clamp(210px, 25vw, 340px);
-  aspect-ratio: 4 / 5;
-  background: #fff;
-  border-radius: 0;
-  overflow: hidden;
+  width: clamp(260px, 32vw, 420px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .hero-photo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 95%;
-  height: 95%;
-  transform: translate(-50%, -50%);
+  display: block;
+  width: 100%;
+  aspect-ratio: 2400 / 1560;
   object-fit: contain;
+  background: #fff;
   border-radius: 0;
-  /* Warm color filter — pulls the photo toward orange/amber. */
-  filter: sepia(0.45) saturate(1.6) hue-rotate(-12deg) brightness(1.03) contrast(1.02);
+}
+
+.hero-photo-caption {
+  align-self: flex-end;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
 }
 
 /* Decorative ASCII-art graphics behind the statement — rendered as a
@@ -997,16 +1001,19 @@ html {
 .timeline-diag {
   position: relative;
   height: 40rem;
-  margin: 1rem 0 2rem;
+  margin: 0.25rem 0 2rem;
 }
 
-/* Reserved far-left space for a clicked "big involvement" (a club,
-   design team, or research lab) — present and empty from first load
-   so opening it never shifts the diagram below. */
+/* Floats over the top-left of the diagram — out of normal document
+   flow entirely, so opening a "big involvement" never shifts the
+   diagram, the page, or anything below it, no matter how long its
+   text runs. */
 .timeline-diag-detail {
-  min-height: 9rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
   max-width: 26rem;
-  margin-bottom: 0.5rem;
 }
 
 .timeline-diag-detail-body {

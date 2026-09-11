@@ -1,6 +1,6 @@
 import roseArt from '../../assets/ascii-art-rose.png';
 import vineArt from '../../assets/ascii-art-vine.png';
-import candidPhoto from '../../assets/about-candid-white.png';
+import dearDataPostcard from '../../assets/dear-data-postcard.jpg';
 
 function Hero() {
   return (
@@ -21,9 +21,10 @@ function Hero() {
           </span>
         </div>
 
-        <div className="hero-photos" aria-hidden="true">
-          <img src={candidPhoto} alt="" className="hero-photo" />
-        </div>
+        <figure className="hero-photos">
+          <img src={dearDataPostcard} alt="A hand-drawn Dear Data postcard, week 14: (abstract) productivity" className="hero-photo" />
+          <figcaption className="hero-photo-caption">Dear Data — Giorgia Lupi</figcaption>
+        </figure>
       </div>
     </section>
   );
