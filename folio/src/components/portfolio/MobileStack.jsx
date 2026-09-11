@@ -3,7 +3,6 @@ import { profile, research, academics, skills, experience, projects, resumeFileU
 import headshot from '../../assets/cara-headshot.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
-import ContactStickers from './ContactStickers.jsx';
 import badgeSwe from '../../assets/badge-swe.png';
 import badgeWicse from '../../assets/badge-wicse.svg';
 import badgeSps from '../../assets/badge-sps.png';
@@ -314,7 +313,6 @@ function ContactBody() {
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
         </div>
-        <p className="footer-copy">© {new Date().getFullYear()} {profile.name}</p>
       </div>
     </>
   );
@@ -376,16 +374,10 @@ function MobileStack() {
                 <Body />
               </div>
             </div>
-
-            {card.id === 'contact' && expanded && <ContactStickers />}
           </section>
         );
       })}
-      <div
-        className="mobile-stack-spacer"
-        aria-hidden="true"
-        style={{ background: cards[cards.length - 1].color }}
-      />
+      <p className="mobile-stack-copy">© {new Date().getFullYear()} {profile.name}</p>
     </div>
   );
 }

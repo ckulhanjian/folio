@@ -1911,17 +1911,18 @@ p.footer-copy {
 .mobile-stack {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
 }
 
-/* A trailing spacer (not a card itself) absorbs any leftover space
-   below the stack so the bottom of the screen is never a gap of the
-   bare page background — colored to match the last card so it reads
-   as a seamless continuation. Kept separate from the cards themselves
-   so expanding/collapsing any card (Home included) never resizes it. */
-.mobile-stack-spacer {
-  flex: 1 0 auto;
+/* One copyright line for the whole mobile site, always visible at
+   the very end regardless of which cards are open — not tied to
+   Contact's own expanded content. */
+.mobile-stack-copy {
+  margin: 0;
+  padding: 1.4rem 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  background: var(--paper);
 }
 
 .mobile-card {
