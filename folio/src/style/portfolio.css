@@ -649,9 +649,18 @@ html {
 
 .research-meta {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.5rem;
   margin-bottom: 2.5rem;
+}
+
+/* Desktop only (mobile's narrow card body keeps these stacked) — all
+   three meta boxes share one row, shrinking to fit rather than
+   wrapping the third one down. */
+@media (min-width: 641px) {
+  .research-meta {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .meta-card {
@@ -712,8 +721,8 @@ html {
 .photo-stack-surface {
   position: relative;
   width: 100%;
-  max-width: 330px;
-  height: 242px;
+  max-width: 396px;
+  height: 290px;
   margin-bottom: 2.25rem;
   border: 0;
   background: transparent;

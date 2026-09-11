@@ -21,12 +21,12 @@ const involvementBadges = {
 };
 
 const cards = [
-  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
+  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
   { id: 'projects', label: 'Projects', color: 'var(--sage)', text: 'var(--ink)' },
   { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
   { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
-  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
+  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
 ];
 
 function HomeBody() {
@@ -329,16 +329,19 @@ const bodies = {
   contact: ContactBody,
 };
 
+const FRONT_ID = cards[0].id;
+
 function MobileStack() {
-  // Home starts open as the front-most card in the stack and can never
-  // be collapsed to blank — it's the resting state of the page, not
-  // just another card. Every other card starts collapsed and stacks
-  // up behind it, and opening one swaps Home out as usual.
-  const [expandedId, setExpandedId] = useState('home');
+  // The first card in the list starts open as the front-most card in
+  // the stack and can never be collapsed to blank — it's the resting
+  // state of the page, not just another card. Every other card starts
+  // collapsed and stacks up behind it, and opening one swaps the front
+  // card out as usual.
+  const [expandedId, setExpandedId] = useState(FRONT_ID);
 
   const toggleCard = (id) => {
     setExpandedId((cur) => {
-      if (cur === id) return id === 'home' ? 'home' : null;
+      if (cur === id) return id === FRONT_ID ? FRONT_ID : null;
       return id;
     });
   };
@@ -361,7 +364,7 @@ function MobileStack() {
               aria-expanded={expanded}
             >
               <span className="mobile-card-label">{card.label}</span>
-              {card.id !== 'home' && (
+              {card.id !== FRONT_ID && (
                 <span className="mobile-card-toggle" aria-hidden="true">{expanded ? '–' : '+'}</span>
               )}
             </button>
