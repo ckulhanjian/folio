@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
   --cream: #f6efc9;
@@ -27,6 +27,8 @@
      doesn't have that problem, and it happens off-screen from the
      seam it's meant to cover anyway. */
   background-color: var(--paper);
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Prevent horizontal scroll without breaking position: sticky inside
@@ -308,36 +310,29 @@ html {
   max-width: 640px;
 }
 
-/* Two of the About page's own photos, reused here as a small layered
-   stack beside the statement — the candid shot up front (warmed up
-   with a color filter) with the headshot sitting just behind and
-   slightly offset, not a floating logo. */
+/* The About page's candid photo, reused here beside the statement on
+   a flat white card — no rotation, no second photo, square corners. */
 .hero-photos {
   position: relative;
   z-index: 1;
   flex-shrink: 0;
-  width: clamp(200px, 24vw, 320px);
+  width: clamp(210px, 25vw, 340px);
   aspect-ratio: 4 / 5;
+  background: #fff;
+  border-radius: 0;
+  overflow: hidden;
 }
 
 .hero-photo {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(32, 26, 20, 0.25);
-}
-
-.hero-photo-back {
-  transform: translate(9%, 9%) rotate(4deg);
-  filter: grayscale(0.15) brightness(0.96);
-}
-
-.hero-photo-front {
-  transform: rotate(-3deg);
-  /* Warm color filter — pulls the halftone photo toward orange/amber. */
+  top: 50%;
+  left: 50%;
+  width: 95%;
+  height: 95%;
+  transform: translate(-50%, -50%);
+  object-fit: contain;
+  border-radius: 0;
+  /* Warm color filter — pulls the photo toward orange/amber. */
   filter: sepia(0.45) saturate(1.6) hue-rotate(-12deg) brightness(1.03) contrast(1.02);
 }
 
@@ -438,8 +433,11 @@ html {
    otherwise beat a plain .about-theme rule on specificity and shrink
    this back down to .accent's 1.2em. */
 .about-theme.accent {
-  font-size: clamp(3rem, 7vw, 5.5rem);
-  line-height: 1;
+  font-family: 'Space Mono', 'SFMono-Regular', Consolas, monospace;
+  font-style: normal;
+  font-weight: 600;
+  font-size: clamp(1.9rem, 4.4vw, 3.2rem);
+  line-height: 1.15;
   margin-bottom: 0.75rem;
 }
 
@@ -883,120 +881,42 @@ html {
   font-weight: 700;
 }
 
-/* ---------- education timeline (horizontal) ---------- */
-.timeline-h {
+/* ---------- education timeline (angled, plotted by date) ---------- */
+.timeline-v2 {
   margin-top: 1rem;
   max-width: 100%;
 }
 
-.timeline-h-track {
-  position: relative;
+/* Reserved space above the axis for the clicked detail card — present
+   (and empty) from first load, so opening a card never shifts the
+   axis or the content below it. */
+.timeline-v2-detail {
+  min-height: 15rem;
   display: flex;
-  gap: 0.5rem;
-  overflow-x: auto;
-  padding: 0.6rem 0 1.2rem;
+  align-items: flex-end;
+  margin-bottom: 1.5rem;
 }
 
-.timeline-h-track::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 1.25rem;
-  height: 2px;
-  background: rgba(32, 26, 20, 0.15);
-}
-
-.timeline-h-node {
-  position: relative;
-  z-index: 1;
-  flex: 1 0 130px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: 0;
-  padding: 0 0.4rem;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-}
-
-.timeline-h-dot {
-  width: 1.4rem;
-  height: 1.4rem;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 2px solid var(--maroon);
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.timeline-h-node.active .timeline-h-dot {
-  background: var(--maroon);
-  transform: scale(1.2);
-}
-
-.timeline-h-label {
-  font-weight: 700;
-  font-size: 0.82rem;
-  text-align: center;
-  line-height: 1.25;
-}
-
-.timeline-h-date {
-  font-size: 0.7rem;
-  color: var(--ink-soft);
-  text-align: center;
-}
-
-/* Clicking a node drops a vertical line, with the (background-free)
-   detail text appearing to its right — animated in each time, rather
-   than an outline box around the node itself. */
-.timeline-h-detail {
-  display: flex;
-  margin-top: 0.5rem;
-}
-
-.timeline-h-vline {
-  flex-shrink: 0;
-  width: 2px;
-  align-self: stretch;
-  background: var(--maroon);
-  margin-right: 1.5rem;
-  transform-origin: top;
-  animation: timeline-vline-grow 0.3s ease both;
-}
-
-@keyframes timeline-vline-grow {
-  from {
-    transform: scaleY(0);
-  }
-  to {
-    transform: scaleY(1);
-  }
-}
-
-.timeline-h-detail-body {
+.timeline-v2-detail-body {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
   max-width: 62ch;
-  animation: timeline-detail-fade 0.4s ease 0.12s both;
+  animation: timeline-detail-fade 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @keyframes timeline-detail-fade {
   from {
     opacity: 0;
-    transform: translateX(-10px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
-.timeline-h-detail-logo {
+.timeline-v2-detail-logo {
   flex-shrink: 0;
   width: 2.6rem;
   height: 2.6rem;
@@ -1007,7 +927,7 @@ html {
   padding: 3px;
 }
 
-.timeline-h-detail-text h4 {
+.timeline-v2-detail-text h4 {
   font-family: 'Fraunces', serif;
   font-size: 1.05rem;
   font-weight: 600;
@@ -1020,13 +940,13 @@ html {
   margin-top: 0.15rem;
 }
 
-.timeline-h-detail-text p {
+.timeline-v2-detail-text p {
   margin: 0.6rem 0 0;
   font-size: 0.9rem;
   color: var(--ink);
 }
 
-.timeline-h-detail-text a {
+.timeline-v2-detail-text a {
   display: inline-block;
   margin-top: 0.6rem;
   font-weight: 700;
@@ -1036,6 +956,157 @@ html {
   text-underline-offset: 2px;
 }
 
+/* The axis itself — a plain line spanning freshman → senior year, with
+   year/class markers and each experience plotted at its real start
+   date, alternating above/below at a slight angle like pins stuck
+   into a real timeline. */
+.timeline-v2-axis {
+  position: relative;
+  height: 16rem;
+  margin: 0 0.5rem;
+}
+
+.timeline-v2-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(32, 26, 20, 0.16);
+}
+
+/* Sits well clear of the "below" node tags (which hug the line), so a
+   year marker never collides with a nearby entry's label. */
+.timeline-v2-year {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, 4.4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.timeline-v2-year::before {
+  content: '';
+  position: absolute;
+  top: -4.4rem;
+  left: 50%;
+  width: 1px;
+  height: 4.2rem;
+  background: rgba(32, 26, 20, 0.18);
+}
+
+.timeline-v2-year-num {
+  font-weight: 700;
+  font-size: 0.78rem;
+  color: var(--ink);
+}
+
+.timeline-v2-year-label {
+  font-size: 0.66rem;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timeline-v2-node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* Small, subtle dot on the line itself — just an outline until the
+   entry is the active one, when it fills solid black. */
+.timeline-v2-dot {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-v2-node:hover .timeline-v2-dot {
+  border-color: var(--maroon);
+}
+
+.timeline-v2-node.active .timeline-v2-dot {
+  background: var(--ink);
+  border-color: var(--ink);
+  transform: scale(1.2);
+}
+
+/* The tag (short name + date) sits off to one side of its dot at a
+   slight angle, connected by a thin stem — both rotate together so
+   the whole pin reads as one tilted mark, like a hand-labeled map. */
+.timeline-v2-tag {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  max-width: 9rem;
+  transform-origin: center bottom;
+}
+
+.timeline-v2-node.above .timeline-v2-tag {
+  bottom: 1.6rem;
+  align-items: center;
+  transform: translateX(-50%) rotate(-6deg);
+}
+
+.timeline-v2-node.below .timeline-v2-tag {
+  top: 1.6rem;
+  align-items: center;
+  transform: translateX(-50%) rotate(6deg);
+  transform-origin: center top;
+}
+
+.timeline-v2-tag::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 1.1rem;
+  background: rgba(32, 26, 20, 0.28);
+}
+
+.timeline-v2-node.above .timeline-v2-tag::after {
+  bottom: -1.1rem;
+}
+
+.timeline-v2-node.below .timeline-v2-tag::after {
+  top: -1.1rem;
+}
+
+.timeline-v2-tag-name {
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.timeline-v2-tag-date {
+  font-size: 0.64rem;
+  color: var(--ink-soft);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.timeline-v2-node.active .timeline-v2-tag-name {
+  color: var(--maroon);
+}
+
 .education-distinctions {
   margin-top: 3.5rem;
   max-width: 68ch;
@@ -1043,10 +1114,10 @@ html {
 
 /* ---------- projects ---------- */
 .projects-bar {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  animation: project-list-in 0.35s ease both;
+  animation: project-list-in 0.6s ease both;
 }
 
 /* Distinct in/out animations for opening a project (slides in from
@@ -1077,7 +1148,6 @@ html {
 }
 
 .project-chip {
-  flex: 1 1 260px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -1097,6 +1167,12 @@ html {
   transform: translateY(-4px);
   box-shadow: 0 14px 28px rgba(32, 26, 20, 0.16);
   border-color: var(--maroon);
+}
+
+.project-chip-icon {
+  width: 2rem;
+  height: 2rem;
+  image-rendering: pixelated;
 }
 
 .project-chip-title {
@@ -1135,7 +1211,7 @@ html {
 
 .project-detail {
   max-width: 100%;
-  animation: project-detail-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: project-detail-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .project-back {
@@ -1644,6 +1720,11 @@ p.footer-copy {
     max-width: 220px;
   }
 
+  .projects-bar,
+  .project-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
 }
 
 /* ---------- mobile stack ---------- */
@@ -1655,6 +1736,15 @@ p.footer-copy {
 .mobile-stack {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* The last card (Contact) absorbs any leftover space below the stack
+   so its own background always reaches the bottom of the screen —
+   never the bare page background showing through as a gap. */
+.mobile-card:last-child {
+  flex: 1 0 auto;
 }
 
 .mobile-card {
@@ -1750,6 +1840,11 @@ p.footer-copy {
 .mobile-card-expanded .mobile-card-title {
   opacity: 1;
   transform: translateY(0);
+}
+
+.mobile-card-title-code {
+  font-family: 'Space Mono', 'SFMono-Regular', Consolas, monospace;
+  font-size: clamp(1.05rem, 4.4vw, 1.3rem);
 }
 
 /* Animating to real "auto" height via a 0fr -> 1fr grid track, rather

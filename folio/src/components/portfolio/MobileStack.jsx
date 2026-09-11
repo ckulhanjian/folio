@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { profile, research, academics, skills, experience, projects, resumeFileUrl } from '../../data/portfolio.js';
-import headshotDots from '../../assets/about-headshot-dots.jpg';
+import headshot from '../../assets/cara-headshot.jpg';
 import me from '../../assets/me.png';
 import PhotoStack from './PhotoStack.jsx';
 import ContactStickers from './ContactStickers.jsx';
 import badgeSwe from '../../assets/badge-swe.png';
-import badgeWicse from '../../assets/badge-wicse.png';
+import badgeWicse from '../../assets/badge-wicse.svg';
 import badgeSps from '../../assets/badge-sps.png';
 import badgeDreamTeam from '../../assets/badge-dream-team.png';
 import badgeKhoshbouei from '../../assets/badge-khoshbouei.jpg';
@@ -47,7 +47,7 @@ function HomeBody() {
 function AboutBody() {
   return (
     <>
-      <span className="mobile-card-title">Carpe Diem.</span>
+      <span className="mobile-card-title mobile-card-title-code">print(&quot;hello world&quot;)</span>
       <div className="mobile-card-content">
         <p className="about-story">
           Carpe Diem has always felt less like a motto and more like a method. I came to computer
@@ -65,7 +65,7 @@ function AboutBody() {
         </p>
         <div className="about-photos">
           <figure className="about-photo about-photo-main">
-            <img src={headshotDots} alt={profile.name} />
+            <img src={headshot} alt={profile.name} />
             <figcaption>{profile.name}</figcaption>
           </figure>
         </div>
@@ -160,6 +160,7 @@ function ProjectsBody() {
                 className="project-chip"
                 onClick={() => setSelectedId(project.id)}
               >
+                {project.icon && <img src={project.icon} alt="" className="project-chip-icon" />}
                 <span className="project-chip-title">{project.title}</span>
                 <span className="project-chip-tagline">{project.tagline}</span>
                 <p className="project-chip-summary">{project.summary}</p>
@@ -280,7 +281,7 @@ function ResumeBody() {
                         <p>{item.detail}</p>
                         {item.link && (
                           <a href={item.link} target="_blank" rel="noreferrer">
-                            View on GitHub ↗
+                            Visit Website ↗
                           </a>
                         )}
                       </div>
@@ -329,9 +330,18 @@ const bodies = {
 };
 
 function MobileStack() {
-  // Home starts open as the front-most card in the stack; every other
-  // card starts collapsed and stacks up behind it.
+  // Home starts open as the front-most card in the stack and can never
+  // be collapsed to blank — it's the resting state of the page, not
+  // just another card. Every other card starts collapsed and stacks
+  // up behind it, and opening one swaps Home out as usual.
   const [expandedId, setExpandedId] = useState('home');
+
+  const toggleCard = (id) => {
+    setExpandedId((cur) => {
+      if (cur === id) return id === 'home' ? 'home' : null;
+      return id;
+    });
+  };
 
   return (
     <div className="mobile-stack">
@@ -347,11 +357,13 @@ function MobileStack() {
             <button
               type="button"
               className="mobile-card-header"
-              onClick={() => setExpandedId(expanded ? null : card.id)}
+              onClick={() => toggleCard(card.id)}
               aria-expanded={expanded}
             >
               <span className="mobile-card-label">{card.label}</span>
-              <span className="mobile-card-toggle" aria-hidden="true">{expanded ? '–' : '+'}</span>
+              {card.id !== 'home' && (
+                <span className="mobile-card-toggle" aria-hidden="true">{expanded ? '–' : '+'}</span>
+              )}
             </button>
 
             <div className="mobile-card-body-wrap">

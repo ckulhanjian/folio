@@ -1,5 +1,5 @@
 import { profile } from '../../data/portfolio.js';
-import headshotDots from '../../assets/about-headshot-dots.jpg';
+import headshot from '../../assets/cara-headshot.jpg';
 import Reveal from './Reveal.jsx';
 
 function About() {
@@ -8,7 +8,7 @@ function About() {
       <div className="about-spread section-reveal">
         <Reveal className="about-copy" y={26}>
           <span className="eyebrow">About</span>
-          <h2 className="about-theme accent">Carpe Diem.</h2>
+          <h2 className="about-theme accent">print(&quot;hello world&quot;)</h2>
           <p className="about-story">
             Carpe Diem has always felt less like a motto and more like a method. I came to
             computer science through curiosity — for how systems work, how people use them,
@@ -29,7 +29,7 @@ function About() {
 
         <Reveal className="about-photos" y={26} delay={0.15}>
           <figure className="about-photo about-photo-main">
-            <img src={headshotDots} alt={profile.name} />
+            <img src={headshot} alt={profile.name} />
             <figcaption>{profile.name}</figcaption>
           </figure>
         </Reveal>

@@ -12,6 +12,7 @@ function ProjectsBar({ onSelect }) {
           className="project-chip"
           onClick={() => onSelect(project.id)}
         >
+          {project.icon && <img src={project.icon} alt="" className="project-chip-icon" />}
           <span className="project-chip-title">{project.title}</span>
           <span className="project-chip-tagline">{project.tagline}</span>
           <p className="project-chip-summary">{project.summary}</p>

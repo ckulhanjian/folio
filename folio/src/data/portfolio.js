@@ -1,6 +1,13 @@
 // Content for the CUR E-Portfolio sections.
 // Sourced from Cara's resume (Aug 2026) and confirmed lab details.
 
+import iconNutrition from '../assets/icon-nutrition.png';
+import iconXray from '../assets/icon-xray.png';
+import iconCells from '../assets/icon-cells.png';
+import iconPlane from '../assets/icon-plane.png';
+import iconSpeech from '../assets/icon-speech.png';
+import iconChili from '../assets/icon-chili.png';
+
 // The "pages" of the folder — hero is the cover underneath everything else,
 // these are the tabbed pages stacked on top of it in scroll order.
 export const pageTabs = [
@@ -116,48 +123,56 @@ export const academics = {
       title: 'Society of Women Engineers (SWE)',
       sub: ['Team Tech Project Lead (2025–26)'],
       detail:
-        'Led multi-disciplinary development in partnership with CACI to build a machine ' +
-        'learning web application that optimizes flight paths between airports, returning ' +
-        "the optimal route with >80% accuracy in under 1 minute — now leads SWE's Team " +
-        'Tech projects as Project Lead.',
+        'SWE is a national society supporting women in engineering; the UF chapter runs a ' +
+        'Team Tech program that pairs student teams with industry sponsors on real-world ' +
+        "projects. I joined as a member in 2024 and now lead SWE's Team Tech program as " +
+        'Project Lead.',
       image: 'swe',
+      link: 'https://uf.swe.org/',
     },
     {
       id: 'wicse',
       title: 'Women in Computer Science & Engineering (WiCSE)',
-      sub: ['Corporate Mentorship & Project (2025)'],
+      sub: ['Corporate Mentorship Program (2025)'],
       detail:
-        'Building a web application through the AMEX x WiCSE Corporate Mentorship Program ' +
-        'that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ' +
-        'ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
+        "WiCSE is UF's student organization supporting and empowering women in computer " +
+        "science and engineering through mentorship, professional development, and " +
+        "community events. I've been an active member since 2023, and in 2025 joined the " +
+        'AMEX x WiCSE Corporate Mentorship Program as a mentee.',
+      link: 'https://ufwicse.com/',
     },
     {
       id: 'khoshbouei-lab',
       title: 'Khoshbouei Research Lab',
       sub: [],
       detail:
-        'Processes 800,000+ patient records from the All of Us database to build a ' +
-        'predictive relapse model, and creates heatmaps and regression analyses of brain ' +
-        'imaging data to map regional concentrations.',
+        'The Khoshbouei Lab studies dopamine transmission and its role in neurological and ' +
+        'neuropsychiatric disease. I joined as an undergraduate researcher in February 2026, ' +
+        'working at the intersection of neuroscience and data science.',
+      link: 'http://www.khoshboueilab.org/',
     },
     {
       id: 'dreamteam',
       title: 'Dream Team Engineering (DTE)',
       sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
       detail:
-        'Developed Python scripts using NLTK and spaCy to parse child speech transcripts ' +
-        'and automatically apply SALT speech formatting, helping researchers more ' +
-        'efficiently identify child speech disorders.',
+        'Dream Team Engineering is a UF student organization that builds assistive medical ' +
+        'devices and software for patients at UF Health Shands. I joined the Speech & ' +
+        'Language Development team in 2025 and now serve as a Research Liaison connecting ' +
+        'the software and research branches.',
       image: 'dreamteam',
+      link: 'https://www.dreamteameng.org/',
     },
     {
       id: 'venus',
       title: 'Venus A Cappella',
       sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
       detail:
-        "Served as Creative Director in 2025, shaping the group's artistic direction and " +
-        'performance repertoire, and now leads as Music Director, directing arrangements ' +
-        'and rehearsals.',
+        'Venus A Cappella is a UF student a cappella group built around original ' +
+        "arrangements and live performance. I joined in 2024, served as Creative Director " +
+        "in 2025 shaping the group's artistic direction, and now serve as Music Director " +
+        'leading rehearsals and arrangements.',
+      link: 'https://www.instagram.com/venusacappella/',
     },
   ],
 };
@@ -211,11 +226,15 @@ export const timeline = [
     id: 'wicse',
     short: 'WiCSE',
     heading: 'Women in Computer Science & Engineering (WiCSE)',
-    sub: ['Corporate Mentorship & Project (2025)'],
+    sub: ['Corporate Mentorship Program (2025)'],
     date: '2023 – Present',
     bullets: [
-      'Building a web application through the AMEX x WiCSE Corporate Mentorship Program that analyzes nutrition labels using Gemini Vision for OCR and Gemini Pro for ingredient analysis, storing results in SQLite for fast lookups across 6 dietary filters.',
+      "WiCSE is UF's student organization supporting and empowering women in computer science " +
+        'and engineering through mentorship, professional development, and community events.',
+      "I've been an active member since 2023, and in 2025 joined the AMEX x WiCSE Corporate " +
+        'Mentorship Program as a mentee.',
     ],
+    link: 'https://ufwicse.com/',
   },
   {
     id: 'swe',
@@ -224,9 +243,12 @@ export const timeline = [
     sub: ['Team Tech Project Lead (2025–26)'],
     date: '2024 – Present',
     bullets: [
-      "Led multi-disciplinary development in partnership with CACI to build a machine learning web application that optimizes flight paths between airports, returning the optimal route with >80% accuracy in under 1 minute — now leads SWE's Team Tech projects as Project Lead.",
+      'SWE is a national society supporting women in engineering; the UF chapter runs a Team ' +
+        'Tech program that pairs student teams with industry sponsors on real-world projects.',
+      "I joined as a member in 2024 and now lead SWE's Team Tech program as Project Lead.",
     ],
     image: 'swe',
+    link: 'https://uf.swe.org/',
   },
   {
     id: 'venus',
@@ -235,19 +257,25 @@ export const timeline = [
     sub: ['Creative Director (2025)', 'Music Director (2026–Present)'],
     date: '2024 – Present',
     bullets: [
-      "Served as Creative Director in 2025, shaping the group's artistic direction and performance repertoire, and now leads as Music Director, directing arrangements and rehearsals.",
+      'Venus A Cappella is a UF student a cappella group built around original arrangements ' +
+        'and live performance.',
+      "I joined in 2024, served as Creative Director in 2025 shaping the group's artistic " +
+        'direction, and now serve as Music Director leading rehearsals and arrangements.',
     ],
+    link: 'https://www.instagram.com/venusacappella/',
   },
   {
     id: 'ta',
     short: 'Teaching Assistant',
     heading: 'Undergraduate Teaching Assistant',
-    org: 'UF Computer Science Department',
+    org: 'UF Computer & Information Science & Engineering (CISE)',
     date: 'August – December 2024',
     bullets: [
-      'Instructed and mentored 30+ students in weekly discussion sessions, strengthening their understanding of procedural and object-oriented programming through hands-on debugging support.',
-      'Created supplemental instructional materials — coding review sheets and practice problems — to prepare 700+ students for exams and reinforce core concepts.',
+      "As a TA for one of the department's introductory programming courses, I supported " +
+        'students in weekly discussion sections and helped prepare instructional materials for ' +
+        'a class of 700+ students.',
     ],
+    link: 'https://www.cise.ufl.edu/',
   },
   {
     id: 'dreamteam',
@@ -256,19 +284,27 @@ export const timeline = [
     sub: ['Speech & Language Development (2025–26)', 'Research Liaison (2026–Present)'],
     date: '2025 – Present',
     bullets: [
-      'Developed Python scripts using NLTK and spaCy to parse child speech transcripts and automatically apply SALT speech formatting, helping researchers more efficiently identify child speech disorders.',
+      'Dream Team Engineering is a UF student organization that builds assistive medical ' +
+        'devices and software for patients at UF Health Shands.',
+      'I joined the Speech & Language Development team in 2025 and now serve as a Research ' +
+        'Liaison connecting the software and research branches.',
     ],
     image: 'dreamteam',
+    link: 'https://www.dreamteameng.org/',
   },
   {
     id: 'khoshbouei-lab',
     short: 'Khoshbouei Lab',
     heading: 'Undergraduate Researcher',
-    org: 'Khoshbouei Research Lab',
+    org: 'Khoshbouei Neuroscience Lab',
     date: 'February 2026 – Present',
     bullets: [
-      'Processes 800,000+ patient records from the All of Us database to build a predictive relapse model, and creates heatmaps and regression analyses of brain imaging data to map regional concentrations.',
+      'The Khoshbouei Lab studies dopamine transmission and its role in neurological and ' +
+        'neuropsychiatric disease.',
+      'I joined as an undergraduate researcher in February 2026, working at the intersection ' +
+        'of neuroscience and data science.',
     ],
+    link: 'http://www.khoshboueilab.org/',
   },
   {
     id: 'arthrex',
@@ -277,9 +313,12 @@ export const timeline = [
     org: 'Arthrex Inc.',
     date: 'May – August 2026',
     bullets: [
-      'Drove end-to-end development of a SAP analytics dashboard, gathering requirements from stakeholders and prototyping a 7-report Figma interface.',
-      'Developed a custom Power Apps solution to streamline registration and logistics for a recurring company event.',
+      'Arthrex is a global medical device company specializing in orthopedic surgical products ' +
+        'and technologies.',
+      'I interned on the IT team over the summer, working alongside stakeholders on internal ' +
+        'analytics and operations tooling.',
     ],
+    link: 'https://www.arthrex.com/',
   },
 ];
 
@@ -291,6 +330,7 @@ const ogImage = (owner, repo) => `https://opengraph.githubassets.com/1/${owner}/
 export const projects = [
   {
     id: 'nutrition-scanner',
+    icon: iconNutrition,
     title: 'Nutrition Label Scanner',
     tagline: 'AMEX x WiCSE Corporate Mentorship Program',
     tech: ['Python', 'Gemini Vision', 'Gemini Pro', 'SQLite'],
@@ -308,6 +348,7 @@ export const projects = [
   },
   {
     id: 'covid-xray-ml',
+    icon: iconXray,
     title: 'COVID-19 X-Ray Classification',
     tagline: 'CIS4930 — Introduction to Machine Learning, Final Project',
     tech: ['Python', 'Jupyter', 'scikit-learn'],
@@ -324,6 +365,7 @@ export const projects = [
   },
   {
     id: 'cns-candidiasis',
+    icon: iconCells,
     title: 'Monocyte Dynamics in CNS Candidiasis',
     tagline: 'Khoshbouei Neuroscience Lab — Undergraduate Research',
     tech: ['Python', 'Matplotlib', 'Seaborn', 'Statistical Analysis'],
@@ -341,6 +383,7 @@ export const projects = [
   },
   {
     id: 'teamtech',
+    icon: iconPlane,
     title: 'Team Tech Project 2025–26',
     tagline: 'Society of Women Engineers (SWE) — Team Tech',
     tech: ['JavaScript', 'Node.js', 'Machine Learning'],
@@ -358,6 +401,7 @@ export const projects = [
   },
   {
     id: 'sld',
+    icon: iconSpeech,
     title: 'Speech Language Development (SLD)',
     tagline: 'UF Dream Team Engineering',
     tech: ['Python', 'NLTK', 'spaCy'],
@@ -375,6 +419,7 @@ export const projects = [
   },
   {
     id: 'spiceitup',
+    icon: iconChili,
     title: 'SpiceItUp',
     tagline: 'Personal Project',
     tech: ['React Native', 'TypeScript', 'Firebase', 'NativeWind'],

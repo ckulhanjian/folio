@@ -1,7 +1,6 @@
 import roseArt from '../../assets/ascii-art-rose.png';
 import vineArt from '../../assets/ascii-art-vine.png';
-import candidPhoto from '../../assets/about-candid-dots.jpg';
-import headshotPhoto from '../../assets/about-headshot-dots.jpg';
+import candidPhoto from '../../assets/about-candid-white.png';
 
 function Hero() {
   return (
@@ -23,8 +22,7 @@ function Hero() {
         </div>
 
         <div className="hero-photos" aria-hidden="true">
-          <img src={headshotPhoto} alt="" className="hero-photo hero-photo-back" />
-          <img src={candidPhoto} alt="" className="hero-photo hero-photo-front" />
+          <img src={candidPhoto} alt="" className="hero-photo" />
         </div>
       </div>
     </section>
