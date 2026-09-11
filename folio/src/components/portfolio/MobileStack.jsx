@@ -21,12 +21,12 @@ const involvementBadges = {
 };
 
 const cards = [
-  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
+  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
   { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
   { id: 'projects', label: 'Projects', color: 'var(--sage)', text: 'var(--ink)' },
   { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
   { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
-  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
+  { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
 ];
 
 function HomeBody() {
@@ -235,23 +235,6 @@ function ResumeBody() {
 
         <div className="coursework-grid">
           <div className="side-col">
-            <h3>Distinctions</h3>
-            <ul className="plain-list">
-              {academics.distinctions.map((item) => (
-                <li key={item.text}>
-                  {item.url ? (
-                    <a href={item.url} target="_blank" rel="noreferrer">
-                      {item.text}
-                    </a>
-                  ) : (
-                    item.text
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="side-col">
             <h3>Involvement</h3>
             <ul className="plain-list involvement-list">
               {academics.involvement.map((item) => {
@@ -289,6 +272,23 @@ function ResumeBody() {
                   </li>
                 );
               })}
+            </ul>
+          </div>
+
+          <div className="side-col">
+            <h3>Distinctions</h3>
+            <ul className="plain-list">
+              {academics.distinctions.map((item) => (
+                <li key={item.text}>
+                  {item.url ? (
+                    <a href={item.url} target="_blank" rel="noreferrer">
+                      {item.text}
+                    </a>
+                  ) : (
+                    item.text
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
