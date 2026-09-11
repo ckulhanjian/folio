@@ -21,12 +21,12 @@ const involvementBadges = {
 };
 
 const cards = [
-  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
-  { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
-  { id: 'projects', label: 'Projects', color: 'var(--sage)', text: 'var(--ink)' },
-  { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
-  { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
   { id: 'contact', label: 'Contact', color: 'var(--ink)', text: 'var(--paper)' },
+  { id: 'resume', label: 'Resume', color: 'var(--babyblue)', text: 'var(--ink)' },
+  { id: 'research', label: 'Research', color: 'var(--pink)', text: 'var(--ink)' },
+  { id: 'projects', label: 'Projects', color: 'var(--sage)', text: 'var(--ink)' },
+  { id: 'about', label: 'About', color: 'var(--paper)', text: 'var(--ink)' },
+  { id: 'home', label: 'Home', color: 'var(--cream)', text: 'var(--ink)' },
 ];
 
 function HomeBody() {

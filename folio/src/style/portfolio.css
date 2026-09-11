@@ -33,9 +33,18 @@
 
 /* Prevent horizontal scroll without breaking position: sticky inside
    .portfolio (overflow-x on that element would turn it into a scroll
-   container). */
+   container). Background-color here (not just on .portfolio) is a
+   safety net for mobile Safari, where the dynamic toolbar showing or
+   hiding can leave the page's computed 100dvh height a beat behind
+   the real visible viewport — any sliver that exposes reads as this
+   warm paper tone instead of the browser's default white. */
 html {
   overflow-x: hidden;
+  background-color: var(--paper);
+}
+
+body {
+  background-color: var(--paper);
 }
 
 .portfolio * {
