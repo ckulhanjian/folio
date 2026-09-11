@@ -652,7 +652,6 @@ body {
 
 .research-title {
   font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-  max-width: 34ch;
   margin-bottom: 4rem;
 }
 
@@ -709,9 +708,6 @@ body {
   flex-direction: column;
 }
 
-.research-body {
-  margin-top: 2.5rem;
-}
 
 /* Stretches to match the text column's full height (title through
    links) so the photo stack can center itself within it. */
