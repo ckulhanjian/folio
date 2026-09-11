@@ -9,6 +9,7 @@ import badgeSps from '../../assets/badge-sps.png';
 import badgeDreamTeam from '../../assets/badge-dream-team.png';
 import badgeKhoshbouei from '../../assets/badge-khoshbouei.jpg';
 import badgeVenus from '../../assets/badge-venus.jpg';
+import linkedinQr from '../../assets/linkedin-qr.jpg';
 
 const involvementBadges = {
   swe: badgeSwe,
@@ -313,6 +314,15 @@ function ContactBody() {
           <a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
           <a href={profile.github} target="_blank" rel="noreferrer">GitHub</a>
         </div>
+        <a
+          href={profile.linkedin}
+          target="_blank"
+          rel="noreferrer"
+          className="contact-qr-link"
+        >
+          <img src={linkedinQr} alt="Scan to open my LinkedIn profile" className="contact-qr" />
+          <span>Scan to connect on LinkedIn</span>
+        </a>
       </div>
     </>
   );

@@ -1715,6 +1715,32 @@ body {
   color: var(--ink);
 }
 
+.contact-qr-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+  text-decoration: none;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.contact-qr-link:hover {
+  opacity: 1;
+}
+
+.contact-qr {
+  width: 132px;
+  height: 132px;
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.5rem;
+}
+
 .footer-inline-link {
   text-decoration: underline;
   text-underline-offset: 2px;
