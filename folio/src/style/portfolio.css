@@ -1203,7 +1203,7 @@ body {
    up through to the end of the line, since every involvement here is
    still ongoing. */
 .timeline-diag-duration {
-  stroke: var(--maroon) !important;
+  stroke: #e84f8a !important;
   stroke-width: 4 !important;
   animation: timeline-duration-in 0.4s ease both;
 }
