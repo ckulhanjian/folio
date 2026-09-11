@@ -9,6 +9,7 @@ import Research from './portfolio/Research.jsx';
 import Resume from './portfolio/Resume.jsx';
 import PortfolioFooter from './portfolio/PortfolioFooter.jsx';
 import MobileStack from './portfolio/MobileStack.jsx';
+import RainToggle from './portfolio/RainToggle.jsx';
 import useIsMobile from '../hooks/useIsMobile.js';
 
 // The color each full-screen section reveals — used to keep the
@@ -84,6 +85,7 @@ function PortfolioHome() {
   if (isMobile) {
     return (
       <div className="portfolio">
+        <RainToggle />
         <MobileStack />
       </div>
     );
@@ -91,6 +93,7 @@ function PortfolioHome() {
 
   return (
     <div className="portfolio">
+      <RainToggle />
       <Nav />
       <Hero />
       <About />

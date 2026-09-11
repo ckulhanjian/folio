@@ -29,11 +29,38 @@ const POINTS = [
   { left: 74, top: 10 },
 ];
 
-function Coursework() {
-  const [selectedOrgId, setSelectedOrgId] = useState(null);
-  const selected = academics.involvement.find((item) => item.id === selectedOrgId);
+// The line itself runs past both ends of the plotted points — a tail
+// trailing off the bottom-left (the past, before freshman year) and
+// an arrowhead pointing past the top-right (still going, beyond
+// senior year) — like an arrow charting time moving forward.
+const LINE_START = { left: -3, top: 84 };
+const LINE_END = { left: 84, top: 3 };
 
-  const toggleOrg = (id) => setSelectedOrgId((cur) => (cur === id ? null : id));
+// Every involvement here is still ongoing (the resume language is all
+// present tense — "now leads", "I'm a member", etc.), so each one's
+// colored duration bar always runs from the year it first appears
+// through to the end of the line, never stopping short.
+function firstYearIndexForOrg(orgId) {
+  return timeline.findIndex((year) => year.events.some((event) => event.org === orgId));
+}
+
+function Coursework() {
+  // Tracks which single event triggered the open detail (not just
+  // which org) — so a second, different event that happens to link to
+  // the same org does nothing, and only re-clicking that exact event
+  // closes it back up.
+  const [active, setActive] = useState(null); // { key, org } | null
+  const selectedOrgId = active?.org ?? null;
+  const selected = academics.involvement.find((item) => item.id === selectedOrgId);
+  const durationStartIndex = selectedOrgId ? firstYearIndexForOrg(selectedOrgId) : -1;
+
+  const handleEventClick = (eventKey, org) => {
+    setActive((cur) => {
+      if (cur && cur.key === eventKey) return null;
+      if (cur && cur.org === org) return cur;
+      return { key: eventKey, org };
+    });
+  };
 
   return (
     <section id="education" className="section coursework stack-section">
@@ -51,13 +78,26 @@ function Coursework() {
               points/content reveal (and un-reveal) as you scroll. */}
           <svg className="timeline-diag-line" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <line
-              x1={POINTS[0].left}
-              y1={POINTS[0].top}
-              x2={POINTS[POINTS.length - 1].left}
-              y2={POINTS[POINTS.length - 1].top}
+              x1={LINE_START.left}
+              y1={LINE_START.top}
+              x2={LINE_END.left}
+              y2={LINE_END.top}
               vectorEffect="non-scaling-stroke"
             />
+            {durationStartIndex >= 0 && (
+              <line
+                key={selectedOrgId}
+                className="timeline-diag-duration"
+                x1={POINTS[durationStartIndex].left}
+                y1={POINTS[durationStartIndex].top}
+                x2={LINE_END.left}
+                y2={LINE_END.top}
+                vectorEffect="non-scaling-stroke"
+              />
+            )}
           </svg>
+
+          <span className="timeline-diag-arrowhead" aria-hidden="true" />
 
           <div className="timeline-diag-detail">
             {selected && (
@@ -103,21 +143,22 @@ function Coursework() {
                     {yearItem.label} <span className="timeline-diag-range">({yearItem.range})</span>
                   </h4>
                   <ul>
-                    {yearItem.events.map((event) =>
-                      event.org ? (
+                    {yearItem.events.map((event) => {
+                      const eventKey = `${yearItem.id}:${event.text}`;
+                      return event.org ? (
                         <li key={event.text} className="timeline-diag-event-clickable">
                           <button
                             type="button"
-                            onClick={() => toggleOrg(event.org)}
-                            aria-expanded={selectedOrgId === event.org}
+                            onClick={() => handleEventClick(eventKey, event.org)}
+                            aria-expanded={active?.key === eventKey}
                           >
                             {event.text}
                           </button>
                         </li>
                       ) : (
                         <li key={event.text}>{event.text}</li>
-                      )
-                    )}
+                      );
+                    })}
                   </ul>
                 </div>
               </Reveal>
