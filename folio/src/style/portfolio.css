@@ -40,11 +40,11 @@
    warm paper tone instead of the browser's default white. */
 html {
   overflow-x: hidden;
-  background-color: var(--paper);
+  background-color: var(--cream);
 }
 
 body {
-  background-color: var(--paper);
+  background-color: var(--cream);
 }
 
 .portfolio * {
@@ -1829,6 +1829,14 @@ p.footer-copy {
     -webkit-tap-highlight-color: transparent;
   }
 
+  /* .portfolio's own min-height:100dvh (set for the desktop scroll
+     page) still applies here and can outstretch the mobile stack's
+     actual content — match Home's cream instead of the desktop
+     default so that sliver is never a different, whiter tone. */
+  .portfolio {
+    background-color: var(--cream);
+  }
+
   .stack-section {
     border-radius: 26px 26px 0 0;
     box-shadow: 0 -16px 32px -18px rgba(32, 26, 20, 0.3);
@@ -1922,7 +1930,7 @@ p.footer-copy {
   text-align: center;
   font-size: 0.75rem;
   color: var(--ink-soft);
-  background: var(--paper);
+  background: var(--cream);
 }
 
 .mobile-card {
