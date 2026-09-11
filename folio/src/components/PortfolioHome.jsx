@@ -85,7 +85,6 @@ function PortfolioHome() {
   if (isMobile) {
     return (
       <div className="portfolio">
-        <RainToggle />
         <MobileStack />
       </div>
     );
