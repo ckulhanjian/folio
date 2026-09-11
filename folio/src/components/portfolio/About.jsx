@@ -8,7 +8,7 @@ function About() {
       <div className="about-spread section-reveal">
         <Reveal className="about-copy" y={26}>
           <span className="eyebrow">About</span>
-          <h2 className="about-theme accent">print(&quot;hello world&quot;)</h2>
+          <h2 className="about-theme accent">print(&quot;carpe diem&quot;)</h2>
           <p className="about-story">
             Carpe Diem has always felt less like a motto and more like a method. I came to
             computer science through curiosity — for how systems work, how people use them,

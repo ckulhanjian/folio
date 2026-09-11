@@ -46,7 +46,7 @@ function HomeBody() {
 function AboutBody() {
   return (
     <>
-      <span className="mobile-card-title mobile-card-title-code">print(&quot;hello world&quot;)</span>
+      <span className="mobile-card-title mobile-card-title-code">print(&quot;carpe diem&quot;)</span>
       <div className="mobile-card-content">
         <p className="about-story">
           Carpe Diem has always felt less like a motto and more like a method. I came to computer

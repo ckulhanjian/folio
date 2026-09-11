@@ -668,7 +668,11 @@ body {
    wrapping the third one down. */
 @media (min-width: 641px) {
   .research-meta {
-    grid-template-columns: repeat(3, 1fr);
+    /* minmax(0, 1fr), not a bare 1fr — a 1fr track still respects its
+       content's min-content width by default, so a long unbroken word
+       could make one box wider than an exact third; minmax(0, 1fr)
+       removes that floor and guarantees equal thirds. */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
