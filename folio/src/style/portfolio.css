@@ -325,10 +325,77 @@ html {
   gap: 0.5rem;
 }
 
-.hero-photo-frame {
+.hero-photo-flip {
+  display: block;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 1400px;
+}
+
+.hero-photo-flip-inner {
   position: relative;
   width: 100%;
   aspect-ratio: 2400 / 1560;
+  transform-style: preserve-3d;
+  transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-photo-flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.hero-photo-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: #fff;
+}
+
+.hero-photo-back {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(32, 26, 20, 0.14);
+  padding: 1.4rem 4.2rem 1.4rem 1.6rem;
+}
+
+.hero-photo-back::before {
+  /* The postcard's center divider line. */
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: 3.2rem;
+  width: 1px;
+  background: rgba(32, 26, 20, 0.18);
+}
+
+.hero-photo-back p {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: clamp(0.8rem, 1.7vw, 1rem);
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.hero-photo-back-stamp {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 1.8rem;
+  height: 2.2rem;
+  border: 1.5px dashed rgba(32, 26, 20, 0.3);
+}
+
+.hero-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
   background: #fff;
 }
 
@@ -608,11 +675,28 @@ html {
   font-size: 0.98rem;
 }
 
-.research-grid {
+.research-layout {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 2.5rem;
-  align-items: start;
+  align-items: stretch;
+}
+
+.research-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.research-body {
+  margin-top: 2.5rem;
+}
+
+/* Stretches to match the text column's full height (title through
+   links) so the photo stack can center itself within it. */
+.research-photos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* photo stack — polaroids fanned like they're piled on a table */
@@ -628,8 +712,8 @@ html {
 .photo-stack-surface {
   position: relative;
   width: 100%;
-  max-width: 300px;
-  height: 220px;
+  max-width: 330px;
+  height: 242px;
   margin-bottom: 2.25rem;
   border: 0;
   background: transparent;
@@ -1694,7 +1778,7 @@ p.footer-copy {
 /* ---------- responsive ---------- */
 @media (max-width: 860px) {
   .about-spread,
-  .research-grid,
+  .research-layout,
   .coursework-grid {
     grid-template-columns: 1fr;
   }

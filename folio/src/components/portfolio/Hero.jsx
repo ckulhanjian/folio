@@ -17,8 +17,14 @@ const POSTCARDS = [
 // portfolio.css) so the postcard rotates in time with the graphics.
 const ROTATE_MS = 7000;
 
+const BACK_MESSAGE =
+  'Dear Data has always fascinated me. The way 2 designers quantified ' +
+  'every day life in a way that never felt about the numbers, but about ' +
+  'communication and art.';
+
 function Hero() {
   const [index, setIndex] = useState(0);
+  const [flipped, setFlipped] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -46,16 +52,31 @@ function Hero() {
         </div>
 
         <figure className="hero-photos">
-          <div className="hero-photo-frame">
-            {POSTCARDS.map((card, i) => (
-              <img
-                key={card.src}
-                src={card.src}
-                alt={i === index ? card.alt : ''}
-                className={`hero-photo${i === index ? ' hero-photo-active' : ''}`}
-              />
-            ))}
-          </div>
+          <button
+            type="button"
+            className="hero-photo-flip"
+            onClick={() => setFlipped((f) => !f)}
+            aria-label={flipped ? 'Flip the postcard back over' : 'Flip the postcard over'}
+          >
+            <div className={`hero-photo-flip-inner${flipped ? ' is-flipped' : ''}`}>
+              <div className="hero-photo-face hero-photo-front">
+                <div className="hero-photo-frame">
+                  {POSTCARDS.map((card, i) => (
+                    <img
+                      key={card.src}
+                      src={card.src}
+                      alt={i === index ? card.alt : ''}
+                      className={`hero-photo${i === index ? ' hero-photo-active' : ''}`}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="hero-photo-face hero-photo-back">
+                <p>{BACK_MESSAGE}</p>
+                <span className="hero-photo-back-stamp" aria-hidden="true" />
+              </div>
+            </div>
+          </button>
           <figcaption className="hero-photo-caption">Dear Data — Giorgia Lupi</figcaption>
         </figure>
       </div>

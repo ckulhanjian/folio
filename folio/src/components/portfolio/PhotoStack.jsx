@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
-// Three real figures from the GLP-1/meth cohort analysis, restyled in
-// the site's own palette instead of matplotlib's default colors.
+// Real figures from the GLP-1/meth cohort analysis, restyled in the
+// site's own palette instead of matplotlib's default colors.
 
 function CohortHeatmap() {
   const cells = [
@@ -23,45 +23,6 @@ function CohortHeatmap() {
           >
             <span className="chart-heatmap-value">{cell.value.toLocaleString()}</span>
             <span className="chart-heatmap-label">{cell.label}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function StimulantFrequencyChart() {
-  const segments = [
-    { key: 'Daily', color: '#6e0f13' },
-    { key: 'Weekly', color: '#a8453a' },
-    { key: 'Monthly', color: '#c97a6c' },
-    { key: 'Once or twice', color: '#e8b3ab' },
-    { key: 'Never', color: '#f6e0dc' },
-  ];
-  const bars = [
-    { label: 'Meth Only', n: 828, values: [11.7, 5.3, 5.9, 14, 63] },
-    { label: 'Meth + GLP-1', n: 45, values: [2.2, 8.9, 0, 0, 88.9] },
-  ];
-  return (
-    <div className="chart-card">
-      <span className="chart-card-title">Stimulant Use Frequency (Past 3 Months)</span>
-      <div className="chart-stackbars">
-        {bars.map((bar) => (
-          <div key={bar.label} className="chart-stackbar-col">
-            <div className="chart-stackbar">
-              {segments.map((seg, i) => (
-                <div
-                  key={seg.key}
-                  className="chart-stackbar-seg"
-                  style={{ height: `${bar.values[i]}%`, background: seg.color }}
-                  title={`${seg.key}: ${bar.values[i]}%`}
-                />
-              ))}
-            </div>
-            <span className="chart-stackbar-caption">
-              {bar.label}
-              <br />n={bar.n}
-            </span>
           </div>
         ))}
       </div>
@@ -100,7 +61,6 @@ function DrugUsageChart() {
 
 const CARDS = [
   { id: 'cohort', bg: 'var(--babyblue)', Render: CohortHeatmap },
-  { id: 'stimulant', bg: 'var(--pink)', Render: StimulantFrequencyChart },
   { id: 'drugs', bg: 'var(--cream)', Render: DrugUsageChart },
 ];
 
@@ -122,11 +82,6 @@ function PhotoStack() {
   const cycle = () => {
     setOrder((prev) => [...prev.slice(1), prev[0]]);
   };
-
-  useEffect(() => {
-    const timer = setInterval(cycle, 4200);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="photo-stack">
