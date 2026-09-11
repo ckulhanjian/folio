@@ -1906,10 +1906,12 @@ p.footer-copy {
   min-height: 100dvh;
 }
 
-/* The last card (Contact) absorbs any leftover space below the stack
-   so its own background always reaches the bottom of the screen —
-   never the bare page background showing through as a gap. */
-.mobile-card:last-child {
+/* A trailing spacer (not a card itself) absorbs any leftover space
+   below the stack so the bottom of the screen is never a gap of the
+   bare page background — colored to match the last card so it reads
+   as a seamless continuation. Kept separate from the cards themselves
+   so expanding/collapsing any card (Home included) never resizes it. */
+.mobile-stack-spacer {
   flex: 1 0 auto;
 }
 

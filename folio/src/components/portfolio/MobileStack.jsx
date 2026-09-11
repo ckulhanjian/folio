@@ -329,27 +329,29 @@ const bodies = {
   contact: ContactBody,
 };
 
-const FRONT_ID = cards[0].id;
-
 function MobileStack() {
-  // The first card in the list starts open as the front-most card in
-  // the stack and can never be collapsed to blank — it's the resting
-  // state of the page, not just another card. Every other card starts
-  // collapsed and stacks up behind it, and opening one swaps the front
-  // card out as usual.
-  const [expandedId, setExpandedId] = useState(FRONT_ID);
+  // Home is always open — no toggle, never collapses — while every
+  // other card expands and collapses independently on its own click,
+  // without touching Home's state at all.
+  const [expandedIds, setExpandedIds] = useState(() => new Set(['home']));
 
   const toggleCard = (id) => {
-    setExpandedId((cur) => {
-      if (cur === id) return id === FRONT_ID ? FRONT_ID : null;
-      return id;
+    if (id === 'home') return;
+    setExpandedIds((cur) => {
+      const next = new Set(cur);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
     });
   };
 
   return (
     <div className="mobile-stack">
       {cards.map((card) => {
-        const expanded = expandedId === card.id;
+        const expanded = expandedIds.has(card.id);
         const Body = bodies[card.id];
         return (
           <section
@@ -364,7 +366,7 @@ function MobileStack() {
               aria-expanded={expanded}
             >
               <span className="mobile-card-label">{card.label}</span>
-              {card.id !== FRONT_ID && (
+              {card.id !== 'home' && (
                 <span className="mobile-card-toggle" aria-hidden="true">{expanded ? '–' : '+'}</span>
               )}
             </button>
@@ -379,6 +381,11 @@ function MobileStack() {
           </section>
         );
       })}
+      <div
+        className="mobile-stack-spacer"
+        aria-hidden="true"
+        style={{ background: cards[cards.length - 1].color }}
+      />
     </div>
   );
 }
