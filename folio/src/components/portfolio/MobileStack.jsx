@@ -356,6 +356,25 @@ function MobileStack() {
     });
   };
 
+  const closeCard = (id) => {
+    if (id === 'home') return;
+    setExpandedIds((cur) => {
+      if (!cur.has(id)) return cur;
+      const next = new Set(cur);
+      next.delete(id);
+      return next;
+    });
+  };
+
+  // Tapping the open card's own background (any plain text, heading,
+  // or whitespace that isn't itself a link/button/control) collapses
+  // it, same as tapping the header — so a long expanded section can
+  // be closed without hunting for the +/- button back at the top.
+  const handleBodyClick = (id) => (event) => {
+    if (event.target.closest('a, button, input, textarea, select')) return;
+    closeCard(id);
+  };
+
   return (
     <div className="mobile-stack">
       {cards.map((card) => {
@@ -379,7 +398,7 @@ function MobileStack() {
               )}
             </button>
 
-            <div className="mobile-card-body-wrap">
+            <div className="mobile-card-body-wrap" onClick={card.id !== 'home' ? handleBodyClick(card.id) : undefined}>
               <div className="mobile-card-body">
                 <Body />
               </div>
