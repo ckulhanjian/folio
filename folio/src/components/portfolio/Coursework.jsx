@@ -17,24 +17,28 @@ const involvementBadges = {
   'ieee-sps': badgeSps,
 };
 
-// Plotted oldest (freshman) at the bottom-left to newest (senior) at
-// the top-right, like a diagonal ramp — each stop's content grows
-// downward from its point on the line, so the years never crowd each
-// other even though they hold very different numbers of events.
-// Spread across the full width with a gentle rise (not a steep 45°).
-const POINTS = [
-  { left: 3, top: 76 },
-  { left: 30, top: 54 },
-  { left: 57, top: 28 },
-  { left: 74, top: 10 },
-];
-
 // The line itself runs past both ends of the plotted points — a tail
 // trailing off the bottom-left (the past, before freshman year) and
 // an arrowhead pointing past the top-right (still going, beyond
 // senior year) — like an arrow charting time moving forward.
 const LINE_START = { left: -3, top: 84 };
 const LINE_END = { left: 84, top: 3 };
+
+// Every year dot sits exactly ON that same line — derived from it by
+// x position, not eyeballed as separate coordinates — so the colored
+// duration highlight (itself just a sub-segment of this same line)
+// can never drift off at its own angle next to the timeline.
+function pointOnLine(left) {
+  const t = (left - LINE_START.left) / (LINE_END.left - LINE_START.left);
+  return { left, top: LINE_START.top + (LINE_END.top - LINE_START.top) * t };
+}
+
+// Plotted oldest (freshman) at the bottom-left to newest (senior) at
+// the top-right, like a diagonal ramp — each stop's content grows
+// downward from its point on the line, so the years never crowd each
+// other even though they hold very different numbers of events.
+// Spread across the full width with a gentle rise (not a steep 45°).
+const POINTS = [3, 30, 57, 74].map(pointOnLine);
 
 // Every involvement here is still ongoing (the resume language is all
 // present tense — "now leads", "I'm a member", etc.), so each one's
